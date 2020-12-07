@@ -28,6 +28,14 @@ function readSingleFile(e) {
         var results = parseTextFile(contents);
         console.log(results);
 
+        const latestData = getLatestValues(results);
+        const lastDate = extractDate(latestData);
+        const lastWaveHeight = extractWaveHeight(latestData);
+
+        document.getElementById('latest-timestamp').innerHTML = lastDate;
+        document.getElementById('latest-wave-height').innerHTML = lastWaveHeight;
+
+
         var series = createSeries(results);
         console.log(series);
 
@@ -65,10 +73,14 @@ function parseTextFile(stringValue) {
     return parsedValues;
 }
 
+function getLatestValues(parsedValues) {
+    return parsedValues[0];
+}
+
 function createSeries(parsedValues) {
     return parsedValues.map(value => {
-        const timestamp = toDate(value["YY"].value, value["MM"].value, value["DD"].value, value["hh"].value, value["mm"].value);
-        const yValue = convertMetersToFeet(parseFloat(value["WVHT"].value));
+        const timestamp = extractDate(value);
+        const yValue = extractWaveHeight(value);
         return [timestamp, yValue];
     }).reverse();
 }
@@ -80,6 +92,14 @@ function tokenize(line) {
 function convertMetersToFeet(value) {
     // A higher performance method of truncating to 2 digits
     return Math.round((value * 3.28084) * 100) / 100;
+}
+
+function extractDate(value) {
+    return toDate(value["YY"].value, value["MM"].value, value["DD"].value, value["hh"].value, value["mm"].value);
+}
+
+function extractWaveHeight(value) {
+    return convertMetersToFeet(parseFloat(value["WVHT"].value));
 }
 
 function toDate(year, month, day, hour, minute) {
