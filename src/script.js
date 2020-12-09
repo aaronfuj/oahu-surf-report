@@ -3,8 +3,10 @@ function getData() {
 
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://www.ndbc.noaa.gov/data/realtime2/51212.txt";
+    const netlifyUrl = "/api/51212.txt";
+    
     // Barber's Point
-    return fetch(proxyUrl + url)
+    return fetch(netlifyUrl)
     .then((response) => {
         const text = response.text();
         return text;
@@ -12,10 +14,13 @@ function getData() {
     .then((data) => {
         console.log(data);
         return parseTextFile(data);
+    })
+    .then((results) => {
+        handleResults(results);
     });
 }
 
-// getData();
+getData();
 
 function readSingleFile(e) {
     var file = e.target.files[0];
@@ -26,22 +31,26 @@ function readSingleFile(e) {
     reader.onload = function(e) {
         var contents = e.target.result;
         var results = parseTextFile(contents);
-        console.log(results);
-
-        const latestData = getLatestValues(results);
-        const lastDate = extractDate(latestData);
-        const lastWaveHeight = extractWaveHeight(latestData);
-
-        document.getElementById('latest-timestamp').innerHTML = lastDate;
-        document.getElementById('latest-wave-height').innerHTML = lastWaveHeight;
-
-
-        var series = createSeries(results);
-        console.log(series);
-
-        plotData(series);
+        handleResults(results);
     };
     reader.readAsText(file);
+}
+
+function handleResults(results) {
+    console.log(results);
+
+    const latestData = getLatestValues(results);
+    const lastDate = extractDate(latestData);
+    const lastWaveHeight = extractWaveHeight(latestData);
+
+    document.getElementById('latest-timestamp').innerHTML = lastDate;
+    document.getElementById('latest-wave-height').innerHTML = lastWaveHeight;
+
+
+    var series = createSeries(results);
+    console.log(series);
+
+    plotData(series);
 }
 
 function parseTextFile(stringValue) {
