@@ -1,26 +1,24 @@
-function getData() {
-    const utf8Decoder = new TextDecoder('utf-8');
+const proxiedUrl = "https://www.ndbc.noaa.gov/data/realtime2";
+const barbersPointUrl = "/api/51212.txt";
+const waimeaUrl = "/api/51201.txt";
 
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://www.ndbc.noaa.gov/data/realtime2/51212.txt";
-    const netlifyUrl = "/api/51212.txt";
-    
-    // Barber's Point
-    return fetch(netlifyUrl)
+function getData(url, location) {
+    const utf8Decoder = new TextDecoder('utf-8');
+    return fetch(url)
     .then((response) => {
         const text = response.text();
         return text;
     })
     .then((data) => {
-        console.log(data);
         return parseTextFile(data);
     })
     .then((results) => {
-        handleResults(results);
+        handleResults(results, location);
     });
 }
 
-getData();
+getData(barbersPointUrl, 'barbers');
+getData(waimeaUrl, 'waimea');
 
 function readSingleFile(e) {
     var file = e.target.files[0];
@@ -31,26 +29,26 @@ function readSingleFile(e) {
     reader.onload = function(e) {
         var contents = e.target.result;
         var results = parseTextFile(contents);
-        handleResults(results);
+        handleResults(results, 'barbers');
     };
     reader.readAsText(file);
 }
 
-function handleResults(results) {
+function handleResults(results, location) {
     console.log(results);
 
     const latestData = getLatestValues(results);
     const lastDate = extractDate(latestData);
     const lastWaveHeight = extractWaveHeight(latestData);
 
-    document.getElementById('latest-timestamp').innerHTML = lastDate;
-    document.getElementById('latest-wave-height').innerHTML = lastWaveHeight;
+    document.getElementById('latest-timestamp-' + location).innerHTML = lastDate;
+    document.getElementById('latest-wave-height-' + location).innerHTML = lastWaveHeight;
 
 
     var series = createSeries(results);
     console.log(series);
 
-    plotData(series);
+    plotData(series, location);
 }
 
 function parseTextFile(stringValue) {
@@ -87,11 +85,14 @@ function getLatestValues(parsedValues) {
 }
 
 function createSeries(parsedValues) {
-    return parsedValues.map(value => {
+    const series = parsedValues.map(value => {
         const timestamp = extractDate(value);
         const yValue = extractWaveHeight(value);
-        return [timestamp, yValue];
+        return [timestamp.getTime(), yValue];
     }).reverse();
+
+    // Only grab latest 7 days (with an expected 30 minute interval)
+    return series.slice(Math.max(series.length - 336, 0))
 }
 
 function tokenize(line) {
@@ -116,15 +117,11 @@ function toDate(year, month, day, hour, minute) {
     return new Date(dateString);
 }
 
-function plotData(data) {
-    Highcharts.chart('chart', {
+function plotData(data, location) {
+    Highcharts.chart('chart-' + location, {
 
         title: {
-            text: null
-        },
-
-        subtitle: {
-            text: 'Source: https://www.ndbc.noaa.gov/data/realtime2/51212.txt'
+            text: location
         },
 
         chart: {
@@ -147,14 +144,11 @@ function plotData(data) {
         // },
 
         legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            floating: true
+            enabled: false
         },
 
         series: [{
-            name: 'Barber\'s Point',
+            name: 'Wave Heights',
             data: data
         }],
 
@@ -171,7 +165,11 @@ function plotData(data) {
                     }
                 }
             }]
-        }
+        },
+
+        credits: {
+            enabled: false
+        },
 
     });
 }
