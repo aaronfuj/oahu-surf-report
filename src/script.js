@@ -132,7 +132,8 @@ function plotData(data, location) {
 
         chart: {
             type: 'area',
-            zoomType: 'x'
+            zoomType: 'x',
+            height: 200
         },
 
         yAxis: {
