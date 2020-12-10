@@ -5,16 +5,16 @@ const waimeaUrl = "/api/51201.txt";
 function getData(url, location) {
     const utf8Decoder = new TextDecoder('utf-8');
     return fetch(url)
-    .then((response) => {
-        const text = response.text();
-        return text;
-    })
-    .then((data) => {
-        return parseTextFile(data);
-    })
-    .then((results) => {
-        handleResults(results, location);
-    });
+        .then((response) => {
+            const text = response.text();
+            return text;
+        })
+        .then((data) => {
+            return parseTextFile(data);
+        })
+        .then((results) => {
+            handleResults(results, location);
+        });
 }
 
 getData(barbersPointUrl, 'barbers');
@@ -23,7 +23,7 @@ getData(waimeaUrl, 'waimea');
 function readSingleFile(e) {
     var file = e.target.files[0];
     if (!file) {
-      return;
+        return;
     }
     var reader = new FileReader();
     reader.onload = function(e) {
@@ -38,7 +38,7 @@ function handleResults(results, location) {
     console.log(results);
 
     const latestData = getLatestValues(results);
-    const lastDate = extractDate(latestData);
+    const lastDate = formatDate(extractDate(latestData));
     const lastWaveHeight = extractWaveHeight(latestData);
 
     document.getElementById('latest-timestamp-' + location).innerHTML = lastDate;
@@ -67,7 +67,7 @@ function parseTextFile(stringValue) {
         }
 
         let object = {};
-        for (var valueIndex=0; valueIndex < values.length; valueIndex++) {
+        for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
             object[headers[valueIndex]] = {
                 header: headers[valueIndex],
                 value: values[valueIndex],
@@ -108,12 +108,17 @@ function extractDate(value) {
     return toDate(value["YY"].value, value["MM"].value, value["DD"].value, value["hh"].value, value["mm"].value);
 }
 
+function formatDate(date) {
+    return date.toDateString() + " " +
+        date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
+}
+
 function extractWaveHeight(value) {
     return convertMetersToFeet(parseFloat(value["WVHT"].value));
 }
 
 function toDate(year, month, day, hour, minute) {
-    const dateString = ""+year+"-"+month+"-"+day+"T"+hour+":"+minute+":00";
+    const dateString = "" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":00Z";
     return new Date(dateString);
 }
 
@@ -121,11 +126,12 @@ function plotData(data, location) {
     Highcharts.chart('chart-' + location, {
 
         title: {
-            text: location
+            // text: location
+            text: null
         },
 
         chart: {
-            type: 'line',
+            type: 'area',
             zoomType: 'x'
         },
 
@@ -147,6 +153,14 @@ function plotData(data, location) {
             enabled: false
         },
 
+        // plotOptions: {
+        //     series: {
+        //         pointPadding: 0.1,
+        //         groupPadding: 0.1,
+        //         borderWidth: 0,
+        //     }
+        // },
+
         series: [{
             name: 'Wave Heights',
             data: data
@@ -155,14 +169,14 @@ function plotData(data, location) {
         responsive: {
             rules: [{
                 condition: {
-                    maxWidth: 500
+                    maxWidth: 590
                 },
                 chartOptions: {
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'center',
-                        verticalAlign: 'bottom'
-                    }
+                    yAxis: {
+                        title: {
+                            text: null
+                        }
+                    },
                 }
             }]
         },
