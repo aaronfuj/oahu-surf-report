@@ -44,8 +44,23 @@ function handleResults(results, location) {
     document.getElementById('latest-timestamp-' + location).innerHTML = lastDate;
     document.getElementById('latest-wave-height-' + location).innerHTML = lastWaveHeight;
 
+    const reducedResults = latestPoints(results);
+    const slope = calculateSlope(latestDay(reducedResults));
 
-    var series = createSeries(results);
+    const increasingSlope = slope > 1;
+    const decreasingSlope = slope < -1;
+
+    const slopeCharacter = increasingSlope ? '▲' : (decreasingSlope ? '▼' : '');
+    const trendElement = document.getElementById('trend-' + location);
+    trendElement.innerHTML = slopeCharacter;
+    if (increasingSlope) {
+        trendElement.classList.add("text-green-500");
+    }
+    else if (decreasingSlope) {
+        trendElement.classList.add("text-red-500");
+    }
+
+    var series = createSeries(reducedResults);
     console.log(series);
 
     plotData(series, location);
@@ -84,6 +99,43 @@ function getLatestValues(parsedValues) {
     return parsedValues[0];
 }
 
+function latestPoints(parsedValues) {
+    return parsedValues.slice(0, Math.max((5 * 24 * 2), 0));
+}
+
+function latestDay(parsedValues) {
+    return parsedValues.slice(0, Math.max((24 * 2), 0));
+}
+
+// Calculate the slope using linear regression, with the end result being an expected result of
+// Ft/day.
+function calculateSlope(parsedValues) {
+    const ascendingValues = parsedValues.reverse();
+    const firstTime = extractDate(ascendingValues[0]).getTime();
+
+    const sum = (accumulator, currentValue) => accumulator + currentValue;
+    const sumSquares = (accumulator, currentValue) => accumulator + (currentValue*currentValue);
+
+    // converts the time interval into minutes, meaning the slope can be considered feet/min
+    const timeValue = (value) => (extractDate(value).getTime() - firstTime) / 1000 / 60;
+
+    const xValues = ascendingValues.map(timeValue);
+    const yValues = ascendingValues.map(value => extractWaveHeight(value));
+    const xTimesYValues = ascendingValues.map(value => timeValue(value) * extractWaveHeight(value));
+
+    let xSummed = xValues.reduce(sum);
+    let xSquaredSummed = xValues.reduce(sumSquares);
+    let ySummed = yValues.reduce(sum);
+    let xTimesYValuesSummed = xTimesYValues.reduce(sum);
+
+    let n = ascendingValues.length;
+    let numerator = (n * xTimesYValuesSummed) - (xSummed * ySummed);
+    let denominator = (n * xSquaredSummed) - (xSummed * xSummed);
+
+    // Convert the end usable slope into ft/day
+    return (numerator / denominator) * 60 * 24;
+}
+
 function createSeries(parsedValues) {
     const series = parsedValues.map(value => {
         const timestamp = extractDate(value);
@@ -91,8 +143,7 @@ function createSeries(parsedValues) {
         return [timestamp.getTime(), yValue];
     }).reverse();
 
-    // Only grab latest 7 days (with an expected 30 minute interval)
-    return series.slice(Math.max(series.length - 336, 0))
+    return series;
 }
 
 function tokenize(line) {
