@@ -1,7 +1,24 @@
 # local-surf-report
-An aggregation of surf information from NOAA and other sources for personal use
+An aggregation of surf information from NOAA and other sources for personal use.
 
-Currently this is being implemented as a single static page, however due to NOAA not having CORS support, this is likely to require a server (or at the very least be dependent on a proxy).
+## Deployment
+This is deployed via Netlify. This is key as it also allows for redirects/proxies to work around the fact that NOAA does not have CORS support for their buoy data.
+
+## Running/Developing
+To run this, netlify cli needs to be installed:
+
+`npm install netlify-cli -g`
+
+Running this locally can be done via the following command:
+
+`netlify dev`
+
+More on this can be found at https://www.netlify.com/products/dev/
+
+This will spawn a local proxy and utilize Netlify's redirects/proxies, via the `_redirects` file, to allow for querying of the NOAA buoy data.
+
+## Understanding CORS
+Due to NOAA not having CORS support, this is likely to require a server (or at the very least be dependent on a proxy).
 
 Current proxy info:
 - https://cors-anywhere.herokuapp.com/
