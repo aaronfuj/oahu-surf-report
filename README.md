@@ -15,7 +15,7 @@ Running this locally can be done via the following command:
 
 More on this can be found at https://www.netlify.com/products/dev/
 
-This will spawn a local proxy and utilize Netlify's redirects/proxies, via the `_redirects` file, to allow for querying of the NOAA buoy data.
+This will spawn a local proxy and utilize Netlify's redirects/proxies, via the `_redirects` file, to allow for querying of the NOAA buoy data. See https://docs.netlify.com/routing/redirects/rewrites-proxies/#proxy-to-another-service for how the proxy allows getting around CORS.
 
 ## Understanding CORS
 Due to NOAA not having CORS support, this is likely to require a server (or at the very least be dependent on a proxy).
