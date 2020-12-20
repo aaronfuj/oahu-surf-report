@@ -17,19 +17,27 @@ export default class LatestHeight extends Component {
     }
   }
 
+  _getTrendClass(trend) {
+    switch (trend) {
+      case TrendPattern.UP: return 'text-green-500'
+      case TrendPattern.DOWN: return 'text-red-500'
+      default: return ''
+    }
+  }
+
   render() {
     const { location, height, trend, timestamp } = this.props
     const formattedDate = this._formatDate(timestamp)
 
     const trendChar = this._getTrendCharacter(trend);
-    
+    const trendClass = this._getTrendClass(trend);
 
     return (
       <div>
         <div className="flex-none w-full pl-18 sm:pl-20 sm:py-0.5">
           <dt className="text-sm font-medium">{location}</dt>
           <dd className="text-3xl sm:text-4xl font-extrabold text-gray-900">
-            <span>{height}</span>FT <span>{trendChar}</span>
+            <span>{height}</span>FT <span className={trendClass}>{trendChar}</span>
           </dd>
           <dt className="text-xs font-medium text-gray-400">{formattedDate}</dt>
         </div>
