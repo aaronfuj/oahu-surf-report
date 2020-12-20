@@ -145,5 +145,5 @@ export default class BuoyPage extends React.Component {
 
 BuoyPage.propTypes = {
   title: PropTypes.string.isRequired,
-  buoyId: PropTypes.number.isRequired,
+  buoyId: PropTypes.string.isRequired,
 }

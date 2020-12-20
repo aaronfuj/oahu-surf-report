@@ -31,3 +31,10 @@ Current proxy info:
 Some potential sources of data:
 - Waimea Buoy: https://www.ndbc.noaa.gov/station_page.php?station=51201
 - Barber's Point Buoy: https://www.ndbc.noaa.gov/station_page.php?station=51212
+
+# Buoys
+The following buoys have wave height data:
+51211 - Pearl Harbor
+51212 - Barbers Point
+51210 - Kaneohe Bay
+51201 - Waimea Bay

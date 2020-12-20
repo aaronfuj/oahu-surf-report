@@ -1,11 +1,9 @@
 // import logo from './logo.svg';
 import './App.css';
 import BuoyPage from './components/BuoyPage'
+import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from './constants/NoaaBuoys';
 
 function App() {
-  const barbersPointBuoyId = 51212;
-  const waimeaBayBuoyId = 51201;
-
   return (
     <div className="App container mx-auto px-4 py-4">
       {/* <header className="App-header">
@@ -23,12 +21,20 @@ function App() {
         </a>
       </header> */}
       <BuoyPage
-        buoyId={barbersPointBuoyId}
-        title='Barbers Point'
+        buoyId={BARBERS_POINT.id}
+        title={BARBERS_POINT.name}
       />
       <BuoyPage
-        buoyId={waimeaBayBuoyId}
-        title='Waimea Bay'
+        buoyId={WAIMEA_BAY.id}
+        title={WAIMEA_BAY.name}
+      />
+      <BuoyPage
+        buoyId={KANEOHE_BAY.id}
+        title={KANEOHE_BAY.name}
+      />
+      <BuoyPage
+        buoyId={PEARL_HARBOR.id}
+        title={PEARL_HARBOR.name}
       />
     </div>
   );
