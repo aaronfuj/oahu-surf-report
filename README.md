@@ -2,9 +2,13 @@
 An aggregation of surf information from NOAA and other sources for personal use.
 
 ## Deployment
-This is deployed via Netlify. This is key as it also allows for redirects/proxies to work around the fact that NOAA does not have CORS support for their buoy data.
+This is built using React and Tailwind CSS, using Netlify for deployment. Netlify is key as it also allows for redirects/proxies to work around the fact that NOAA does not have CORS support for their buoy data.
 
 ## Running/Developing
+First, install all dependencies via:
+
+`yarn install`
+
 To run this, netlify cli needs to be installed:
 
 `npm install netlify-cli -g`
