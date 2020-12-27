@@ -28,13 +28,20 @@ Current proxy info:
 - https://cors-anywhere.herokuapp.com/
 - https://stackoverflow.com/a/43881141
 
+# Buoy References
 Some potential sources of data:
 - Waimea Buoy: https://www.ndbc.noaa.gov/station_page.php?station=51201
 - Barber's Point Buoy: https://www.ndbc.noaa.gov/station_page.php?station=51212
 
-# Buoys
+## Buoys
 The following buoys have wave height data:
 51211 - Pearl Harbor
 51212 - Barbers Point
 51210 - Kaneohe Bay
 51201 - Waimea Bay
+
+# Tide References
+Some potential sources of information:
+- CO-OPS API Reference: https://api.tidesandcurrents.noaa.gov/api/prod/
+- Predictions: https://tidesandcurrents.noaa.gov/tide_predictions.html?gid=1399#listing
+- Honolulu Tides: https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612340
