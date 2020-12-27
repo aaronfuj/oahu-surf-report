@@ -1,7 +1,9 @@
 // import logo from './logo.svg';
 import './App.css';
 import BuoyPage from './components/BuoyPage'
+import TidePage from './components/TidePage'
 import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from './constants/NoaaBuoys';
+import { HONOLULU } from './constants/NoaaTides'
 
 function App() {
   return (
@@ -20,7 +22,7 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <BuoyPage
+      {/* <BuoyPage
         buoyId={BARBERS_POINT.id}
         title={BARBERS_POINT.name}
       />
@@ -35,6 +37,10 @@ function App() {
       <BuoyPage
         buoyId={PEARL_HARBOR.id}
         title={PEARL_HARBOR.name}
+      /> */}
+      <TidePage
+        stationId={HONOLULU.id}
+        title={HONOLULU.name}
       />
     </div>
   );
