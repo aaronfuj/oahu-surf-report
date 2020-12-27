@@ -37,7 +37,9 @@ export default class TideTable extends React.Component {
     );
 
     return (
-      <table className="w-full border-collapse border border-gray-300 text-sm">{rows}</table>
+      <table className="w-full border-collapse border border-gray-300 text-sm">
+        <tbody>{rows}</tbody>
+      </table>
     )
   }
 }

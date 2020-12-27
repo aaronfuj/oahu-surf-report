@@ -1,5 +1,7 @@
 import React from 'react'
 import { getData } from '../services/noaa_tides'
+import { TideTrend } from '../constants/TideTrend'
+import CurrentTideTrend from './CurrentTideTrend'
 import TideTable from './TideTable'
 import TideChart from './TideChart'
 import PropTypes from 'prop-types'
@@ -57,6 +59,19 @@ export default class TidePage extends React.Component {
     return newDate;
   }
 
+  _getNextTide(data, currentDate) {
+    const timestamp = currentDate.getTime();
+    return data.find(datum => datum.timestamp > timestamp);
+  }
+
+  _determineTrend(data, currentDate) {
+    const firstResult = this._getNextTide(data, currentDate);
+    if (firstResult) {
+      return firstResult.type.toLowerCase() === 'low' ? TideTrend.FALLING : TideTrend.RISING;
+    }
+    return TideTrend.NONE;
+  }
+
   _renderLoading() {
     return <div>Loading...</div>
   }
@@ -72,8 +87,15 @@ export default class TidePage extends React.Component {
     const maxDate = this._addDays(minDate, 1);
     const seriesData = this._createSeries(data);
 
+    const trend = this._determineTrend(data, currentDate);
+    const nextTide = this._getNextTide(data, currentDate);
+
     return (
       <div>
+        <CurrentTideTrend
+          trend={trend}
+          tide={nextTide}
+        />
         <TideChart
           minDate={minDate}
           maxDate={maxDate}
