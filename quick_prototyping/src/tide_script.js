@@ -1,3 +1,9 @@
+const HONOLULU =   { id: '1612340', name: 'Honolulu' };
+const NAWILIWILI = { id: '1611400', name: 'Nawiliwili' };
+const WAIMANALO =  { id: '1612376', name: 'Waimanalo' };
+const WAIANAE =    { id: '1612482', name: 'Waianae' };
+const WAIMEA_BAY = { id: '1611401', name: 'Waimea Bay' };
+
 const exampleData = {
   "predictions": [
     {
@@ -57,11 +63,13 @@ Date.prototype.addDays = function(days) {
     return date;
 }
 
-function getData() {
+function getData(station) {
   const currentDate = new Date();
   const startDate = toDateString(currentDate);
 
   console.log(currentDate);
+
+  const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 
   const url = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?" +
     "product=predictions" +
@@ -69,7 +77,7 @@ function getData() {
     "&begin_date=" + startDate +
     "&range=96" +
     "&datum=MLLW" +
-    "&station=1612340" +
+    "&station=" + station.id +
     "&time_zone=gmt" +
     "&units=english" +
     "&interval=hilo" +
@@ -83,6 +91,7 @@ function getData() {
     return data;
   })
   .then((data) => {
+    renderTable(data, dayDate);
     return createSeries(data);
   })
   .then((data) => {
@@ -91,7 +100,7 @@ function getData() {
   })
 }
 
-getData();
+getData(HONOLULU);
 
 function pad2(number) {
   return (number < 10 ? '0' : '') + number;
@@ -116,6 +125,64 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
+
+function toTypeString(type) {
+  switch (type) {
+    case 'L': return 'Low';
+    case 'H': return 'High';
+    default: return type;
+  }
+}
+
+function renderTable(apiData, dayDate) {
+  const tableData = apiData.predictions.map(datum => {
+    return {
+      timestamp: toDate(datum.t + "Z").getTime(),
+      type: toTypeString(datum.type),
+      height: roundTwoDigits(parseFloat(datum.v))
+    };
+  });
+
+  const filteredTableDate = filterToDay(tableData, dayDate);
+  let tableHtml = '<table>';
+  for (let index = 0; index < filteredTableDate.length; index++) {
+    const datum = filteredTableDate[index];
+    tableHtml += '<tr>';
+    tableHtml += `<td>${datum.type}</td><td>${createTimeString(new Date(datum.timestamp))}</td><td>${datum.height}ft</td>`;
+    tableHtml += '</tr>';
+  }
+  tableHtml += '</table>';
+
+  document.getElementById('table').innerHTML = tableHtml;
+}
+
+function filterToDay(data, dayDate) {
+  const lowerTimestamp = dayDate.getTime();
+  const upperTimestamp = dayDate.getTime() + 24 * 60 * 60 * 1000;
+  return data.filter(datum => datum.timestamp >= lowerTimestamp && datum.timestamp <= upperTimestamp);
+}
+
+function createTimeString(date) {
+  let hour = date.getHours();
+  let ampm = 'am';
+  
+  if (hour === 12){
+    ampm = 'pm'
+  }
+  if (hour === 0){
+    hour = 12;
+  }
+  if (hour > 12){
+    hour = hour - 12;
+    ampm = 'pm'
+  }
+
+  return pad2(hour) + ':' + pad2(date.getMinutes()) + '' + ampm;
+}
+
+function roundTwoDigits(number) {
+  return Math.round(number * 100) / 100;
+}
 
 function plotData(data, currentDate, minDate, maxDate) {
     Highcharts.chart('chart', {
@@ -168,21 +235,6 @@ function plotData(data, currentDate, minDate, maxDate) {
             labels: {
               formatter: function() {
               var date = new Date(this.value);
-              hour = date.getHours();
-              ampm = 'AM';
-              
-              if (hour == 12){
-                ampm = 'PM'
-              }
-              if (hour == 0){
-                hour = 12;
-              }
-              if (hour > 12){
-                hour = hour - 12;
-                ampm = 'PM'
-              }
-
-              // var datestring = pad2(hour) + ':' + pad2(date.getMinutes()) + ' ' + ampm + '<br/>' + (date.getMonth() + 1) + '/' + date.getDate();
               var datestring = (date.getMonth() + 1) + '/' + date.getDate();
               return datestring;
             },
