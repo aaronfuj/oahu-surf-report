@@ -50,3 +50,7 @@ Some potential sources of information:
 - NOAA Calculations: https://www.esrl.noaa.gov/gmd/grad/solcalc/
 - NOAA Old Calculator: https://www.esrl.noaa.gov/gmd/grad/solcalc/sunrise.html 
 - Javascript Library: https://github.com/mourner/suncalc
+
+# NOAA APIs
+- https://www.ncdc.noaa.gov/cdo-web/webservices/v2
+- https://www.weather.gov/documentation/services-web-api
