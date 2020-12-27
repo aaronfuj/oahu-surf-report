@@ -4,6 +4,12 @@ const WAIMANALO =  { id: '1612376', name: 'Waimanalo' };
 const WAIANAE =    { id: '1612482', name: 'Waianae' };
 const WAIMEA_BAY = { id: '1611401', name: 'Waimea Bay' };
 
+const TideTrend = {
+  RISING: "rising",
+  FALLING: "falling",
+  NONE: "none",
+}
+
 const exampleData = {
   "predictions": [
     {
@@ -53,8 +59,8 @@ function toDate(dateString) {
   return new Date(dateString);
 }
 
-function toDateString(date) {
-  return "" + date.getFullYear() + "" + (date.getMonth()+1) + "" + pad2(date.getDate());
+function toDateRequestString(date) {
+  return "" + date.getFullYear() + "" + pad2(date.getMonth()+1) + "" + pad2(date.getDate());
 }
 
 Date.prototype.addDays = function(days) {
@@ -65,7 +71,7 @@ Date.prototype.addDays = function(days) {
 
 function getData(station) {
   const currentDate = new Date();
-  const startDate = toDateString(currentDate);
+  const startDate = toDateRequestString(currentDate);
 
   console.log(currentDate);
 
@@ -73,7 +79,7 @@ function getData(station) {
 
   const url = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?" +
     "product=predictions" +
-    "&application=NOS.COOPS.TAC.WL" +
+    "&application=FreeForecast" +
     "&begin_date=" + startDate +
     "&range=96" +
     "&datum=MLLW" +
@@ -91,12 +97,13 @@ function getData(station) {
     return data;
   })
   .then((data) => {
+    renderTrend(data, currentDate);
     renderTable(data, dayDate);
     return createSeries(data);
   })
   .then((data) => {
     console.log(data);
-    plotData(data, currentDate, new Date(currentDate.toDateString()), new Date(currentDate.addDays(3).toDateString()));
+    plotData(data, currentDate, new Date(currentDate.toDateString()), new Date(currentDate.addDays(1).toDateString()));
   })
 }
 
@@ -114,9 +121,11 @@ function createSeries(apiData) {
 
 function createPlotLine(date) {
   return {
-    color: '#96ff96',
+    // color: '#96ff96',
+    color: 'red',
     width: 2,
     value: date.getTime(),
+    zIndex: 5,
   };
 }
 
@@ -134,27 +143,62 @@ function toTypeString(type) {
   }
 }
 
-function renderTable(apiData, dayDate) {
-  const tableData = apiData.predictions.map(datum => {
+function createDataModel(apiData) {
+  return apiData.predictions.map(datum => {
     return {
       timestamp: toDate(datum.t + "Z").getTime(),
       type: toTypeString(datum.type),
       height: roundTwoDigits(parseFloat(datum.v))
     };
   });
+}
+
+function renderTrend(apiData, currentDate) {
+  const data = createDataModel(apiData);
+  const nextTide = getNextTide(data, currentDate);
+  const trend = determineTrend(data, currentDate);
+  document.getElementById('trend-text').innerHTML = getTrendText(trend);
+  document.getElementById('trend-icon').innerHTML = getTrendCharacter(trend);
+  document.getElementById('next-tide').innerHTML = getNextTideText(nextTide);
+}
+
+function getTrendText(trend) {
+  switch (trend) {
+    case TideTrend.RISING: return 'Rising'
+    case TideTrend.FALLING: return 'Falling'
+    default: return ''
+  }
+}
+
+function getTrendCharacter(trend) {
+  switch (trend) {
+    case TideTrend.RISING: return '▲'
+    case TideTrend.FALLING: return '▼'
+    default: return ''
+  }
+}
+
+function getNextTideText(tide) {
+  return `${tide.type} tide at ${createTimeString(new Date(tide.timestamp))}`;
+}
+
+function renderTable(apiData, dayDate) {
+  const tableData = createDataModel(apiData);
 
   const filteredTableDate = filterToDay(tableData, dayDate);
-  let tableHtml = '<table>';
+  let tableHtml = '';
   for (let index = 0; index < filteredTableDate.length; index++) {
     const datum = filteredTableDate[index];
     tableHtml += '<tr>';
-    tableHtml += `<td>${datum.type}</td><td>${createTimeString(new Date(datum.timestamp))}</td><td>${datum.height}ft</td>`;
+    tableHtml += `<td class="border border-gray-200 p-1 px-2 font-semibold">${datum.type}</td>`;
+    tableHtml += `<td class="border border-gray-200 p-1 px-2">${createTimeString(new Date(datum.timestamp))}</td>`;
+    tableHtml += `<td class="border border-gray-200 p-1 px-2">${datum.height}ft</td>`;
     tableHtml += '</tr>';
   }
-  tableHtml += '</table>';
 
-  document.getElementById('table').innerHTML = tableHtml;
+  document.getElementById('tide-table').innerHTML = tableHtml;
 }
+
 
 function filterToDay(data, dayDate) {
   const lowerTimestamp = dayDate.getTime();
@@ -177,11 +221,24 @@ function createTimeString(date) {
     ampm = 'pm'
   }
 
-  return pad2(hour) + ':' + pad2(date.getMinutes()) + '' + ampm;
+  return hour + ':' + pad2(date.getMinutes()) + '' + ampm;
 }
 
 function roundTwoDigits(number) {
   return Math.round(number * 100) / 100;
+}
+
+function getNextTide(data, currentDate) {
+  const timestamp = currentDate.getTime();
+  return data.find(datum => datum.timestamp > timestamp);
+}
+
+function determineTrend(data, currentDate) {
+  const firstResult = getNextTide(data, currentDate);
+  if (firstResult) {
+    return firstResult.type.toLowerCase() === 'low' ? TideTrend.FALLING : TideTrend.RISING;
+  }
+  return TideTrend.NONE;
 }
 
 function plotData(data, currentDate, minDate, maxDate) {
@@ -193,20 +250,21 @@ function plotData(data, currentDate, minDate, maxDate) {
         },
 
         chart: {
-            type: 'spline',
-            zoomType: 'x',
-            height: 100
+            type: 'areaspline',
+            // zoomType: 'x',
+            height: 100,
         },
 
         yAxis: {
             title: {
-                text: 'Height (ft)'
+                // text: 'Height (ft)'
+                text: null
             },
             min: -0.5,
             max: 2.5,
             tickInterval: 1,
             startOnTick: false,
-            endOnTick: false
+            endOnTick: false,
         },
 
         tooltip: {
@@ -233,11 +291,12 @@ function plotData(data, currentDate, minDate, maxDate) {
             max: maxDate.getTime(),
             tickInterval: 1000 * 60 * 60 * 24,
             labels: {
-              formatter: function() {
-              var date = new Date(this.value);
-              var datestring = (date.getMonth() + 1) + '/' + date.getDate();
-              return datestring;
-            },
+              enabled: false,
+              // formatter: function() {
+              //   var date = new Date(this.value);
+              //   var datestring = (date.getMonth() + 1) + '/' + date.getDate();
+              //   return datestring;
+              // },
           },
         },
 
@@ -260,6 +319,12 @@ function plotData(data, currentDate, minDate, maxDate) {
         series: [{
             name: 'Wave Heights',
             data: data,
+            fillOpacity: 0.3,
+            threshold: -0.5,
+            marker: {
+              enabled: false,
+              // radius: 3,
+            },
         }],
 
         responsive: {

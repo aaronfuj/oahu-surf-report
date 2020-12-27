@@ -1,0 +1,150 @@
+import React, { Component } from 'react'
+import HighchartsReact from 'highcharts-react-official'
+import Highcharts from 'highcharts'
+import PropTypes from 'prop-types'
+
+export default class TideChart extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      chartOptions: {
+        title: {
+          // text: location
+          text: null
+        },
+
+        time: {
+          useUTC: false,
+        },
+
+        chart: {
+          type: 'areaspline',
+          // zoomType: 'x',
+          height: 100,
+        },
+
+        yAxis: {
+          title: {
+            // text: 'Height (ft)'
+            text: null
+          },
+          min: -0.5,
+          max: 2.5,
+          tickInterval: 1,
+          startOnTick: false,
+          endOnTick: false,
+        },
+
+        tooltip: {
+          shared: true,
+          crosshairs: true,
+          formatter: function () {
+            var date = new Date(this.x);
+            var datestring = Highcharts.dateFormat("%A, %b %e %Y, %l:%M %p ", date);
+
+            var s = '<span style="font-size: 10px;">' + datestring + '</span>';
+            if (this.points) {
+              s += '<br/><span style="color: #0080FF">' + this.points[0].series.name + ':</span><b> ' + this.points[0].y.toFixed(2) + '</b>';
+            } else {
+              s += '<br/><span style="color: #00FF00">' + this.series.name + ':</span><b> ' + this.y.toFixed(2) + '</b>';
+            }
+            return s;
+          }
+        },
+
+        xAxis: {
+          type: 'datetime',
+          plotLines: [this._createPlotLine(props.currentDate)],
+          min: props.minDate.getTime(),
+          max: props.maxDate.getTime(),
+          tickInterval: 1000 * 60 * 60 * 24,
+          labels: {
+            enabled: false,
+            // formatter: function() {
+            //   var date = new Date(this.value);
+            //   var datestring = (date.getMonth() + 1) + '/' + date.getDate();
+            //   return datestring;
+            // },
+          },
+        },
+
+        // tooltip: {
+        //     xDateFormat: '%A, %B %d, %Y'
+        // },
+
+        legend: {
+          enabled: false
+        },
+
+        // plotOptions: {
+        //     series: {
+        //         pointPadding: 0.1,
+        //         groupPadding: 0.1,
+        //         borderWidth: 0,
+        //     }
+        // },
+
+        series: [{
+          name: 'Wave Heights',
+          data: props.data,
+          fillOpacity: 0.3,
+          threshold: -0.5,
+          marker: {
+            enabled: false,
+            // radius: 3,
+          },
+        }],
+
+        responsive: {
+          rules: [{
+            condition: {
+              maxWidth: 590
+            },
+            chartOptions: {
+              yAxis: {
+                title: {
+                  text: null
+                }
+              },
+            }
+          }]
+        },
+
+        credits: {
+          enabled: false
+        },
+      }
+    }
+  }
+
+  _createPlotLine(date) {
+    return {
+      // color: '#96ff96',
+      color: 'red',
+      width: 2,
+      value: date.getTime(),
+      zIndex: 5,
+    };
+  }
+
+  render() {
+    const { chartOptions } = this.state;
+
+    return (
+      <div>
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={chartOptions}
+        />
+      </div>
+    )
+  }
+}
+
+TideChart.propTypes = {
+  minDate: PropTypes.instanceOf(Date).isRequired,
+  maxDate: PropTypes.instanceOf(Date).isRequired,
+  currentDate: PropTypes.instanceOf(Date).isRequired,
+  data: PropTypes.array.isRequired,
+}
