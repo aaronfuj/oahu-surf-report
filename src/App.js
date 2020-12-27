@@ -3,7 +3,7 @@ import './App.css';
 import BuoyPage from './components/BuoyPage'
 import TidePage from './components/TidePage'
 import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from './constants/NoaaBuoys';
-import { HONOLULU } from './constants/NoaaTides'
+import { HONOLULU, WAIMANALO, WAIANAE, WAIMEA_BAY as WAIMEA_BAY_TIDES } from './constants/NoaaTides'
 
 function App() {
   return (
@@ -22,22 +22,34 @@ function App() {
           Learn React
         </a>
       </header> */}
-      {/* <BuoyPage
+      <BuoyPage
         buoyId={BARBERS_POINT.id}
         title={BARBERS_POINT.name}
+      />
+      <TidePage
+        stationId={WAIANAE.id}
+        title={WAIANAE.name}
       />
       <BuoyPage
         buoyId={WAIMEA_BAY.id}
         title={WAIMEA_BAY.name}
       />
+      <TidePage
+        stationId={WAIMEA_BAY_TIDES.id}
+        title={WAIMEA_BAY_TIDES.name}
+      />
       <BuoyPage
         buoyId={KANEOHE_BAY.id}
         title={KANEOHE_BAY.name}
       />
+      <TidePage
+        stationId={WAIMANALO.id}
+        title={WAIMANALO.name}
+      />
       <BuoyPage
         buoyId={PEARL_HARBOR.id}
         title={PEARL_HARBOR.name}
-      /> */}
+      />
       <TidePage
         stationId={HONOLULU.id}
         title={HONOLULU.name}
