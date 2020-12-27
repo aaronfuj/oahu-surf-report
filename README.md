@@ -45,3 +45,8 @@ Some potential sources of information:
 - CO-OPS API Reference: https://api.tidesandcurrents.noaa.gov/api/prod/
 - Predictions: https://tidesandcurrents.noaa.gov/tide_predictions.html?gid=1399#listing
 - Honolulu Tides: https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612340
+
+# Sunrise/Sunset Calculations
+- NOAA Calculations: https://www.esrl.noaa.gov/gmd/grad/solcalc/
+- NOAA Old Calculator: https://www.esrl.noaa.gov/gmd/grad/solcalc/sunrise.html 
+- Javascript Library: https://github.com/mourner/suncalc
