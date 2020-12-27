@@ -3,6 +3,13 @@ import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import PropTypes from 'prop-types'
 
+Highcharts.setOptions({
+  global: {
+      // timezoneOffset: +1,
+      useUTC: false
+  }
+});
+
 export default class TideChart extends Component {
   constructor(props) {
     super(props);
@@ -12,10 +19,6 @@ export default class TideChart extends Component {
         title: {
           // text: location
           text: null
-        },
-
-        time: {
-          useUTC: false,
         },
 
         chart: {
