@@ -1,35 +1,4 @@
-function toDate(dateString) {
-  return new Date(dateString);
-}
-
-function toDateString(date) {
-  return "" + date.getFullYear() + "" + (date.getMonth()+1) + "" + pad2(date.getDate());
-}
-
-Date.prototype.addDays = function(days) {
-    var date = new Date(this.valueOf());
-    date.setDate(date.getDate() + days);
-    return date;
-}
-
 function getData() {
-  const currentDate = new Date();
-  const startDate = toDateString(currentDate);
-
-  console.log(currentDate);
-
-  const url = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?" +
-    "product=predictions" +
-    "&application=NOS.COOPS.TAC.WL" +
-    "&begin_date=" + startDate +
-    "&range=96" +
-    "&datum=MLLW" +
-    "&station=1612340" +
-    "&time_zone=gmt" +
-    "&units=english" +
-    "&interval=hilo" +
-    "&format=json";
-
   fetch("https://cors-anywhere.herokuapp.com/https://www.weather.gov/source/hfo/xml/SurfState.xml")
   .then(response => response.text())
   .then(text => textToDocument(text, "text/xml"))
@@ -82,7 +51,7 @@ function getDescription(xmlDocument) {
       const forecastJson = parseForecastTable(table);
       console.log(forecastJson);
 
-      document.getElementById('tableJson').innerHTML = JSON.stringify(forecastJson);
+      // document.getElementById('tableJson').innerHTML = JSON.stringify(forecastJson);
 
       document.getElementById('north-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'north'));
       document.getElementById('west-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'west'));
@@ -133,10 +102,15 @@ function createTable(forecastJson) {
     html += '<div class="flex space-x-0.5">';
     for (let singleForecastIndex = 0; singleForecastIndex < dataForDay.length; singleForecastIndex++) {
       const singleForecast = dataForDay[singleForecastIndex];
+      const averageHeight = parseAverageHeight(singleForecast.height);
+      const baseColor = getHeightColor(averageHeight);
+
+      const bgColor = `bg-${baseColor}-300`;
+      const bgColorLight = `bg-${baseColor}-50`;
       
       html += `<div class="inline-block p-0 m-0 flex-1">`;
-      html += `  <div class="w-full text-xs text-white bg-blue-300 p-1 px-4">${singleForecast.time}</div>`;
-      html += `  <div class="w-full text-medium p-1">${singleForecast.height} ft</div>`;
+      html += `  <div class="w-full text-xs text-white ${bgColor} p-1 px-2 md:px-3">${singleForecast.time}</div>`;
+      html += `  <div class="w-full text-base ${bgColorLight} p-1 px-2 md:px-3"><span class="font-semibold">${singleForecast.height}</span> <span class="font-extralight">FT</span></div>`;
       html += `</div>`;
     }
     html += '</div>';
@@ -145,6 +119,25 @@ function createTable(forecastJson) {
   }
 
   return html;
+}
+
+function parseAverageHeight(heightString) {
+  const heightStrings = heightString.split('-');
+  const totalValue = heightStrings.reduce((total, current) => total += parseInt(current), 0);
+  return totalValue / heightStrings.length;
+}
+
+function getHeightColor(heightValue) {
+  if (heightValue > 8) {
+    return 'red';
+  }
+  else if (heightValue >= 6) {
+    return 'yellow';
+  }
+  else if (heightValue >= 4) {
+    return 'blue';
+  }
+  return 'gray';
 }
 
 function parseForecastTable(tableElement) {
@@ -231,143 +224,4 @@ function extractValue(element) {
     return element.textContent;
   }
   return null;
-}
-
-function pad2(number) {
-  return (number < 10 ? '0' : '') + number;
-}
-
-function createSeries(apiData) {
-  return apiData.predictions.map(datum => {
-    return [ toDate(datum.t + "Z").getTime(), parseFloat(datum.v) ];
-  });
-}
-
-function createPlotLine(date) {
-  return {
-    color: '#96ff96',
-    width: 2,
-    value: date.getTime(),
-  };
-}
-
-Highcharts.setOptions({
-    time: {
-        useUTC: false
-    }
-});
-
-function plotData(data, currentDate, minDate, maxDate) {
-    Highcharts.chart('chart', {
-
-        title: {
-            // text: location
-            text: null
-        },
-
-        chart: {
-            type: 'spline',
-            zoomType: 'x',
-            height: 100
-        },
-
-        yAxis: {
-            title: {
-                text: 'Height (ft)'
-            },
-            min: -0.5,
-            max: 2.5,
-            tickInterval: 1,
-            startOnTick: false,
-            endOnTick: false
-        },
-
-        tooltip: {
-          shared: true,
-          crosshairs: true,
-          formatter: function() {
-            var date = new Date(this.x);
-            var datestring = Highcharts.dateFormat("%A, %b %e %Y, %l:%M %p ", date);
-
-            var s = '<span style="font-size: 10px;">' + datestring + '</span>';
-            if (this.points) {
-              s += '<br/><span style="color: #0080FF">' + this.points[0].series.name + ':</span><b> ' + this.points[0].y.toFixed(2) + '</b>';
-            } else {
-              s += '<br/><span style="color: #00FF00">' + this.series.name + ':</span><b> ' + this.y.toFixed(2) + '</b>';
-            }
-          return s;
-          }
-        },
-
-        xAxis: {
-            type: 'datetime',
-            plotLines: [createPlotLine(currentDate)],
-            min: minDate.getTime(),
-            max: maxDate.getTime(),
-            tickInterval: 1000 * 60 * 60 * 24,
-            labels: {
-              formatter: function() {
-              var date = new Date(this.value);
-              hour = date.getHours();
-              ampm = 'AM';
-              
-              if (hour == 12){
-                ampm = 'PM'
-              }
-              if (hour == 0){
-                hour = 12;
-              }
-              if (hour > 12){
-                hour = hour - 12;
-                ampm = 'PM'
-              }
-
-              // var datestring = pad2(hour) + ':' + pad2(date.getMinutes()) + ' ' + ampm + '<br/>' + (date.getMonth() + 1) + '/' + date.getDate();
-              var datestring = (date.getMonth() + 1) + '/' + date.getDate();
-              return datestring;
-            },
-          },
-        },
-
-        // tooltip: {
-        //     xDateFormat: '%A, %B %d, %Y'
-        // },
-
-        legend: {
-            enabled: false
-        },
-
-        // plotOptions: {
-        //     series: {
-        //         pointPadding: 0.1,
-        //         groupPadding: 0.1,
-        //         borderWidth: 0,
-        //     }
-        // },
-
-        series: [{
-            name: 'Wave Heights',
-            data: data,
-        }],
-
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 590
-                },
-                chartOptions: {
-                    yAxis: {
-                        title: {
-                            text: null
-                        }
-                    },
-                }
-            }]
-        },
-
-        credits: {
-            enabled: false
-        },
-
-    });
 }
