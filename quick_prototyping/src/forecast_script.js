@@ -83,8 +83,68 @@ function getDescription(xmlDocument) {
       console.log(forecastJson);
 
       document.getElementById('tableJson').innerHTML = JSON.stringify(forecastJson);
+
+      document.getElementById('north-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'north'));
+      document.getElementById('west-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'west'));
+      document.getElementById('south-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'south'));
+      document.getElementById('east-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'east'));
     }
   }
+}
+
+function filterDataToDirection(forecastJson, direction) {
+  return forecastJson.filter(datum => datum.direction && datum.direction.toLowerCase().includes(direction.toLowerCase()));
+}
+
+function groupDataByDay(forecastJson) {
+  return forecastJson.reduce((result, currentValue) => {
+    if (result.length === 0) {
+      const currentDay = [];
+      currentDay.push(currentValue);
+      result.push(currentDay);
+    }
+    else {
+      const latestDay = result[result.length-1];
+      if (latestDay[0].day === currentValue.day) {
+        latestDay.push(currentValue);
+      }
+      else {
+        const newDay = [];
+        newDay.push(currentValue);
+        result.push(newDay);
+      }
+    }
+    return result;
+  }, []);
+}
+
+function createTable(forecastJson) {
+  const databyDay = groupDataByDay(forecastJson);
+
+  console.log(databyDay);
+  
+  let html = '';
+  for (let dayIndex = 0; dayIndex < databyDay.length; dayIndex++) {
+    const dataForDay = databyDay[dayIndex];
+
+    html += '<div class="p-0 inline-block flex-1">';
+    html += `<div class="block font-semibold w-full">${dataForDay[0].day}</div>`;
+
+    html += '<div class="flex space-x-0.5">';
+    for (let singleForecastIndex = 0; singleForecastIndex < dataForDay.length; singleForecastIndex++) {
+      const singleForecast = dataForDay[singleForecastIndex];
+      
+      html += `<div class="inline-block p-0 m-0 flex-1">`;
+      html += `  <div class="w-full text-xs text-white bg-blue-300 p-1 px-4">${singleForecast.time}</div>`;
+      html += `  <div class="w-full text-medium p-1">${singleForecast.height} ft</div>`;
+      html += `</div>`;
+    }
+    html += '</div>';
+    
+    html += '</div>';
+  }
+
+  return html;
 }
 
 function parseForecastTable(tableElement) {
@@ -107,7 +167,7 @@ function parseForecastTable(tableElement) {
         if (headerValue.toLowerCase().includes('shore')) {
           continue;
         }
-        else if (headerValue.toLowerCase().includes('day')) {
+        else if (headerValue.toLowerCase().includes('day') || headerValue.toLowerCase().includes('night')) {
           days.push(headerValue);
         }
         else if (headerValue.toLowerCase().includes('am') || headerValue.toLowerCase().includes('pm')) {
