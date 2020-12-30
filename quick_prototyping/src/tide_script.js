@@ -314,11 +314,13 @@ function plotData(divId, data, plotLine, minDate, maxDate) {
 
         xAxis: {
             type: 'datetime',
-            visible: false,
             plotLines: [plotLine],
             min: minDate.getTime(),
             max: maxDate.getTime(),
-            tickInterval: 1000 * 60 * 60 * 24,
+            // minorTickLength: 0,
+            tickLength: 0,
+            // tickInterval: 1000 * 60 * 60 * 24,
+            // visible: false,
             labels: {
               enabled: false,
               // formatter: function() {

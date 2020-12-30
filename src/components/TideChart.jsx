@@ -64,8 +64,10 @@ export default class TideChart extends Component {
           plotLines: [this._createPlotLine(props.currentDate)],
           min: props.minDate.getTime(),
           max: props.maxDate.getTime(),
-          tickInterval: 1000 * 60 * 60 * 24,
-          visible: false,
+          // minorTickLength: 0,
+          tickLength: 0,
+          // tickInterval: 1000 * 60 * 60 * 24,
+          // visible: false,
           labels: {
             enabled: false,
             // formatter: function() {
