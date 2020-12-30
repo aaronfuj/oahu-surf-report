@@ -62,6 +62,7 @@ export default class TideChart extends Component {
           min: props.minDate.getTime(),
           max: props.maxDate.getTime(),
           tickInterval: 1000 * 60 * 60 * 24,
+          visible: false,
           labels: {
             enabled: false,
             // formatter: function() {
