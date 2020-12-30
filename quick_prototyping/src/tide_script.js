@@ -217,10 +217,14 @@ function renderTable(tableId, data, dayDate) {
   let tableHtml = '';
   for (let index = 0; index < filteredTableDate.length; index++) {
     const datum = filteredTableDate[index];
-    tableHtml += '<tr>';
-    tableHtml += `<td class="border border-gray-200 p-1 px-2 font-semibold">${datum.type}</td>`;
-    tableHtml += `<td class="border border-gray-200 p-1 px-2">${createTimeString(new Date(datum.timestamp))}</td>`;
-    tableHtml += `<td class="border border-gray-200 p-1 px-2">${datum.height}ft</td>`;
+    const bgColor = index % 2 === 0 ? 'bg-gray-50' : '';
+    const border = 'border border-gray-100';
+    // const border = '';
+
+    tableHtml += `<tr class="${bgColor}">`;
+    tableHtml += `<td class="${border} p-1 px-2 font-semibold">${datum.type}</td>`;
+    tableHtml += `<td class="${border} p-1 px-2">${createTimeString(new Date(datum.timestamp))}</td>`;
+    tableHtml += `<td class="${border} p-1 px-2">${datum.height}ft</td>`;
     tableHtml += '</tr>';
   }
 
