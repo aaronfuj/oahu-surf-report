@@ -209,7 +209,7 @@ function getTrendCharacter(trend) {
 }
 
 function getNextTideText(tide) {
-  return `${tide.type} tide at ${createTimeString(new Date(tide.timestamp))}`;
+  return `${tide.type} tide (${tide.height}ft) at ${createTimeString(new Date(tide.timestamp))}`;
 }
 
 function renderTable(tableId, data, dayDate) {

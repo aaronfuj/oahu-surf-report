@@ -43,7 +43,7 @@ export default class CurrentTideTrend extends Component {
   }
 
   _getNextTideText(tide) {
-    return `${tide.type} tide at ${this._createTimeString(new Date(tide.timestamp))}`;
+    return `${tide.type} tide (${tide.height}ft) at ${this._createTimeString(new Date(tide.timestamp))}`;
   }
 
   render() {
@@ -59,7 +59,7 @@ export default class CurrentTideTrend extends Component {
           <span>{trendText}</span> Tide<span>{trendChar}</span>
         </div>
         <div>
-          <span className="text-xs text-gray-400">{nextTide}</span>
+          <span className="text-xs font-medium text-gray-400">{nextTide}</span>
         </div>
       </div>
     )
