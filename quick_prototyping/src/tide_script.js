@@ -59,63 +59,112 @@ function toDate(dateString) {
   return new Date(dateString);
 }
 
-function toDateRequestString(date) {
-  return "" + date.getFullYear() + "" + pad2(date.getMonth()+1) + "" + pad2(date.getDate());
-}
-
 Date.prototype.addDays = function(days) {
     var date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
     return date;
 }
 
-function getData(station) {
-  const currentDate = new Date();
+const BASE_URL = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter';
+
+function buildPath(stationId, currentDate, days) {
   const startDate = toDateRequestString(currentDate);
+  const hourRange = days * 24;
 
-  console.log(currentDate);
-
-  const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-
-  const url = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?" +
+  return BASE_URL + "?" +
     "product=predictions" +
+    "&station=" + stationId +
     "&application=FreeForecast" +
     "&begin_date=" + startDate +
-    "&range=96" +
+    "&range=" + hourRange +
     "&datum=MLLW" +
-    "&station=" + station.id +
     "&time_zone=gmt" +
     "&units=english" +
     "&interval=hilo" +
     "&format=json";
-
-  fetch(url).then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    console.log(data);
-    return data;
-  })
-  .then((data) => {
-    renderTrend(data, currentDate);
-    renderTable(data, dayDate);
-    return createSeries(data);
-  })
-  .then((data) => {
-    console.log(data);
-    plotData(data, currentDate, new Date(currentDate.toDateString()), new Date(currentDate.addDays(1).toDateString()));
-  })
 }
 
-getData(HONOLULU);
+function parseApiData(apiData) {
+  if (apiData && apiData.predictions) {
+    return apiData.predictions.map(datum => {
+      return {
+        dateString: datum.t,
+        timestamp: toDate(datum.t + "Z").getTime(),
+        originalType: datum.type,
+        type: toTypeString(datum.type),
+        height: roundTwoDigits(parseFloat(datum.v))
+      };
+    });
+  }
+
+  return [];
+}
+
+function toTypeString(type) {
+  if (type) {
+    switch (type.toUpperCase()) {
+      case 'L': return 'Low';
+      case 'H': return 'High';
+      default: return type;
+    }
+  }
+  return '';
+}
+
+function toDateRequestString(date) {
+  return "" + date.getFullYear() + "" + pad2(date.getMonth() + 1) + "" + pad2(date.getDate());
+}
+
+function roundTwoDigits(number) {
+  return Math.round(number * 100) / 100;
+}
 
 function pad2(number) {
   return (number < 10 ? '0' : '') + number;
 }
 
+function getData(stationId, currentDate) {
+  const url = buildPath(stationId, currentDate, 7);
+
+  return fetch(url)
+  .then((response) => response.json())
+  .then(jsonData => parseApiData(jsonData));
+}
+
+function run() {
+  const currentDate = new Date();
+  const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+
+  getData(HONOLULU.id, currentDate)
+  .then((data) => {
+    console.log(data);
+
+    renderTrend(data, currentDate);
+
+    renderGroup(1, data, currentDate, currentDate, dayDate);
+    renderGroup(2, data, currentDate, currentDate.addDays(1), dayDate.addDays(1));
+    renderGroup(3, data, currentDate, currentDate.addDays(2), dayDate.addDays(2));
+    renderGroup(4, data, currentDate, currentDate.addDays(3), dayDate.addDays(3));
+    // renderTable(data, dayDate);
+
+    // const series = createSeries(data);
+    // plotData(, series, currentDate, new Date(currentDate.toDateString()), new Date(currentDate.addDays(1).toDateString()));
+  })
+}
+
+run();
+
+function renderGroup(groupNumber, data, actualCurrentDate, currentDate, dayDate) {
+  renderTable(`table-${groupNumber}`, data, dayDate);
+
+  const series = createSeries(data);
+  const plotLine = createPlotLine(actualCurrentDate);
+  plotData(`chart-${groupNumber}`, series, plotLine, new Date(currentDate.toDateString()), new Date(currentDate.addDays(1).toDateString()));
+}
+
 function createSeries(apiData) {
-  return apiData.predictions.map(datum => {
-    return [ toDate(datum.t + "Z").getTime(), parseFloat(datum.v) ];
+  return apiData.map(datum => {
+    return [ datum.timestamp, datum.height ];
   });
 }
 
@@ -135,26 +184,7 @@ Highcharts.setOptions({
     }
 });
 
-function toTypeString(type) {
-  switch (type) {
-    case 'L': return 'Low';
-    case 'H': return 'High';
-    default: return type;
-  }
-}
-
-function createDataModel(apiData) {
-  return apiData.predictions.map(datum => {
-    return {
-      timestamp: toDate(datum.t + "Z").getTime(),
-      type: toTypeString(datum.type),
-      height: roundTwoDigits(parseFloat(datum.v))
-    };
-  });
-}
-
-function renderTrend(apiData, currentDate) {
-  const data = createDataModel(apiData);
+function renderTrend(data, currentDate) {
   const nextTide = getNextTide(data, currentDate);
   const trend = determineTrend(data, currentDate);
   document.getElementById('trend-text').innerHTML = getTrendText(trend);
@@ -182,10 +212,8 @@ function getNextTideText(tide) {
   return `${tide.type} tide at ${createTimeString(new Date(tide.timestamp))}`;
 }
 
-function renderTable(apiData, dayDate) {
-  const tableData = createDataModel(apiData);
-
-  const filteredTableDate = filterToDay(tableData, dayDate);
+function renderTable(tableId, data, dayDate) {
+  const filteredTableDate = filterToDay(data, dayDate);
   let tableHtml = '';
   for (let index = 0; index < filteredTableDate.length; index++) {
     const datum = filteredTableDate[index];
@@ -196,7 +224,7 @@ function renderTable(apiData, dayDate) {
     tableHtml += '</tr>';
   }
 
-  document.getElementById('tide-table').innerHTML = tableHtml;
+  document.getElementById(tableId).innerHTML = tableHtml;
 }
 
 
@@ -224,10 +252,6 @@ function createTimeString(date) {
   return hour + ':' + pad2(date.getMinutes()) + '' + ampm;
 }
 
-function roundTwoDigits(number) {
-  return Math.round(number * 100) / 100;
-}
-
 function getNextTide(data, currentDate) {
   const timestamp = currentDate.getTime();
   return data.find(datum => datum.timestamp > timestamp);
@@ -241,8 +265,8 @@ function determineTrend(data, currentDate) {
   return TideTrend.NONE;
 }
 
-function plotData(data, currentDate, minDate, maxDate) {
-    Highcharts.chart('chart', {
+function plotData(divId, data, plotLine, minDate, maxDate) {
+    Highcharts.chart(divId, {
 
         title: {
             // text: location
@@ -286,7 +310,8 @@ function plotData(data, currentDate, minDate, maxDate) {
 
         xAxis: {
             type: 'datetime',
-            plotLines: [createPlotLine(currentDate)],
+            visible: false,
+            plotLines: [plotLine],
             min: minDate.getTime(),
             max: maxDate.getTime(),
             tickInterval: 1000 * 60 * 60 * 24,

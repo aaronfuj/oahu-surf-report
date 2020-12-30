@@ -12,7 +12,6 @@
 
 <body>
     <div class="container mx-auto px-4">
-        <!-- <input type="file" id="file-input" /> -->
         <div id="trend">
             <div class="text-medium">
                 <span id="trend-text"></span> Tide<span id="trend-icon"></span>
@@ -21,11 +20,38 @@
                 <span id="next-tide" class="text-xs text-gray-400"></span>
             </div>
         </div>
-        <div id="chart">
+
+        <div class="flex">
+            <div class="flex-1">
+                <div id="chart-1">
+                </div>
+                <div>
+                    <table id="table-1" class="w-full border-collapse border border-gray-300 text-sm"></table>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div id="chart-2">
+                </div>
+                <div>
+                    <table id="table-2" class="w-full border-collapse border border-gray-300 text-sm"></table>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div id="chart-3">
+                </div>
+                <div>
+                    <table id="table-3" class="w-full border-collapse border border-gray-300 text-sm"></table>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div id="chart-4">
+                </div>
+                <div>
+                    <table id="table-4" class="w-full border-collapse border border-gray-300 text-sm"></table>
+                </div>
+            </div>
         </div>
-        <div id="table">
-            <table id="tide-table" class="w-full border-collapse border border-gray-300 text-sm"></table>
-        </div>
+        
     </div>
 </body>
 <script src="src/tide_script.js"></script>
