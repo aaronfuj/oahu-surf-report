@@ -15,13 +15,16 @@ export default class BuoyChart extends Component {
 
         chart: {
           type: 'area',
+          spaceingLeft: 0,
+          spacingRight: 0,
           zoomType: 'x',
           height: 200
         },
 
         yAxis: {
           title: {
-            text: 'Wave Height (ft)'
+            // text: 'Wave Height (ft)'
+            text: null,
           }
         },
 

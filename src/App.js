@@ -30,6 +30,8 @@ function App() {
         stationId={WAIANAE.id}
         title={WAIANAE.name}
       />
+      <div className="h-8"></div>
+
       <BuoyPage
         buoyId={WAIMEA_BAY.id}
         title={WAIMEA_BAY.name}
@@ -38,6 +40,8 @@ function App() {
         stationId={WAIMEA_BAY_TIDES.id}
         title={WAIMEA_BAY_TIDES.name}
       />
+      <div className="h-8"></div>
+
       <BuoyPage
         buoyId={KANEOHE_BAY.id}
         title={KANEOHE_BAY.name}
@@ -46,6 +50,8 @@ function App() {
         stationId={WAIMANALO.id}
         title={WAIMANALO.name}
       />
+      <div className="h-8"></div>
+      
       <BuoyPage
         buoyId={PEARL_HARBOR.id}
         title={PEARL_HARBOR.name}

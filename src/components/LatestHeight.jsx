@@ -34,8 +34,8 @@ export default class LatestHeight extends Component {
 
     return (
       <div>
-        <div className="flex-none w-full pl-18 sm:pl-20 sm:py-0.5">
-          <dt className="text-sm font-medium">{location}</dt>
+        <div className="flex-none w-full pl-2 sm:py-0.5 text-center md:text-left">
+          <dt className="text-4xl font-thin">{location}</dt>
           <dd className="text-3xl sm:text-4xl font-extrabold text-gray-900">
             <span>{height}</span>FT <span className={trendClass}>{trendChar}</span>
           </dd>

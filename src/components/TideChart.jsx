@@ -23,6 +23,9 @@ export default class TideChart extends Component {
 
         chart: {
           type: 'areaspline',
+          
+          spaceingLeft: 0,
+          spacingRight: 0,
           // zoomType: 'x',
           height: 100,
         },

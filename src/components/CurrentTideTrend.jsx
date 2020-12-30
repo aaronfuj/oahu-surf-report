@@ -54,8 +54,8 @@ export default class CurrentTideTrend extends Component {
     const nextTide = this._getNextTideText(tide);
 
     return (
-      <div>
-        <div className="text-medium">
+      <div className="pl-2">
+        <div className="text-base">
           <span>{trendText}</span> Tide<span>{trendChar}</span>
         </div>
         <div>
