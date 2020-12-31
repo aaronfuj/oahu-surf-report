@@ -2,9 +2,9 @@ import React from 'react'
 import { getData } from '../services/noaa_buoys'
 import LatestHeight from './LatestHeight'
 import BuoyChart from './BuoyChart'
-import {TrendPattern} from '../constants/TrendPattern'
+import { TrendPattern } from '../constants/TrendPattern'
 import PropTypes from 'prop-types'
-
+import { calculateSlope } from '../services/simple_linear_regression'
 
 export default class BuoyPage extends React.Component {
   state = {
@@ -37,74 +37,62 @@ export default class BuoyPage extends React.Component {
   }
 
   _getLatestDataPoint(parsedValues) {
-    return parsedValues[0];
-  }
-
-  _convertMetersToFeet(value) {
-    // A higher performance method of truncating to 2 digits
-    return Math.round((value * 3.28084) * 100) / 100;
-  }
-
-  _toDate(year, month, day, hour, minute) {
-    const dateString = "" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":00Z";
-    return new Date(dateString);
-  }
-
-  _extractDate(value) {
-    return this._toDate(value["YY"].value, value["MM"].value, value["DD"].value, value["hh"].value, value["mm"].value);
-  }
-  
-  _extractWaveHeight(value) {
-      return this._convertMetersToFeet(parseFloat(value["WVHT"].value));
+    return parsedValues.reduce((latestPoint, currentPoint) => {
+      if (latestPoint.timestamp > currentPoint.timestamp) return latestPoint;
+      return currentPoint;
+    }, parsedValues[0]);
   }
 
   _createSeries(parsedValues) {
-    const series = parsedValues.map(value => {
-        const timestamp = this._extractDate(value);
-        const yValue = this._extractWaveHeight(value);
-        return [timestamp.getTime(), yValue];
-    }).reverse();
-
+    const series = parsedValues
+      .map(value => [value.timestamp, value.significantWaveHeightFt])
+      .reverse();
     return series;
   }
 
+  _latestDays(parsedValues, days) {
+    // Buoy update intervals are expected to be every 30 minutes
+    const estimatedEntries = days * 24 * 2;
+    return parsedValues.slice(0, Math.max(estimatedEntries, 0));
+  }
+
   _latestDay(parsedValues) {
-    return parsedValues.slice(0, Math.max((24 * 2), 0));
+    return this._latestDays(parsedValues, 1);
   }
 
   _latestFiveDays(parsedValues) {
-    return parsedValues.slice(0, Math.max((5 * 24 * 2), 0));
+    return this._latestDays(parsedValues, 5);
   }
+
 
   // Calculate the slope using simple linear regression, with the end result being an expected result of
   // Ft/day.
   _calculateSlope(parsedValues) {
     const ascendingValues = parsedValues.reverse();
-    const firstTime = this._extractDate(ascendingValues[0]).getTime();
-
-    const sum = (accumulator, currentValue) => accumulator + currentValue;
-    const sumSquares = (accumulator, currentValue) => accumulator + (currentValue*currentValue);
+    const firstTime = ascendingValues[0].timestamp;
 
     // converts the time interval into minutes, meaning the slope can be considered feet/min
-    const timeValue = (value) => (this._extractDate(value).getTime() - firstTime) / 1000 / 60;
+    const timeValue = (value) => (value.timestamp - firstTime) / 1000 / 60;
 
     const xValues = ascendingValues.map(timeValue);
-    const yValues = ascendingValues.map(value => this._extractWaveHeight(value));
-    const xTimesYValues = ascendingValues.map(value => timeValue(value) * this._extractWaveHeight(value));
+    const yValues = ascendingValues.map(value => value.significantWaveHeightFt);
 
-    let xSummed = xValues.reduce(sum);
-    let xSquaredSummed = xValues.reduce(sumSquares);
-    let ySummed = yValues.reduce(sum);
-    let xTimesYValuesSummed = xTimesYValues.reduce(sum);
+    let slope = calculateSlope(xValues, yValues);
 
-    let n = ascendingValues.length;
-    let numerator = (n * xTimesYValuesSummed) - (xSummed * ySummed);
-    let denominator = (n * xSquaredSummed) - (xSummed * xSummed);
-
-    // Convert the end usable slope into ft/day
-    return (numerator / denominator) * 60 * 24;
+    // convert the resulting slope back to feet/day
+    return slope * 60 * 24;
   }
 
+  _getTrendPattern(slope) {
+    // consider the data trending if there is a pattern of increasing or decreasing by a foot within the day
+    if (slope > 1) {
+      return TrendPattern.UP;
+    }
+    else if (slope < -1) {
+      return TrendPattern.DOWN;
+    }
+    return TrendPattern.NONE;
+  }
 
   render() {
     if (!this._hasData()) return this._renderLoading()
@@ -121,19 +109,15 @@ export default class BuoyPage extends React.Component {
     }
 
     const latestData = this._getLatestDataPoint(data);
-    const lastDate = this._extractDate(latestData);
-    const lastWaveHeight = this._extractWaveHeight(latestData);
-
-    const seriesData = this._createSeries(this._latestFiveDays(data));
+    const lastDate = latestData.date;
+    const lastWaveHeight = latestData.significantWaveHeightFt;
 
     const slope = this._calculateSlope(this._latestDay(data));
-    console.log('Slope for ' + title + 'is ' + slope);
+    console.log(`Slope for ${title} is ${slope}`);
+    
+    const trend = this._getTrendPattern(slope); 
 
-    const increasingSlope = slope > 1;
-    const decreasingSlope = slope < -1;
-    const trend = increasingSlope ? TrendPattern.UP :
-      (decreasingSlope ? TrendPattern.DOWN :
-        TrendPattern.NONE);
+    const seriesData = this._createSeries(this._latestFiveDays(data));
 
     return (
       <div>
