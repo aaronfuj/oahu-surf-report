@@ -2,9 +2,8 @@ import React from 'react'
 import { getData } from '../services/noaa_buoys'
 import CurrentBuoyInfo from './CurrentBuoyInfo'
 import BuoyChart from './BuoyChart'
-import { TrendPattern } from '../constants/TrendPattern'
 import PropTypes from 'prop-types'
-import { calculateSlope } from '../services/simple_linear_regression'
+import {extractLatestBuoyInfo, filterLatestDays} from './buoy-utils'
 
 export default class BuoyPage extends React.Component {
   state = {
@@ -36,13 +35,6 @@ export default class BuoyPage extends React.Component {
     return <div>Loading...</div>
   }
 
-  _getLatestDataPoint(parsedValues) {
-    return parsedValues.reduce((latestPoint, currentPoint) => {
-      if (latestPoint.timestamp > currentPoint.timestamp) return latestPoint;
-      return currentPoint;
-    }, parsedValues[0]);
-  }
-
   _createSeries(parsedValues) {
     const series = parsedValues
       .map(value => [value.timestamp, value.significantWaveHeightFt])
@@ -50,48 +42,8 @@ export default class BuoyPage extends React.Component {
     return series;
   }
 
-  _latestDays(parsedValues, days) {
-    // Buoy update intervals are expected to be every 30 minutes
-    const estimatedEntries = days * 24 * 2;
-    return parsedValues.slice(0, Math.max(estimatedEntries, 0));
-  }
-
-  _latestDay(parsedValues) {
-    return this._latestDays(parsedValues, 1);
-  }
-
   _latestFiveDays(parsedValues) {
-    return this._latestDays(parsedValues, 5);
-  }
-
-
-  // Calculate the slope using simple linear regression, with the end result being an expected result of
-  // Ft/day.
-  _calculateSlope(parsedValues) {
-    const ascendingValues = parsedValues.reverse();
-    const firstTime = ascendingValues[0].timestamp;
-
-    // converts the time interval into minutes, meaning the slope can be considered feet/min
-    const timeValue = (value) => (value.timestamp - firstTime) / 1000 / 60;
-
-    const xValues = ascendingValues.map(timeValue);
-    const yValues = ascendingValues.map(value => value.significantWaveHeightFt);
-
-    let slope = calculateSlope(xValues, yValues);
-
-    // convert the resulting slope back to feet/day
-    return slope * 60 * 24;
-  }
-
-  _getTrendPattern(slope) {
-    // consider the data trending if there is a pattern of increasing or decreasing by a foot within the day
-    if (slope > 1) {
-      return TrendPattern.UP;
-    }
-    else if (slope < -1) {
-      return TrendPattern.DOWN;
-    }
-    return TrendPattern.NONE;
+    return filterLatestDays(parsedValues, 5);
   }
 
   render() {
@@ -108,14 +60,7 @@ export default class BuoyPage extends React.Component {
       );
     }
 
-    const latestData = this._getLatestDataPoint(data);
-    const lastDate = latestData.date;
-    const lastWaveHeight = latestData.significantWaveHeightFt;
-
-    const slope = this._calculateSlope(this._latestDay(data));
-    console.log(`Slope for ${title} is ${slope}`);
-    
-    const trend = this._getTrendPattern(slope); 
+    const buoyInfo = extractLatestBuoyInfo(title, data);
 
     const seriesData = this._createSeries(this._latestFiveDays(data));
 
@@ -123,9 +68,9 @@ export default class BuoyPage extends React.Component {
       <div>
         <CurrentBuoyInfo
           location={title}
-          height={lastWaveHeight}
-          trend={trend}
-          timestamp={lastDate}
+          height={buoyInfo.height}
+          trend={buoyInfo.trend}
+          date={buoyInfo.date}
         />
         <BuoyChart
           data={seriesData}

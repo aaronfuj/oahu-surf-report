@@ -44,9 +44,6 @@ export default class TidePage extends React.Component {
     })
   }
 
-  _toDate(dateString) {
-    return new Date(dateString);
-  }
 
   _createSeries(data) {
     return data.map(datum => {

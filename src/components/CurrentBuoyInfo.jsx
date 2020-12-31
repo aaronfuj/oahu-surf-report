@@ -26,8 +26,8 @@ export default class CurrentBuoyInfo extends Component {
   }
 
   render() {
-    const { height, trend, timestamp } = this.props
-    const formattedDate = this._formatDate(timestamp)
+    const { height, trend, date } = this.props
+    const formattedDate = this._formatDate(date)
 
     const trendChar = this._getTrendCharacter(trend);
     const trendClass = this._getTrendClass(trend);
@@ -49,5 +49,5 @@ CurrentBuoyInfo.propTypes = {
   location: PropTypes.string.isRequired,
   height: PropTypes.number.isRequired,
   trend: PropTypes.string.isRequired,
-  timestamp: PropTypes.any.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
 }
