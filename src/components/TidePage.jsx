@@ -1,6 +1,6 @@
 import React from 'react'
 import { getData } from '../services/noaa_tides'
-import MonotoneInterpolatorCreator from '../services/monotone_cubibc_spline_interpolation'
+import MonotoneInterpolatorCreator from '../services/monotone_cubic_spline_interpolation'
 import { TideTrend } from '../constants/TideTrend'
 import CurrentTideTrend from './CurrentTideTrend'
 import TideTable from './TideTable'
