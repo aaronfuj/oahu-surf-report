@@ -75,15 +75,15 @@ export default class Location extends React.Component {
         <BuoyChart
           data={buoySeriesData}
         />
-        <DirectionWaveHeightForecast
-          heights={forecastHeights}
-          direction={direction}
-        />
         <TidePage
           stationId={stationId}
           title={stationName}
         />
-        {/* <div className="text-2xl font-thin pt-4 text-center md:text-left">{this._capitalizeFirstLetter(direction)} Facing Forecast</div> */}
+        <div className="text-2xl font-thin pt-4 text-center md:text-left">{this._capitalizeFirstLetter(direction)} Facing Forecast</div>
+        <DirectionWaveHeightForecast
+          heights={forecastHeights}
+          direction={direction}
+        />
         
       </div>
     )

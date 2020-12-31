@@ -41,7 +41,7 @@ export default class OahuPage extends React.Component {
     const { waveHeights } = data;
 
     return (
-      <div className="space-y-10">
+      <div className="space-y-16">
         <Location
           title={BARBERS_POINT.name}
           buoyId={BARBERS_POINT.id}
