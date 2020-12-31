@@ -2,3 +2,8 @@
   from = "/api/*"
   to = "https://www.ndbc.noaa.gov/data/realtime2/:splat"
   status = 200
+
+[[redirects]]
+  from = "/noaa_xml/*"
+  to = "https://www.weather.gov/source/hfo/xml/:splat"
+  status = 200
