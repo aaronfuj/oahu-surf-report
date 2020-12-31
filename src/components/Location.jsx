@@ -7,6 +7,10 @@ import DirectionWaveHeightForecast from './DirectionWaveHeightForecast'
 
 export default class Location extends React.Component {
 
+  _capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   render() {
     const { title, buoyId, buoyName, stationId, stationName, direction, forecastHeights } = this.props;
 
@@ -21,7 +25,7 @@ export default class Location extends React.Component {
           stationId={stationId}
           title={stationName}
         />
-        <div className="text-2xl font-thin pt-4 text-center md:text-left">Forecast</div>
+        <div className="text-2xl font-thin pt-4 text-center md:text-left">{this._capitalizeFirstLetter(direction)} Facing Forecast</div>
         <DirectionWaveHeightForecast
           heights={forecastHeights}
           direction={direction}
