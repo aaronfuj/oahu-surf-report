@@ -1,64 +1,141 @@
+const XML_URL = "https://www.weather.gov/source/hfo/xml/SurfState.xml";
+const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+const URL = PROXY_URL + XML_URL;
+
 function getData() {
-  fetch("https://cors-anywhere.herokuapp.com/https://www.weather.gov/source/hfo/xml/SurfState.xml")
+  return fetch(URL)
   .then(response => response.text())
   .then(text => textToDocument(text, "text/xml"))
-  .then((data) => {
-    console.log(data);
-    getDescription(data);
-    return data;
-  });
+  .then((data) => parseDocument(data));
 }
 
-getData();
+function run() {
+  getData()
+  .then((data) => {
+    console.log(data);
+    return data;
+  })
+  .then((data) => renderData(data));
+}
 
-function getDescription(xmlDocument) {
+run();
+
+function parseDocument(xmlDocument) {
   const items = [...xmlDocument.getElementsByTagName("item")];
-  const discussionItems = items.filter(item => {
+
+  const discussion = getDiscussion(items);
+  const { waveHeights, generalDayInfo } = getIslandForecast(items, 'oahu');
+  return {
+    discussion: discussion,
+    waveHeights: waveHeights,
+    generalDayInfo: generalDayInfo,
+  };
+}
+
+function getDiscussion(items) {
+  const discussionItem = getDiscussionItemElement(items);
+  if (discussionItem) {
+    const description = extractDescription(discussionItem);
+    const descriptionDoc = textToDocument(description, "text/html");
+    const pElements = [...descriptionDoc.getElementsByTagName("p")];
+    return pElements.map(extractValue).map(text => text.trim()).filter(text => text && text.length > 0);
+  }
+  return [];
+}
+
+function getDiscussionItemElement(items) {
+  return items.find(item => {
     const title = extractTitle(item);
     return title && "discussion" === title.toLowerCase();
   });
+}
 
-  if (discussionItems.length > 0) {
-    const description = extractDescription(discussionItems[0]);
-    console.log(description);
+function getIslandForecast(items, island) {
+  const forecastItem = getForecastItemElement(items, island);
 
-    const descriptionDoc = textToDocument(description, "text/html");
-    console.log(descriptionDoc);
+  let generalDayInfo = [];
+  let waveHeights = [];
 
-    const pElements = [...descriptionDoc.getElementsByTagName("p")];
-    const paragraphs = pElements.map(extractValue).map(text => text.trim()).filter(text => text && text.length > 0);
-    console.log(paragraphs);
-
-    document.getElementById('description').innerHTML = paragraphs.join('<br>');
-  }
-
-  const forecastItems = items.filter(item => {
-    const title = extractTitle(item);
-    return title && title.toLowerCase().includes('forecast') && title.toLowerCase().includes('oahu');
-  });
-
-  if (forecastItems.length > 0) {
-    const forecastItem = forecastItems[0];
+  if (forecastItem) {
     const description = extractDescription(forecastItem);
-    console.log(description);
-
     const descriptionDoc = textToDocument(description, "text/html");
-    console.log(descriptionDoc);
-
     const tableElements = [...descriptionDoc.getElementsByTagName("table")];
+
+    generalDayInfo = getGeneralDayInfo(descriptionDoc);
+
     if (tableElements.length > 0) {
-      const table = tableElements[0];
-      const forecastJson = parseForecastTable(table);
-      console.log(forecastJson);
-
-      // document.getElementById('tableJson').innerHTML = JSON.stringify(forecastJson);
-
-      document.getElementById('north-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'north'));
-      document.getElementById('west-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'west'));
-      document.getElementById('south-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'south'));
-      document.getElementById('east-table').innerHTML = createTable(filterDataToDirection(forecastJson, 'east'));
+      const tableElement = tableElements[0];
+      waveHeights = parseForecastTable(tableElement);
     }
   }
+  return {
+    generalDayInfo: generalDayInfo,
+    waveHeights: waveHeights,
+  }
+}
+
+function getForecastItemElement(items, location) {
+  return items.find(item => {
+    const title = extractTitle(item);
+    return title && title.toLowerCase().includes('forecast') && title.toLowerCase().includes(location.toLowerCase());
+  });
+}
+
+function getGeneralDayInfo(descriptionDoc) {
+  const generalDivs = getAsList(descriptionDoc, "div");
+  const dayInfo = [];
+  for (let divIndex = 0; divIndex < generalDivs.length; divIndex++) {
+    const generalDiv = generalDivs[divIndex];
+    
+    const dayJson = parseGeneralDiv(generalDiv);
+    dayInfo.push(dayJson);
+  }
+  return dayInfo;
+}
+
+function parseGeneralDiv(generalDiv) {
+  const day = extractFirstValue(generalDiv, "span");
+  let weather = '';
+  let temperature = '';
+  let winds = '';
+
+  const tableElement = getFirst(generalDiv, "table");
+  if (tableElement) {
+    const rows = getRows(tableElement);
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+      const row = rows[rowIndex];
+      const headerValue = extractFirstValue(row, "th");
+      if (headerValue) {
+        if (headerValue.toLowerCase().includes('weather')) {
+            weather = extractFirstValue(row, "td").trim();
+        }
+        else if (headerValue.toLowerCase().includes('temperature')) {
+          temperature = extractFirstValue(row, "td").trim();
+        }
+        else if (headerValue.toLowerCase().includes('winds')) {
+          winds = extractFirstValue(row, "td").trim();
+        }
+      }
+    }
+  }
+
+  return {
+    day: day,
+    weather: weather,
+    temperature: temperature,
+    winds: winds,
+  };
+}
+
+function renderData(data) {
+  const {discussion, waveHeights} = data;
+
+  document.getElementById('description').innerHTML = discussion.join('<br><br>');
+
+  document.getElementById('north-table').innerHTML = createTable(filterDataToDirection(waveHeights, 'north'));
+  document.getElementById('west-table').innerHTML = createTable(filterDataToDirection(waveHeights, 'west'));
+  document.getElementById('south-table').innerHTML = createTable(filterDataToDirection(waveHeights, 'south'));
+  document.getElementById('east-table').innerHTML = createTable(filterDataToDirection(waveHeights, 'east'));
 }
 
 function filterDataToDirection(forecastJson, direction) {
@@ -97,12 +174,12 @@ function createTable(forecastJson) {
     const dataForDay = databyDay[dayIndex];
 
     html += '<div class="p-0 inline-block flex-1">';
-    html += `<div class="block font-semibold w-full">${dataForDay[0].day}</div>`;
+    html += `<div class="block text-sm w-full">${dataForDay[0].day}</div>`;
 
     html += '<div class="flex space-x-0.5">';
     for (let singleForecastIndex = 0; singleForecastIndex < dataForDay.length; singleForecastIndex++) {
       const singleForecast = dataForDay[singleForecastIndex];
-      const averageHeight = parseAverageHeight(singleForecast.height);
+      const averageHeight = singleForecast.averageHeight;
       const baseColor = getHeightColor(averageHeight);
 
       const bgColor = `bg-${baseColor}-300`;
@@ -119,12 +196,6 @@ function createTable(forecastJson) {
   }
 
   return html;
-}
-
-function parseAverageHeight(heightString) {
-  const heightStrings = heightString.split('-');
-  const totalValue = heightStrings.reduce((total, current) => total += parseInt(current), 0);
-  return totalValue / heightStrings.length;
 }
 
 function getHeightColor(heightValue) {
@@ -181,11 +252,25 @@ function parseForecastTable(tableElement) {
       else {
         const dayIndex = Math.floor((cellIndex-1) / 2);
         const timeIndex = cellIndex-1;
+
+        const heightString = cellValue;
+        const heightStrings = heightString.split('-');
+
+        let heightValues = heightStrings.map(height => parseInt(height));
+
+        const minHeight = Math.min(...heightValues);
+        const maxHeight = Math.max(...heightValues);
+        const totalValue = heightValues.reduce((total, current) => total += current, 0);
+        const averageHeight = totalValue / heightStrings.length;
+
         results.push({
           'direction': direction,
           'day': days[dayIndex],
           'time': times[timeIndex],
-          'height': cellValue,
+          'height': heightString,
+          'minHeight': minHeight,
+          'maxHeight': maxHeight,
+          'averageHeight': averageHeight,
           'order': timeIndex,
         });
       }
@@ -196,27 +281,45 @@ function parseForecastTable(tableElement) {
 }
 
 function getRows(tableElement) {
-  return [...tableElement.getElementsByTagName("tr")]
+  return getAsList(tableElement, "tr");
 }
 
 function getHeaders(tableRowElement) {
-  return [...tableRowElement.getElementsByTagName("th")]
+  return getAsList(tableRowElement, "th");
 }
 
 function getCells(tableRowElement) {
-  return [...tableRowElement.getElementsByTagName("td")]
+  return getAsList(tableRowElement, "td");
 }
 
+function extractTitle(itemElement) {
+  return extractFirstValue(itemElement, "title");
+}
+
+function extractDescription(itemElement) {
+  return extractFirstValue(itemElement, "description");
+}
+
+// General helpers for working with the document
 function textToDocument(text, mimeType) {
   return (new window.DOMParser()).parseFromString(text, mimeType);
 }
 
-function extractTitle(itemElement) {
-  return extractValue(itemElement.getElementsByTagName("title")[0]);
+function getAsList(element, tagName) {
+  return [...element.getElementsByTagName(tagName)];
 }
 
-function extractDescription(itemElement) {
-  return extractValue(itemElement.getElementsByTagName("description")[0]);
+function getFirst(element, tagName) {
+  const foundValues = getAsList(element, tagName);
+  if (foundValues && foundValues.length > 0) {
+    return foundValues[0];
+  }
+  return null;
+}
+
+function extractFirstValue(itemElement, tagName) {
+  const first = getFirst(itemElement, tagName);
+  return first ? extractValue(first) : null;
 }
 
 function extractValue(element) {
