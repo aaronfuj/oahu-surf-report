@@ -2,26 +2,38 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default class SingleDayWaveHeightForecast extends React.Component {
-  _getHeightColor(heightValue) {
+  _getBgColor(heightValue) {
     if (heightValue > 8) {
-      return 'red';
+      return 'bg-red-300';
     }
     else if (heightValue >= 6) {
-      return 'yellow';
+      return 'bg-yellow-300';
     }
     else if (heightValue >= 4) {
-      return 'blue';
+      return 'bg-blue-300';
     }
-    return 'gray';
+    return 'bg-gray-300';
+  }
+
+  _getBgColorLight(heightValue) {
+    if (heightValue > 8) {
+      return 'bg-red-50';
+    }
+    else if (heightValue >= 6) {
+      return 'bg-yellow-50';
+    }
+    else if (heightValue >= 4) {
+      return 'bg-blue-50';
+    }
+    return 'bg-gray-50';
   }
 
   render() {
     const { day, heights } = this.props;
 
     const forecastForTime = heights.map((singleForecast, index) => {
-      const baseColor = this._getHeightColor(singleForecast.averageHeight);
-      const bgColor = `bg-${baseColor}-300`;
-      const bgColorLight = `bg-${baseColor}-50`;
+      const bgColor = this._getBgColor(singleForecast.averageHeight);
+      const bgColorLight = this._getBgColorLight(singleForecast.averageHeight);
 
       return (
         <div class="inline-block p-0 m-0 flex-1" key={index}>
