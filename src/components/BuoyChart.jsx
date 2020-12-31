@@ -29,7 +29,9 @@ export default class BuoyChart extends Component {
         },
 
         xAxis: {
-          type: 'datetime'
+          type: 'datetime',
+          minPadding: 0,
+          maxPadding: 0
         },
 
         legend: {
