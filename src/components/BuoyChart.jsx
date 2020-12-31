@@ -39,7 +39,7 @@ export default class BuoyChart extends Component {
         },
 
         series: [{
-          name: 'Wave Heights',
+          name: 'Tide Heights',
           data: props.data
         }],
 
