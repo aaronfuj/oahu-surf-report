@@ -38,9 +38,11 @@ function tokenize(line) {
 export function getData(buoyId) {
     return fetch(buildRelativePath(buoyId))
     .then((response) => {
-        return response.text();
-    })
-    .then((textData) => {
-        return parseTextFile(textData);
+        if (!response.ok) {
+            return [];
+        }
+        else {
+            return response.text().then(text => parseTextFile(text));
+        }
     });
 }

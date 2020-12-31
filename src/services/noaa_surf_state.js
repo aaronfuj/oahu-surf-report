@@ -1,5 +1,5 @@
-const XML_URL = "https://www.weather.gov/source/hfo/xml/SurfState.xml";
-const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+// const XML_URL = "https://www.weather.gov/source/hfo/xml/SurfState.xml";
+// const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 const PRODUCTION_URL = "/noaa_xml/SurfState.xml";
 const URL = PRODUCTION_URL;
 

@@ -91,6 +91,16 @@ export default class TidePage extends React.Component {
     if (!this._hasData()) return this._renderLoading()
 
     const { currentDate, data } = this.state;
+    const { title } = this.props;
+
+    if (data.length === 0) {
+      return (
+        <div>
+          <span>Missing tide data for {title}</span>
+        </div>
+      );
+    }
+
     const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
     const singleDayData = this._filterToDay(data, dayDate);
 

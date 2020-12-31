@@ -112,6 +112,14 @@ export default class BuoyPage extends React.Component {
     const { data } = this.state;
     const { title } = this.props;
 
+    if (data.length === 0) {
+      return (
+        <div>
+          <span>Missing buoy data for {title}</span>
+        </div>
+      );
+    }
+
     const latestData = this._getLatestDataPoint(data);
     const lastDate = this._extractDate(latestData);
     const lastWaveHeight = this._extractWaveHeight(latestData);
