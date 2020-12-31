@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {TrendPattern} from '../constants/TrendPattern'
 
-export default class LatestHeight extends Component {
+export default class CurrentBuoyInfo extends Component {
 
   _formatDate(date) {
     return date.toDateString() + " " +
@@ -45,7 +45,7 @@ export default class LatestHeight extends Component {
   }
 }
 
-LatestHeight.propTypes = {
+CurrentBuoyInfo.propTypes = {
   location: PropTypes.string.isRequired,
   height: PropTypes.number.isRequired,
   trend: PropTypes.string.isRequired,

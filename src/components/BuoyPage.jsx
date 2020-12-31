@@ -1,6 +1,6 @@
 import React from 'react'
 import { getData } from '../services/noaa_buoys'
-import LatestHeight from './LatestHeight'
+import CurrentBuoyInfo from './CurrentBuoyInfo'
 import BuoyChart from './BuoyChart'
 import { TrendPattern } from '../constants/TrendPattern'
 import PropTypes from 'prop-types'
@@ -121,7 +121,7 @@ export default class BuoyPage extends React.Component {
 
     return (
       <div>
-        <LatestHeight
+        <CurrentBuoyInfo
           location={title}
           height={lastWaveHeight}
           trend={trend}
