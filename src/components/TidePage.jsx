@@ -1,5 +1,6 @@
 import React from 'react'
 import { getData } from '../services/noaa_tides'
+import MonotoneInterpolatorCreator from '../services/monotone_cubibc_spline_interpolation'
 import { TideTrend } from '../constants/TideTrend'
 import CurrentTideTrend from './CurrentTideTrend'
 import TideTable from './TideTable'
@@ -72,6 +73,16 @@ export default class TidePage extends React.Component {
     return TideTrend.NONE;
   }
 
+  _roundTwoDigits(number) {
+    return Math.round(number * 100) / 100;
+  }
+
+  _estimateHeight(data, currentDate) {
+    const interpolator = MonotoneInterpolatorCreator(data.map(datum => datum.timestamp), data.map(datum => datum.height));
+    const estimatedHeight = interpolator(currentDate.getTime());
+    return this._roundTwoDigits(estimatedHeight);
+  }
+
   _renderLoading() {
     return <div>Loading...</div>
   }
@@ -87,12 +98,14 @@ export default class TidePage extends React.Component {
     const maxDate = this._addDays(minDate, 1);
     const seriesData = this._createSeries(data);
 
+    const estimatedHeight = this._estimateHeight(data, currentDate);
     const trend = this._determineTrend(data, currentDate);
     const nextTide = this._getNextTide(data, currentDate);
 
     return (
       <div>
         <CurrentTideTrend
+          estimatedHeight={estimatedHeight}
           trend={trend}
           tide={nextTide}
         />

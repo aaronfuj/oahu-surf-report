@@ -47,7 +47,7 @@ export default class CurrentTideTrend extends Component {
   }
 
   render() {
-    const { trend, tide } = this.props
+    const { estimatedHeight, trend, tide } = this.props
 
     const trendText = this._getTrendText(trend);
     const trendChar = this._getTrendCharacter(trend);
@@ -56,7 +56,7 @@ export default class CurrentTideTrend extends Component {
     return (
       <div className="pl-2">
         <div className="text-base">
-          <span>{trendText}</span> Tide<span>{trendChar}</span>
+          <span className="font-semibold">{estimatedHeight}ft</span> <span>{trendText}</span> Tide<span>{trendChar}</span>
         </div>
         <div>
           <span className="text-xs font-medium text-gray-400">{nextTide}</span>
@@ -67,6 +67,7 @@ export default class CurrentTideTrend extends Component {
 }
 
 CurrentTideTrend.propTypes = {
+  estimatedHeight: PropTypes.number,
   trend: PropTypes.string.isRequired,
   tide: PropTypes.object.isRequired,
 }
