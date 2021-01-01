@@ -5,6 +5,10 @@ import Location from './Location'
 import { getData } from '../services/noaa_surf_state'
 
 export default class OahuPage extends React.Component {
+  westRef = React.createRef();
+  northRef = React.createRef();
+  southRef = React.createRef();
+  eastRef = React.createRef();
 
   state = {
     currentDate: null,
@@ -30,6 +34,10 @@ export default class OahuPage extends React.Component {
     })
   }
 
+  _executeScroll(ref) {
+    ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   _renderLoading() {
     return <div>Loading...</div>
   }
@@ -41,46 +49,71 @@ export default class OahuPage extends React.Component {
     const { waveHeights } = data;
 
     return (
-      <div className="space-y-16">
-        <Location
-          title={BARBERS_POINT.name}
-          buoyId={BARBERS_POINT.id}
-          buoyName={BARBERS_POINT.name}
-          stationId={WAIANAE.id}
-          stationName={WAIANAE.name}
-          forecastHeights={waveHeights}
-          direction='west'
-        />
+      <div>
+        <div className="flex text-center mb-2 pb-2 font-semibold border-b-2 border-gray-600">
+          <div className="flex-1">
+            <button onClick={() => this._executeScroll(this.westRef)}>West</button>
+          </div>
+          <div className="flex-1">
+            <button onClick={() => this._executeScroll(this.northRef)}>North</button>
+          </div>
+          <div className="flex-1">
+            <button onClick={() => this._executeScroll(this.southRef)}>South</button>
+          </div>
+          <div className="flex-1">
+            <button onClick={() => this._executeScroll(this.eastRef)}>East</button>
+          </div>
+        </div>
 
-        <Location
-          title={WAIMEA_BAY.name}
-          buoyId={WAIMEA_BAY.id}
-          buoyName={WAIMEA_BAY.name}
-          stationId={WAIMEA_BAY_TIDES.id}
-          stationName={WAIMEA_BAY_TIDES.name}
-          forecastHeights={waveHeights}
-          direction='north'
-        />
+        <div className="space-y-16">
+          <div ref={this.westRef}>
+            <Location
+              title={BARBERS_POINT.name}
+              buoyId={BARBERS_POINT.id}
+              buoyName={BARBERS_POINT.name}
+              stationId={WAIANAE.id}
+              stationName={WAIANAE.name}
+              forecastHeights={waveHeights}
+              direction='west'
+            />
+          </div>
 
-        <Location
-          title={PEARL_HARBOR.name}
-          buoyId={PEARL_HARBOR.id}
-          buoyName={PEARL_HARBOR.name}
-          stationId={HONOLULU.id}
-          stationName={HONOLULU.name}
-          forecastHeights={waveHeights}
-          direction='south'
-        />
+          <div ref={this.northRef}>
+            <Location
+              title={WAIMEA_BAY.name}
+              buoyId={WAIMEA_BAY.id}
+              buoyName={WAIMEA_BAY.name}
+              stationId={WAIMEA_BAY_TIDES.id}
+              stationName={WAIMEA_BAY_TIDES.name}
+              forecastHeights={waveHeights}
+              direction='north'
+            />
+          </div>
 
-        <Location
-          title={KANEOHE_BAY.name}
-          buoyId={KANEOHE_BAY.id}
-          buoyName={KANEOHE_BAY.name}
-          stationId={WAIMANALO.id}
-          stationName={WAIMANALO.name}
-          forecastHeights={waveHeights}
-          direction='east'
-        />
+          <div ref={this.southRef}>
+            <Location
+              title={PEARL_HARBOR.name}
+              buoyId={PEARL_HARBOR.id}
+              buoyName={PEARL_HARBOR.name}
+              stationId={HONOLULU.id}
+              stationName={HONOLULU.name}
+              forecastHeights={waveHeights}
+              direction='south'
+            />
+          </div>
+
+          <div ref={this.eastRef}>
+            <Location
+              title={KANEOHE_BAY.name}
+              buoyId={KANEOHE_BAY.id}
+              buoyName={KANEOHE_BAY.name}
+              stationId={WAIMANALO.id}
+              stationName={WAIMANALO.name}
+              forecastHeights={waveHeights}
+              direction='east'
+            />
+          </div>
+        </div>
       </div>
     );
   }
