@@ -36,7 +36,7 @@ export default class SingleDayWaveHeightForecast extends React.Component {
       const bgColorLight = this._getBgColorLight(singleForecast.averageHeight);
 
       return (
-        <div class="inline-block p-0 m-0 flex-1" key={index}>
+        <div className="inline-block p-0 m-0 flex-1" key={index}>
           <div className={`w-full text-xs text-white p-1 px-2 md:px-3 ${bgColor}`}>
             <span>{singleForecast.time}</span>
           </div>
