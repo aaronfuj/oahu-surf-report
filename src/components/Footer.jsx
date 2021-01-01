@@ -21,7 +21,7 @@ export default class Footer extends React.Component {
             </div>
           </div>
         </div>
-        <div className="text-center text-xs text-gray-400">An Aaron Fujimoto Project</div>
+        <div className="text-center text-xs text-gray-400">An <a href="https://www.aaronfujimoto.com/">Aaron Fujimoto</a> Project</div>
       </div>
     )
   }
