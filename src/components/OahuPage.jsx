@@ -2,6 +2,7 @@ import React from 'react'
 import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from '../constants/NoaaBuoys';
 import { HONOLULU, WAIANAE, WAIMANALO, WAIMEA_BAY as WAIMEA_BAY_TIDES } from '../constants/NoaaTides'
 import Location from './Location'
+import Footer from './Footer'
 import { getData } from '../services/noaa_surf_state'
 
 export default class OahuPage extends React.Component {
@@ -114,6 +115,7 @@ export default class OahuPage extends React.Component {
             />
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
