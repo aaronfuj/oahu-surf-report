@@ -4,8 +4,8 @@ export default class Footer extends React.Component {
   render() {
     return (
       <div className="space-y-4 space-x-4">
-        <div className="flex pt-10">
-          <div className="flex-none pr-4">
+        <div className="flex flex-col md:flex-row pt-10">
+          <div className="flex-none pt-2 pr-2">
             <div className="font-bold text-sm text-gray-600">Resources</div>
             <ul className="text-xs text-gray-500">
               <li><a href="https://www.weather.gov/hfo/SRF">Surf Forecast for the State of Hawaii</a></li>
@@ -13,7 +13,7 @@ export default class Footer extends React.Component {
               <li><a href="https://www.ndbc.noaa.gov/maps/Hawaii.shtml">NOAA Buoy Center (Hawaii)</a></li>
             </ul>
           </div>
-          <div className="flex-auto">
+          <div className="md:flex-auto pt-2">
             <div className="font-bold text-sm text-gray-600">Disclaimer</div>
             <div className="text-xs text-gray-500">
               <span>This website is for informational purposes only.</span>
