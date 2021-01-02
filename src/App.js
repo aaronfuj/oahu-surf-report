@@ -4,7 +4,7 @@ import OahuPage from './components/OahuPage'
 
 function App() {
   return (
-    <div className="App container mx-auto px-4 py-4">
+    <div className="App container mx-auto max-w-screen-md px-4 py-4">
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

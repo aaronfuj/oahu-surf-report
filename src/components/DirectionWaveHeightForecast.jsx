@@ -38,7 +38,7 @@ export default class DirectionWaveHeightForecast extends React.Component {
     const groupedData = this._groupDataByDay(filteredData);
 
     return (
-      <div className="space-x-1 flex w-full md:w-1/2 text-center md:text-left">
+      <div className="space-x-1 flex w-full text-center md:text-left">
         {
           groupedData.map((data, index) => (
             <SingleDayWaveHeightForecast
