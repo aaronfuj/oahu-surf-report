@@ -59,7 +59,8 @@ export default class TidePage extends React.Component {
 
   _getNextTide(data, currentDate) {
     const timestamp = currentDate.getTime();
-    return data.find(datum => datum.timestamp > timestamp);
+    const firstResult = data.find(datum => datum.timestamp > timestamp);
+    return firstResult ? firstResult : data[data.length-1];
   }
 
   _determineTrend(data, currentDate) {

@@ -20,9 +20,11 @@ function buildPath(stationId, currentDate, days) {
 function parseApiData(apiData) {
   if (apiData && apiData.predictions) {
     return apiData.predictions.map(datum => {
+      const date = toDate(datum.t);
       return {
         dateString: datum.t,
-        timestamp: toDate(datum.t + "Z").getTime(),
+        date: date,
+        timestamp: date.getTime(),
         originalType: datum.type,
         type: toTypeString(datum.type),
         height: roundTwoDigits(parseFloat(datum.v))
@@ -34,7 +36,10 @@ function parseApiData(apiData) {
 }
 
 function toDate(dateString) {
-  return new Date(dateString);
+  //Input dateString: "2021-01-01 23:34"
+  //ISO Format: 2021-01-02T06:33:49Z
+  const modifiedDateString = dateString.trim().split(' ').join('T') + ':00Z';
+  return new Date(modifiedDateString);
 }
 
 function toTypeString(type) {
