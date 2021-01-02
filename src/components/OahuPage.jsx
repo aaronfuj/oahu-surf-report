@@ -53,10 +53,10 @@ export default class OahuPage extends React.Component {
       <div>
         <div className="flex text-center mb-2 pb-2 font-semibold border-b-2 border-gray-600">
           <div className="flex-1">
-            <button onClick={() => this._executeScroll(this.westRef)}>West</button>
+            <button onClick={() => this._executeScroll(this.northRef)}>North</button>
           </div>
           <div className="flex-1">
-            <button onClick={() => this._executeScroll(this.northRef)}>North</button>
+            <button onClick={() => this._executeScroll(this.westRef)}>West</button>
           </div>
           <div className="flex-1">
             <button onClick={() => this._executeScroll(this.southRef)}>South</button>
@@ -67,17 +67,6 @@ export default class OahuPage extends React.Component {
         </div>
 
         <div className="space-y-16">
-          <div ref={this.westRef}>
-            <Location
-              title={BARBERS_POINT.name}
-              buoyId={BARBERS_POINT.id}
-              buoyName={BARBERS_POINT.name}
-              stationId={WAIANAE.id}
-              stationName={WAIANAE.name}
-              forecastHeights={waveHeights}
-              direction='west'
-            />
-          </div>
 
           <div ref={this.northRef}>
             <Location
@@ -90,6 +79,19 @@ export default class OahuPage extends React.Component {
               direction='north'
             />
           </div>
+
+          <div ref={this.westRef}>
+            <Location
+              title={BARBERS_POINT.name}
+              buoyId={BARBERS_POINT.id}
+              buoyName={BARBERS_POINT.name}
+              stationId={WAIANAE.id}
+              stationName={WAIANAE.name}
+              forecastHeights={waveHeights}
+              direction='west'
+            />
+          </div>
+
 
           <div ref={this.southRef}>
             <Location
