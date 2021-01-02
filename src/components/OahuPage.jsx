@@ -1,6 +1,6 @@
 import React from 'react'
 import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from '../constants/NoaaBuoys';
-import { HONOLULU, WAIANAE, WAIMANALO, WAIMEA_BAY as WAIMEA_BAY_TIDES } from '../constants/NoaaTides'
+import { HONOLULU, WAIANAE, WAIMANALO, HALEIWA } from '../constants/NoaaTides'
 import Location from './Location'
 import Footer from './Footer'
 import { getData } from '../services/noaa_surf_state'
@@ -84,8 +84,8 @@ export default class OahuPage extends React.Component {
               title={WAIMEA_BAY.name}
               buoyId={WAIMEA_BAY.id}
               buoyName={WAIMEA_BAY.name}
-              stationId={WAIMEA_BAY_TIDES.id}
-              stationName={WAIMEA_BAY_TIDES.name}
+              stationId={HALEIWA.id}
+              stationName={HALEIWA.name}
               forecastHeights={waveHeights}
               direction='north'
             />
