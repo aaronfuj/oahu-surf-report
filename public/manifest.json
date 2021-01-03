@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Local Surf Forecast",
+  "name": "Local Surf Forecast (Oahu)",
   "icons": [
     {
       "src": "favicon.ico",
