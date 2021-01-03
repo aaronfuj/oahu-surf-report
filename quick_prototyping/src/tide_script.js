@@ -227,7 +227,7 @@ function renderTable(tableId, data, dayDate) {
     // const border = '';
 
     tableHtml += `<tr class="${bgColor}">`;
-    tableHtml += `<td class="${border} p-1 px-2 font-semibold">${datum.type}</td>`;
+    tableHtml += `<td class="${border} p-1 px-2 font-semibold"><span class="hidden md:inline">${datum.type}</span><span class="inline md:hidden">${datum.type[0]}</span></td>`;
     tableHtml += `<td class="${border} p-1 px-2">${createTimeString(new Date(datum.timestamp))}</td>`;
     tableHtml += `<td class="${border} p-1 px-2">${datum.height}ft</td>`;
     tableHtml += '</tr>';
@@ -286,12 +286,19 @@ function plotData(divId, data, plotLine, minDate, maxDate) {
             type: 'areaspline',
             // zoomType: 'x',
             height: 100,
+            spaceingLeft: 0,
+            spacingRight: 0,
         },
 
         yAxis: {
             title: {
                 // text: 'Height (ft)'
                 text: null
+            },
+            labels: {
+              align: 'right',
+              x: -5,
+              y: 3,
             },
             min: -0.5,
             max: 2.5,
