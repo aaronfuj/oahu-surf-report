@@ -128,14 +128,54 @@ function parseGeneralDiv(generalDiv) {
 }
 
 function renderData(data) {
-  const {discussion, waveHeights} = data;
+  const {discussion, waveHeights, generalDayInfo} = data;
 
   document.getElementById('description').innerHTML = discussion.join('<br><br>');
+
+  document.getElementById('day-metadata').innerHTML = createMetadataHtml(generalDayInfo);
 
   document.getElementById('north-table').innerHTML = createTable(filterDataToDirection(waveHeights, 'north'));
   document.getElementById('west-table').innerHTML = createTable(filterDataToDirection(waveHeights, 'west'));
   document.getElementById('south-table').innerHTML = createTable(filterDataToDirection(waveHeights, 'south'));
   document.getElementById('east-table').innerHTML = createTable(filterDataToDirection(waveHeights, 'east'));
+}
+
+function createMetadataHtml(generalDayInfo) {
+  let html = '<table class="text-left text-sm">';
+  html += '<tr class="bg-gray-600 text-white text-xs">';
+  html += `<th></th>`
+  for (let dayInfoIndex = 0; dayInfoIndex < generalDayInfo.length; dayInfoIndex++) {
+    const dayInfo = generalDayInfo[dayInfoIndex];
+    html += `<th class="p-1 px-2">${dayInfo.day}</th>`
+  }
+  html += '</tr>';
+  
+  html += '<tr class="bg-gray-50">';
+  html += `<td class="font-semibold border border-gray-100 p-1 px-2 text-xs">Weather</td>`
+  for (let dayInfoIndex = 0; dayInfoIndex < generalDayInfo.length; dayInfoIndex++) {
+    const dayInfo = generalDayInfo[dayInfoIndex];
+    html += `<td class="border border-gray-100 p-1 px-2">${dayInfo.weather}</td>`
+  }
+  html += '</tr>';
+  
+  html += '<tr>';
+  html += `<td class="font-semibold border border-gray-100 p-1 px-2 text-xs">Temperature</td>`
+  for (let dayInfoIndex = 0; dayInfoIndex < generalDayInfo.length; dayInfoIndex++) {
+    const dayInfo = generalDayInfo[dayInfoIndex];
+    html += `<td class="border border-gray-100 p-1 px-2">${dayInfo.temperature}</td>`
+  }
+  html += '</tr>';
+  
+  html += '<tr class="bg-gray-50">';
+  html += `<td class="font-semibold border border-gray-100 p-1 px-2 text-xs">Winds</td>`
+  for (let dayInfoIndex = 0; dayInfoIndex < generalDayInfo.length; dayInfoIndex++) {
+    const dayInfo = generalDayInfo[dayInfoIndex];
+    html += `<td class="border border-gray-100 p-1 px-2">${dayInfo.winds}</td>`
+  }
+  html += '</tr>';
+
+  html += '</table>';
+  return html;
 }
 
 function filterDataToDirection(forecastJson, direction) {

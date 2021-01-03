@@ -11,25 +11,26 @@
 </head>
 
 <body>
-    <div class="container mx-auto px-4">
-        <!-- <input type="file" id="file-input" /> -->
-        <div id="description"></div>
-        <div id="tableJson"></div>
+    <div class="container mx-auto max-w-screen-md p-4">
+        <div class="text-4xl font-extrabold">Oahu Surf Forecast</div>
+        <div id="description" class="pb-4"></div>
+
+        <div id="day-metadata" class="pb-4"></div>
 
         <div class="font-extrabold">NORTH</div>
-        <div id="north-table" class="space-x-1 flex w-full md:w-1/2"></div>
-        <div class="h-8"></div>
+        <div id="north-table" class="space-x-1 flex w-full"></div>
+        <div class="h-4"></div>
 
         <div class="font-extrabold">WEST</div>
-        <div id="west-table" class="space-x-1 flex w-full md:w-1/2"></div>
-        <div class="h-8"></div>
+        <div id="west-table" class="space-x-1 flex w-full"></div>
+        <div class="h-4"></div>
 
         <div class="font-extrabold">SOUTH</div>
-        <div id="south-table" class="space-x-1 flex w-full md:w-1/2"></div>
-        <div class="h-8"></div>
+        <div id="south-table" class="space-x-1 flex w-full"></div>
+        <div class="h-4"></div>
 
         <div class="font-extrabold">EAST</div>
-        <div id="east-table" class="space-x-1 flex w-full md:w-1/2"></div>
+        <div id="east-table" class="space-x-1 flex w-full"></div>
     </div>
 </body>
 <script src="src/forecast_script.js"></script>
