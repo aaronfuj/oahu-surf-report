@@ -141,7 +141,7 @@ function renderData(data) {
 }
 
 function createMetadataHtml(generalDayInfo) {
-  let html = '<table class="text-left text-sm">';
+  let html = '<table class="text-left text-sm w-full">';
   html += '<tr class="bg-gray-600 text-white text-xs">';
   html += `<th></th>`
   for (let dayInfoIndex = 0; dayInfoIndex < generalDayInfo.length; dayInfoIndex++) {
