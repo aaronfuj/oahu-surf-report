@@ -2,6 +2,7 @@ import React from 'react'
 import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from '../constants/NoaaBuoys';
 import { HONOLULU, WAIANAE, WAIMANALO, HALEIWA } from '../constants/NoaaTides'
 import Location from './Location'
+import Forecast from './Forecast'
 import Footer from './Footer'
 import { getData } from '../services/noaa_surf_state'
 
@@ -47,7 +48,7 @@ export default class OahuPage extends React.Component {
     if (!this._hasData()) return this._renderLoading()
 
     const { data } = this.state;
-    const { waveHeights } = data;
+    const { lastBuildDateObject, waveHeights, discussion, generalDayInfo } = data;
 
     return (
       <div>
@@ -67,6 +68,12 @@ export default class OahuPage extends React.Component {
         </div>
 
         <div className="space-y-16">
+          <Forecast
+            title="Oahu Surf Forecast"
+            date={lastBuildDateObject}
+            discussion={discussion}
+            generalDayInfo={generalDayInfo}
+          />
 
           <div ref={this.northRef}>
             <Location
