@@ -6,13 +6,20 @@ const URL = PRODUCTION_URL;
 function parseDocument(xmlDocument) {
     const items = [...xmlDocument.getElementsByTagName("item")];
   
+    const lastBuildDate = getLastBuildDate(xmlDocument);
     const discussion = getDiscussion(items);
     const { waveHeights, generalDayInfo } = getIslandForecast(items, 'oahu');
     return {
+      lastBuildDate: lastBuildDate,
+      lastBuildDateObject: xmlTimeToDate(lastBuildDate),
       discussion: discussion,
       waveHeights: waveHeights,
       generalDayInfo: generalDayInfo,
     };
+  }
+
+  function getLastBuildDate(xmlDocument) {
+    return extractFirstValue(xmlDocument, 'lastBuildDate');
   }
   
   function getDiscussion(items) {
@@ -227,8 +234,60 @@ function parseDocument(xmlDocument) {
     return null;
   }
 
-  export function getData() {
-    return fetch(URL)
+  // Creates a date object from the expected XML formatted string
+  function xmlTimeToDate(feedtime) {
+    //03 Jun 2019 06:26:00 GMT
+    var dt = feedtime.split(' ');
+    var day = dt[0];
+    var month = dt[1];
+    if (month === "Jan") {
+      month = "01";
+    } else if (month === "Feb") {
+      month = "02";
+    } else if (month === "Mar") {
+      month = "03";
+    } else if (month === "Apr") {
+      month = "04";
+    } else if (month === "May") {
+      month = "05";
+    } else if (month === "Jun") {
+      month = "06";
+    } else if (month === "Jul") {
+      month = "07";
+    } else if (month === "Aug") {
+      month = "08";
+    } else if (month === "Sep") {
+      month = "09";
+    } else if (month === "Oct") {
+      month = "10";
+    } else if (month === "Nov") {
+      month = "11";
+    } else if (month === "Dec") {
+      month = "12";
+    }
+    var year = dt[2];
+    var t = dt[3].split(':');
+    var hr = t[0];
+    var mn = t[1];
+    var sc = t[2];
+  
+    var buildDate = new Date(Date.UTC(
+      parseInt(year),
+      parseInt(month) - 1,
+      parseInt(day),
+      parseInt(hr),
+      parseInt(mn),
+      parseInt(sc)
+    ));
+    return buildDate;
+  }
+
+  export function getData(url) {
+    if (url === null || url === undefined) {
+      url = URL;
+    }
+
+    return fetch(url)
     .then(response => response.text())
     .then(text => textToDocument(text, "text/xml"))
     .then((data) => parseDocument(data));
