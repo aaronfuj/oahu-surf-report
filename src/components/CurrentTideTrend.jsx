@@ -43,7 +43,8 @@ export default class CurrentTideTrend extends Component {
   }
 
   _getNextTideText(tide) {
-    return `${tide.type} tide (${tide.height}ft) at ${this._createTimeString(new Date(tide.timestamp))}`;
+    // return `${tide.type} tide (${tide.height}ft) at ${this._createTimeString(new Date(tide.timestamp))}`;
+    return `${tide.height}ft at ${this._createTimeString(new Date(tide.timestamp))}`;
   }
 
   render() {
