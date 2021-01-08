@@ -23,9 +23,9 @@ export default class TideChart extends Component {
 
         chart: {
           type: 'areaspline',
-          
-          spaceingLeft: 0,
-          spacingRight: 0,
+          margin: [0, 0, 0, 0],
+          // spaceingLeft: 0,
+          // spacingRight: 0,
           // zoomType: 'x',
           height: 100,
         },
@@ -40,6 +40,11 @@ export default class TideChart extends Component {
           tickInterval: 1,
           startOnTick: false,
           endOnTick: false,
+          labels: {
+            align: 'left',
+            x: 2,
+            y: 3,
+          },
         },
 
         tooltip: {

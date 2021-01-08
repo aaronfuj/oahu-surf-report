@@ -101,6 +101,7 @@ export default class TidePage extends React.Component {
 
     const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
     const singleDayData = this._filterToDay(data, dayDate);
+    const nextSingleDayData = this._filterToDay(data, this._addDays(dayDate, 1));
 
     const minDate = new Date(currentDate.toDateString());
     const maxDate = this._addDays(minDate, 1);
@@ -117,15 +118,31 @@ export default class TidePage extends React.Component {
           trend={trend}
           tide={nextTide}
         />
-        <TideChart
-          minDate={minDate}
-          maxDate={maxDate}
-          currentDate={currentDate}
-          data={seriesData}
-        />
-        <TideTable
-          tides={singleDayData}
-        />
+        <div className="flex space-x-1">
+          <div className="flex-1 overflow-hidden">
+            <TideChart
+              minDate={minDate}
+              maxDate={maxDate}
+              currentDate={currentDate}
+              data={seriesData}
+            />
+            <TideTable
+              tides={singleDayData}
+            />
+            <div className="text-xs text-gray-400 p-1">{title} tides</div>
+          </div>
+          <div className="flex-1 overflow-hidden hidden sm:block">
+            <TideChart
+              minDate={this._addDays(minDate, 1)}
+              maxDate={this._addDays(maxDate, 1)}
+              currentDate={currentDate}
+              data={seriesData}
+            />
+            <TideTable
+              tides={nextSingleDayData}
+            />
+          </div>
+        </div>
       </div>
     )
   }
