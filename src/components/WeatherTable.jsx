@@ -17,7 +17,7 @@ export default class WeatherTable extends React.Component {
     days.push(...generalDayInfo.map(dayInfo => dayInfo.day));
 
     const headers = days.map((day, index) =>
-      <th className="p-1 px-2" key={index}>{day}</th>
+      <th className={ index === 0 ? "p-1 px-2 w-2/12" : "p-1 px-2 w-5/12"} key={index}>{day}</th>
     );
     
     const transposedRows = [];
@@ -42,7 +42,7 @@ export default class WeatherTable extends React.Component {
 
       return (
         <tr className="bg-gray-50" key={index}>
-          <td className="font-semibold border border-gray-100 p-1 px-2 text-xs">{row.title}</td>
+          <td className="font-semibold border border-gray-100 p-1 text-xs truncate">{row.title}</td>
           {cells}
         </tr>
       )
@@ -50,7 +50,7 @@ export default class WeatherTable extends React.Component {
     );
 
     return (
-      <table className="text-left text-sm w-full">
+      <table className="text-left text-sm w-full table-fixed">
         <tr className="bg-gray-600 text-white text-xs">
           {headers}
         </tr>
