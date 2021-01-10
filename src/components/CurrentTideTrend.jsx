@@ -56,7 +56,7 @@ export default class CurrentTideTrend extends Component {
 
     return (
       <div className="pl-2 py-2">
-        <div className="text-xl">
+        <div className="text-2xl">
           <span className="font-semibold">{estimatedHeight}FT</span> <span>{trendChar}</span>
         </div>
         <div className="text-xs font-medium text-gray-400">
