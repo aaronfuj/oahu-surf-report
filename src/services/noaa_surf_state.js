@@ -88,6 +88,8 @@ function parseDocument(xmlDocument) {
     let weather = '';
     let temperature = '';
     let winds = '';
+    let sunrise = '';
+    let sunset = '';
   
     const tableElement = getFirst(generalDiv, "table");
     if (tableElement) {
@@ -105,6 +107,12 @@ function parseDocument(xmlDocument) {
           else if (headerValue.toLowerCase().includes('winds')) {
             winds = extractFirstValue(row, "td").trim();
           }
+          else if (headerValue.toLowerCase().includes('sunrise')) {
+            sunrise = extractFirstValue(row, "td").trim();
+          }
+          else if (headerValue.toLowerCase().includes('sunset')) {
+            sunset = extractFirstValue(row, "td").trim();
+          }
         }
       }
     }
@@ -114,6 +122,8 @@ function parseDocument(xmlDocument) {
       weather: weather,
       temperature: temperature,
       winds: winds,
+      sunrise: sunrise,
+      sunset: sunset,
     };
   }
 

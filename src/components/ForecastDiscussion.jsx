@@ -17,7 +17,7 @@ export default class ForecastDiscussion extends React.Component {
 
     return (
       <div>
-        <div className="text-4xl font-extrabold">{title}</div>
+        <div className="text-4xl font-extrabold"><a href="https://www.weather.gov/hfo/SRF">{title}</a></div>
         <div className="text-xs font-medium text-gray-400">{this._formatDate(date)}</div>
         <div className="pb-4">
           {paragraphs}

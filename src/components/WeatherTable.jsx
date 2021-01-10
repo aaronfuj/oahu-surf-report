@@ -2,6 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default class WeatherTable extends React.Component {
+  _formatCell(cell) {
+    return (!cell || 0 === cell.length) ? '-' : cell;
+  }
+
   render() {
     const { generalDayInfo } = this.props;
 
@@ -33,11 +37,19 @@ export default class WeatherTable extends React.Component {
       title: 'Winds',
       cells: generalDayInfo.map(dayInfo => dayInfo.winds),
     });
+    transposedRows.push({
+      title: 'Sunrise',
+      cells: generalDayInfo.map(dayInfo => dayInfo.sunrise),
+    });
+    transposedRows.push({
+      title: 'Sunset',
+      cells: generalDayInfo.map(dayInfo => dayInfo.sunset),
+    });
 
 
     const rows = transposedRows.map((row, index) => {
       const cells = row.cells.map((cell, cellIndex) =>
-        <td className="border border-gray-100 p-1 px-2" key={cellIndex}>{cell}</td>
+        <td className="border border-gray-100 p-1 px-2" key={cellIndex}>{this._formatCell(cell)}</td>
       );
 
       return (

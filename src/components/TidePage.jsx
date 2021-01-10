@@ -163,12 +163,6 @@ export default class TidePage extends React.Component {
             <TideTable
               tides={singleDayData}
             />
-            <div className="flex text-sm space-x-1 p-1">
-              <div className="flex-1 font-medium text-right">Sunrise</div>
-              <div className="flex-1 text-left">{this._createTimeString(day1Times.sunrise)}</div>
-              <div className="flex-1 font-medium text-right">Sunset</div>
-              <div className="flex-1 text-left">{this._createTimeString(day1Times.sunset)}</div>
-            </div>
           </div>
           <div className="flex-1 overflow-hidden hidden sm:block">
             <TideChart
@@ -182,12 +176,6 @@ export default class TidePage extends React.Component {
             <TideTable
               tides={nextSingleDayData}
             />
-            <div className="flex text-sm space-x-1 p-1">
-              <div className="flex-1 font-medium text-right">Sunrise</div>
-              <div className="flex-1 text-left">{this._createTimeString(day2Times.sunrise)}</div>
-              <div className="flex-1 font-medium text-right">Sunset</div>
-              <div className="flex-1 text-left">{this._createTimeString(day2Times.sunset)}</div>
-            </div>
           </div>
         </div>
       </div>
