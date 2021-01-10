@@ -66,6 +66,7 @@ export default class TideChart extends Component {
 
         xAxis: {
           type: 'datetime',
+          plotBands: this._createPlotBands(props.minDate, props.sunrise, props.sunset, props.maxDate),
           plotLines: [this._createPlotLine(props.currentDate)],
           min: props.minDate.getTime(),
           max: props.maxDate.getTime(),
@@ -132,6 +133,29 @@ export default class TideChart extends Component {
     }
   }
 
+  _createPlotBand(startDate, endDate) {
+    return {
+      color: '#F3F4F6',
+      from: startDate.getTime(),
+      to: endDate.getTime(),
+    };
+  }
+
+  _createPlotBands(minDate, sunrise, sunset, maxDate) {
+    const bands = [];
+
+    if (minDate && sunrise) {
+      bands.push(this._createPlotBand(minDate, sunrise));
+    }
+    if (sunset && maxDate) {
+      bands.push(this._createPlotBand(sunset, maxDate));
+    }
+
+    return bands;
+  }
+
+  
+
   _createPlotLine(date) {
     return {
       // color: '#96ff96',
@@ -160,5 +184,7 @@ TideChart.propTypes = {
   minDate: PropTypes.instanceOf(Date).isRequired,
   maxDate: PropTypes.instanceOf(Date).isRequired,
   currentDate: PropTypes.instanceOf(Date).isRequired,
+  sunrise: PropTypes.instanceOf(Date),
+  sunset: PropTypes.instanceOf(Date),
   data: PropTypes.array.isRequired,
 }

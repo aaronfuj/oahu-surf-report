@@ -1,5 +1,6 @@
 import React from 'react'
 import { getData } from '../services/noaa_tides'
+import getTimes from '../services/sunrise_sunset'
 import MonotoneInterpolatorCreator from '../services/monotone_cubic_spline_interpolation'
 import { TideTrend } from '../constants/TideTrend'
 import CurrentTideTrend from './CurrentTideTrend'
@@ -85,11 +86,38 @@ export default class TidePage extends React.Component {
     return <div>Loading...</div>
   }
 
+  _formatDate(date) {
+    return date.toDateString() + " " +
+      date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
+  }
+
+  _pad2(number) {
+    return (number < 10 ? '0' : '') + number;
+  }
+
+  _createTimeString(date) {
+    let hour = date.getHours();
+    let ampm = 'am';
+    
+    if (hour === 12){
+      ampm = 'pm'
+    }
+    if (hour === 0){
+      hour = 12;
+    }
+    if (hour > 12){
+      hour = hour - 12;
+      ampm = 'pm'
+    }
+  
+    return hour + ':' + this._pad2(date.getMinutes()) + '' + ampm;
+  }
+
   render() {
     if (!this._hasData()) return this._renderLoading()
 
     const { currentDate, data } = this.state;
-    const { title } = this.props;
+    const { title, coordinates } = this.props;
 
     if (data.length === 0) {
       return (
@@ -111,6 +139,9 @@ export default class TidePage extends React.Component {
     const trend = this._determineTrend(data, currentDate);
     const nextTide = this._getNextTide(data, currentDate);
 
+    const day1Times = getTimes(coordinates, currentDate);
+    const day2Times = getTimes(coordinates, this._addDays(currentDate, 1));
+
     return (
       <div>
         <CurrentTideTrend
@@ -118,29 +149,45 @@ export default class TidePage extends React.Component {
           trend={trend}
           tide={nextTide}
         />
+        <div className="text-xs text-gray-400 p-1">{title} tides</div>
         <div className="flex space-x-1">
           <div className="flex-1 overflow-hidden">
             <TideChart
               minDate={minDate}
               maxDate={maxDate}
               currentDate={currentDate}
+              sunrise={day1Times.sunrise}
+              sunset={day1Times.sunset}
               data={seriesData}
             />
             <TideTable
               tides={singleDayData}
             />
-            <div className="text-xs text-gray-400 p-1">{title} tides</div>
+            <div className="flex text-sm space-x-1 p-1">
+              <div className="flex-1 font-medium text-right">Sunrise</div>
+              <div className="flex-1 text-left">{this._createTimeString(day1Times.sunrise)}</div>
+              <div className="flex-1 font-medium text-right">Sunset</div>
+              <div className="flex-1 text-left">{this._createTimeString(day1Times.sunset)}</div>
+            </div>
           </div>
           <div className="flex-1 overflow-hidden hidden sm:block">
             <TideChart
               minDate={this._addDays(minDate, 1)}
               maxDate={this._addDays(maxDate, 1)}
               currentDate={currentDate}
+              sunrise={day2Times.sunrise}
+              sunset={day2Times.sunset}
               data={seriesData}
             />
             <TideTable
               tides={nextSingleDayData}
             />
+            <div className="flex text-sm space-x-1 p-1">
+              <div className="flex-1 font-medium text-right">Sunrise</div>
+              <div className="flex-1 text-left">{this._createTimeString(day2Times.sunrise)}</div>
+              <div className="flex-1 font-medium text-right">Sunset</div>
+              <div className="flex-1 text-left">{this._createTimeString(day2Times.sunset)}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -151,4 +198,5 @@ export default class TidePage extends React.Component {
 TidePage.propTypes = {
   title: PropTypes.string.isRequired,
   stationId: PropTypes.string.isRequired,
+  coordinates: PropTypes.object.isRequired,
 }

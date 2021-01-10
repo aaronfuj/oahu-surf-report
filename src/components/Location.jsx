@@ -58,7 +58,7 @@ export default class Location extends React.Component {
     if (!this._hasData()) return this._renderLoading()
 
     const { buoyData } = this.state;
-    const { title, stationId, stationName, direction, forecastHeights } = this.props;
+    const { title, stationId, stationName, stationCoordinates, direction, forecastHeights } = this.props;
 
     const buoyInfo = extractLatestBuoyInfo(title, buoyData);
     const buoySeriesData = this._createBuoySeries(this._latestFiveDays(buoyData));
@@ -78,6 +78,7 @@ export default class Location extends React.Component {
         <TidePage
           stationId={stationId}
           title={stationName}
+          coordinates={stationCoordinates}
         />
         <div className="text-2xl font-thin pt-4 text-center md:text-left">{this._capitalizeFirstLetter(direction)} Facing Forecast</div>
         <DirectionWaveHeightForecast
@@ -96,6 +97,7 @@ Location.propTypes = {
   buoyName: PropTypes.string.isRequired,
   stationId: PropTypes.string.isRequired,
   stationName: PropTypes.string.isRequired,
+  stationCoordinates: PropTypes.object.isRequired,
   direction: PropTypes.string.isRequired,
   forecastHeights: PropTypes.array.isRequired,
 }

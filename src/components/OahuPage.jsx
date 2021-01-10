@@ -1,6 +1,12 @@
 import React from 'react'
-import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from '../constants/NoaaBuoys';
+import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from '../constants/NoaaBuoys'
 import { HONOLULU, WAIANAE, WAIMANALO, HALEIWA } from '../constants/NoaaTides'
+import {
+  HONOLULU as HONOLULU_COORDINATES,
+  WAIANAE as WAIANAE_COORDINATES,
+  WAIMANALO as WAIMANALO_COORDINATES,
+  HALEIWA as HALEIWA_COORDINATES,
+} from '../constants/GeographicCoordinates'
 import Location from './Location'
 import Forecast from './Forecast'
 import Footer from './Footer'
@@ -82,6 +88,7 @@ export default class OahuPage extends React.Component {
               buoyName={WAIMEA_BAY.name}
               stationId={HALEIWA.id}
               stationName={HALEIWA.name}
+              stationCoordinates={HALEIWA_COORDINATES}
               forecastHeights={waveHeights}
               direction='north'
             />
@@ -94,6 +101,7 @@ export default class OahuPage extends React.Component {
               buoyName={BARBERS_POINT.name}
               stationId={WAIANAE.id}
               stationName={WAIANAE.name}
+              stationCoordinates={WAIANAE_COORDINATES}
               forecastHeights={waveHeights}
               direction='west'
             />
@@ -107,6 +115,7 @@ export default class OahuPage extends React.Component {
               buoyName={PEARL_HARBOR.name}
               stationId={HONOLULU.id}
               stationName={HONOLULU.name}
+              stationCoordinates={HONOLULU_COORDINATES}
               forecastHeights={waveHeights}
               direction='south'
             />
@@ -119,6 +128,7 @@ export default class OahuPage extends React.Component {
               buoyName={KANEOHE_BAY.name}
               stationId={WAIMANALO.id}
               stationName={WAIMANALO.name}
+              stationCoordinates={WAIMANALO_COORDINATES}
               forecastHeights={waveHeights}
               direction='east'
             />
