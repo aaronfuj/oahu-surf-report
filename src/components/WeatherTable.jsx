@@ -51,10 +51,14 @@ export default class WeatherTable extends React.Component {
 
     return (
       <table className="text-left text-sm w-full table-fixed">
-        <tr className="bg-gray-600 text-white text-xs">
-          {headers}
-        </tr>
-        {rows}
+        <thead>
+          <tr className="bg-gray-600 text-white text-xs">
+            {headers}
+          </tr>
+        </thead>
+        <tbody>
+          {rows}
+        </tbody>
       </table>
     );
   }
