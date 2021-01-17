@@ -159,10 +159,10 @@ export default class TidePage extends React.Component {
         />
         <div className="text-xs text-gray-400">{title} tides</div>
 
-        <SwipeableViews className="block sm:hidden">
+        <SwipeableViews className="sm:hidden" enableMouseEvents="true">
           <div className="overflow-hidden">
             <div>
-              <span className="text-sm">{this._createDayString(dayDate)}</span>
+              <span className="text-xs font-medium">{this._createDayString(dayDate)}</span>
             </div>
             <TideChart
               minDate={minDate}
@@ -178,7 +178,7 @@ export default class TidePage extends React.Component {
           </div>
           <div className="overflow-hidden">
             <div>
-              <span className="text-sm">{this._createDayString(nextDayDate)}</span>
+              <span className="text-xs font-medium">{this._createDayString(nextDayDate)}</span>
             </div>
             <TideChart
               minDate={this._addDays(minDate, 1)}
@@ -197,7 +197,7 @@ export default class TidePage extends React.Component {
         <div className="hidden sm:flex space-x-1">
           <div className="flex-1 overflow-hidden">
             <div>
-              <span className="text-sm">{this._createDayString(dayDate)}</span>
+              <span className="text-xs font-medium">{this._createDayString(dayDate)}</span>
             </div>
             <TideChart
               minDate={minDate}
@@ -213,7 +213,7 @@ export default class TidePage extends React.Component {
           </div>
           <div className="flex-1 overflow-hidden">
             <div>
-              <span className="text-sm">{this._createDayString(nextDayDate)}</span>
+              <span className="text-xs font-medium">{this._createDayString(nextDayDate)}</span>
             </div>
             <TideChart
               minDate={this._addDays(minDate, 1)}
