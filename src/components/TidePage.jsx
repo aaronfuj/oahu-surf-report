@@ -115,6 +115,11 @@ export default class TidePage extends React.Component {
     return hour + ':' + this._pad2(date.getMinutes()) + '' + ampm;
   }
 
+  _createDayString(date) {
+    let options = { weekday: 'long', month: 'numeric', day: 'numeric' }; 
+    return date.toLocaleString('en-US', options);
+  }
+
   render() {
     if (!this._hasData()) return this._renderLoading()
 
@@ -130,6 +135,7 @@ export default class TidePage extends React.Component {
     }
 
     const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    const nextDayDate = this._addDays(dayDate, 1);
     const singleDayData = this._filterToDay(data, dayDate);
     const nextSingleDayData = this._filterToDay(data, this._addDays(dayDate, 1));
 
@@ -151,10 +157,13 @@ export default class TidePage extends React.Component {
           trend={trend}
           tide={nextTide}
         />
-        <div className="text-xs text-gray-400 p-1">{title} tides</div>
+        <div className="text-xs text-gray-400">{title} tides</div>
 
-        <SwipeableViews>
+        <SwipeableViews className="block sm:hidden">
           <div className="overflow-hidden">
+            <div>
+              <span className="text-sm">{this._createDayString(dayDate)}</span>
+            </div>
             <TideChart
               minDate={minDate}
               maxDate={maxDate}
@@ -168,6 +177,9 @@ export default class TidePage extends React.Component {
             />
           </div>
           <div className="overflow-hidden">
+            <div>
+              <span className="text-sm">{this._createDayString(nextDayDate)}</span>
+            </div>
             <TideChart
               minDate={this._addDays(minDate, 1)}
               maxDate={this._addDays(maxDate, 1)}
@@ -182,8 +194,11 @@ export default class TidePage extends React.Component {
           </div>
         </SwipeableViews>
 
-        <div className="flex space-x-1">
+        <div className="hidden sm:flex space-x-1">
           <div className="flex-1 overflow-hidden">
+            <div>
+              <span className="text-sm">{this._createDayString(dayDate)}</span>
+            </div>
             <TideChart
               minDate={minDate}
               maxDate={maxDate}
@@ -196,7 +211,10 @@ export default class TidePage extends React.Component {
               tides={singleDayData}
             />
           </div>
-          <div className="flex-1 overflow-hidden hidden sm:block">
+          <div className="flex-1 overflow-hidden">
+            <div>
+              <span className="text-sm">{this._createDayString(nextDayDate)}</span>
+            </div>
             <TideChart
               minDate={this._addDays(minDate, 1)}
               maxDate={this._addDays(maxDate, 1)}

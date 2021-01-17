@@ -34,7 +34,7 @@ export default class CurrentBuoyInfo extends Component {
 
     return (
       <div>
-        <div className="flex-none w-full pl-2 sm:py-0.5 text-center md:text-left">
+        <div className="flex-none w-full sm:py-0.5 text-center md:text-left">
           <dd className="text-3xl sm:text-4xl font-extrabold text-gray-900">
             <span>{height}</span>FT <span className={trendClass}>{trendChar}</span>
           </dd>
