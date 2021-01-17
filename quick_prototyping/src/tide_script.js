@@ -1,4 +1,5 @@
 const HONOLULU =   { id: '1612340', name: 'Honolulu' };
+const HANAUMA_BAY = { id: '1612301', name: 'Hanauma Bay'};
 const NAWILIWILI = { id: '1611400', name: 'Nawiliwili' };
 const WAIMANALO =  { id: '1612376', name: 'Waimanalo' };
 const WAIANAE =    { id: '1612482', name: 'Waianae' };
@@ -135,7 +136,7 @@ function run() {
   const currentDate = new Date();
   const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 
-  getData(HONOLULU.id, currentDate)
+  getData(HANAUMA_BAY.id, currentDate)
   .then((data) => {
     console.log(data);
 
