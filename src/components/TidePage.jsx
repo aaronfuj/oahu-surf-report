@@ -1,4 +1,6 @@
 import React from 'react'
+import SwipeableViews from 'react-swipeable-views';
+
 import { getData } from '../services/noaa_tides'
 import getTimes from '../services/sunrise_sunset'
 import MonotoneInterpolatorCreator from '../services/monotone_cubic_spline_interpolation'
@@ -150,6 +152,36 @@ export default class TidePage extends React.Component {
           tide={nextTide}
         />
         <div className="text-xs text-gray-400 p-1">{title} tides</div>
+
+        <SwipeableViews>
+          <div className="overflow-hidden">
+            <TideChart
+              minDate={minDate}
+              maxDate={maxDate}
+              currentDate={currentDate}
+              sunrise={day1Times.sunrise}
+              sunset={day1Times.sunset}
+              data={seriesData}
+            />
+            <TideTable
+              tides={singleDayData}
+            />
+          </div>
+          <div className="overflow-hidden">
+            <TideChart
+              minDate={this._addDays(minDate, 1)}
+              maxDate={this._addDays(maxDate, 1)}
+              currentDate={currentDate}
+              sunrise={day2Times.sunrise}
+              sunset={day2Times.sunset}
+              data={seriesData}
+            />
+            <TideTable
+              tides={nextSingleDayData}
+            />
+          </div>
+        </SwipeableViews>
+
         <div className="flex space-x-1">
           <div className="flex-1 overflow-hidden">
             <TideChart
