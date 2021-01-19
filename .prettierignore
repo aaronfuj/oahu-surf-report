@@ -1,0 +1,4 @@
+.netlify
+/node_modules
+/example_data
+/quick_prototyping
