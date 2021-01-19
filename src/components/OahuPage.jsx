@@ -1,16 +1,21 @@
-import React from 'react'
-import { WAIMEA_BAY, BARBERS_POINT, KANEOHE_BAY, PEARL_HARBOR } from '../constants/NoaaBuoys'
-import { HONOLULU, WAIANAE, WAIMANALO, HALEIWA } from '../constants/NoaaTides'
+import React from "react";
+import {
+  WAIMEA_BAY,
+  BARBERS_POINT,
+  KANEOHE_BAY,
+  PEARL_HARBOR,
+} from "../constants/NoaaBuoys";
+import { HONOLULU, WAIANAE, WAIMANALO, HALEIWA } from "../constants/NoaaTides";
 import {
   HONOLULU as HONOLULU_COORDINATES,
   WAIANAE as WAIANAE_COORDINATES,
   WAIMANALO as WAIMANALO_COORDINATES,
   HALEIWA as HALEIWA_COORDINATES,
-} from '../constants/GeographicCoordinates'
-import Location from './Location'
-import Forecast from './Forecast'
-import Footer from './Footer'
-import { getData } from '../services/noaa_surf_state'
+} from "../constants/GeographicCoordinates";
+import Location from "./Location";
+import Forecast from "./Forecast";
+import Footer from "./Footer";
+import { getData } from "../services/noaa_surf_state";
 
 export default class OahuPage extends React.Component {
   westRef = React.createRef();
@@ -22,11 +27,11 @@ export default class OahuPage extends React.Component {
     currentDate: null,
     data: {},
     hasData: false,
-  }
-  fetching = false
+  };
+  fetching = false;
 
   _hasData() {
-    return this.state.hasData
+    return this.state.hasData;
   }
 
   componentDidMount() {
@@ -35,41 +40,54 @@ export default class OahuPage extends React.Component {
       this.setState({
         data: data,
         hasData: true,
-      })
-      this.fetching = false
+      });
+      this.fetching = false;
 
-      console.log('Done fetching forecast data')
-    })
+      console.log("Done fetching forecast data");
+    });
   }
 
   _executeScroll(ref) {
-    ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   _renderLoading() {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   render() {
-    if (!this._hasData()) return this._renderLoading()
+    if (!this._hasData()) return this._renderLoading();
 
     const { data } = this.state;
-    const { lastBuildDateObject, waveHeights, discussion, generalDayInfo } = data;
+    const {
+      lastBuildDateObject,
+      waveHeights,
+      discussion,
+      generalDayInfo,
+    } = data;
 
     return (
       <div>
         <div className="flex text-center mb-2 pb-2 font-semibold border-b-2 border-gray-600">
           <div className="flex-1">
-            <button onClick={() => this._executeScroll(this.northRef)}>North</button>
+            <button onClick={() => this._executeScroll(this.northRef)}>
+              North
+            </button>
           </div>
           <div className="flex-1">
-            <button onClick={() => this._executeScroll(this.westRef)}>West</button>
+            <button onClick={() => this._executeScroll(this.westRef)}>
+              West
+            </button>
           </div>
           <div className="flex-1">
-            <button onClick={() => this._executeScroll(this.southRef)}>South</button>
+            <button onClick={() => this._executeScroll(this.southRef)}>
+              South
+            </button>
           </div>
           <div className="flex-1">
-            <button onClick={() => this._executeScroll(this.eastRef)}>East</button>
+            <button onClick={() => this._executeScroll(this.eastRef)}>
+              East
+            </button>
           </div>
         </div>
 
@@ -90,7 +108,7 @@ export default class OahuPage extends React.Component {
               stationName={HALEIWA.name}
               stationCoordinates={HALEIWA_COORDINATES}
               forecastHeights={waveHeights}
-              direction='north'
+              direction="north"
             />
           </div>
 
@@ -103,10 +121,9 @@ export default class OahuPage extends React.Component {
               stationName={WAIANAE.name}
               stationCoordinates={WAIANAE_COORDINATES}
               forecastHeights={waveHeights}
-              direction='west'
+              direction="west"
             />
           </div>
-
 
           <div ref={this.southRef}>
             <Location
@@ -117,7 +134,7 @@ export default class OahuPage extends React.Component {
               stationName={HONOLULU.name}
               stationCoordinates={HONOLULU_COORDINATES}
               forecastHeights={waveHeights}
-              direction='south'
+              direction="south"
             />
           </div>
 
@@ -130,7 +147,7 @@ export default class OahuPage extends React.Component {
               stationName={WAIMANALO.name}
               stationCoordinates={WAIMANALO_COORDINATES}
               forecastHeights={waveHeights}
-              direction='east'
+              direction="east"
             />
           </div>
         </div>

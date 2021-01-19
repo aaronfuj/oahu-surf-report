@@ -1,5 +1,5 @@
-import { TrendPattern } from '../constants/TrendPattern'
-import { calculateSlope } from '../services/simple_linear_regression'
+import { TrendPattern } from "../constants/TrendPattern";
+import { calculateSlope } from "../services/simple_linear_regression";
 
 export function filterLatestDays(parsedValues, days) {
   // Buoy update intervals are expected to be every 30 minutes
@@ -32,7 +32,6 @@ function getLatestDataPoint(parsedValues) {
   }, parsedValues[0]);
 }
 
-
 // Calculate the slope using simple linear regression, with the end result being an expected result of
 // Ft/day.
 function calculateWaveHeightSlope(parsedValues) {
@@ -43,7 +42,7 @@ function calculateWaveHeightSlope(parsedValues) {
   const timeValue = (value) => (value.timestamp - firstTime) / 1000 / 60;
 
   const xValues = ascendingValues.map(timeValue);
-  const yValues = ascendingValues.map(value => value.significantWaveHeightFt);
+  const yValues = ascendingValues.map((value) => value.significantWaveHeightFt);
 
   let slope = calculateSlope(xValues, yValues);
 
@@ -55,8 +54,7 @@ function getTrendPattern(slope) {
   // consider the data trending if there is a pattern of increasing or decreasing by a foot within the day
   if (slope > 1) {
     return TrendPattern.UP;
-  }
-  else if (slope < -1) {
+  } else if (slope < -1) {
     return TrendPattern.DOWN;
   }
   return TrendPattern.NONE;

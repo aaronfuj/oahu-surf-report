@@ -1,11 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import SingleDayWaveHeightForecast from './SingleDayWaveHeightForecast'
+import React from "react";
+import PropTypes from "prop-types";
+import SingleDayWaveHeightForecast from "./SingleDayWaveHeightForecast";
 
 export default class DirectionWaveHeightForecast extends React.Component {
-
   _filterDataToDirection(forecastJson, direction) {
-    return forecastJson.filter(datum => datum.direction && datum.direction.toLowerCase().includes(direction.toLowerCase()));
+    return forecastJson.filter(
+      (datum) =>
+        datum.direction &&
+        datum.direction.toLowerCase().includes(direction.toLowerCase())
+    );
   }
 
   _groupDataByDay(forecastJson) {
@@ -14,13 +17,11 @@ export default class DirectionWaveHeightForecast extends React.Component {
         const currentDay = [];
         currentDay.push(currentValue);
         result.push(currentDay);
-      }
-      else {
-        const latestDay = result[result.length-1];
+      } else {
+        const latestDay = result[result.length - 1];
         if (latestDay[0].day === currentValue.day) {
           latestDay.push(currentValue);
-        }
-        else {
+        } else {
           const newDay = [];
           newDay.push(currentValue);
           result.push(newDay);
@@ -30,7 +31,6 @@ export default class DirectionWaveHeightForecast extends React.Component {
     }, []);
   }
 
-
   render() {
     const { direction, heights } = this.props;
 
@@ -39,15 +39,13 @@ export default class DirectionWaveHeightForecast extends React.Component {
 
     return (
       <div className="space-x-1 flex w-full text-center md:text-left">
-        {
-          groupedData.map((data, index) => (
-            <SingleDayWaveHeightForecast
-              key={index}
-              day={data[0].day}
-              heights={data}
-            />
-          ))
-        }
+        {groupedData.map((data, index) => (
+          <SingleDayWaveHeightForecast
+            key={index}
+            day={data[0].day}
+            heights={data}
+          />
+        ))}
       </div>
     );
   }
@@ -56,4 +54,4 @@ export default class DirectionWaveHeightForecast extends React.Component {
 DirectionWaveHeightForecast.propTypes = {
   direction: PropTypes.string.isRequired,
   heights: PropTypes.array.isRequired,
-}
+};

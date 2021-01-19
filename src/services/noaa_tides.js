@@ -1,25 +1,31 @@
-const BASE_URL = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter';
+const BASE_URL = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter";
 
 function buildPath(stationId, currentDate, days) {
   const startDate = toDateRequestString(currentDate);
   const hourRange = days * 24;
 
-  return BASE_URL + "?" +
+  return (
+    BASE_URL +
+    "?" +
     "product=predictions" +
-    "&station=" + stationId +
+    "&station=" +
+    stationId +
     "&application=FreeForecast" +
-    "&begin_date=" + startDate +
-    "&range=" + hourRange +
+    "&begin_date=" +
+    startDate +
+    "&range=" +
+    hourRange +
     "&datum=MLLW" +
     "&time_zone=gmt" +
     "&units=english" +
     "&interval=hilo" +
-    "&format=json";
+    "&format=json"
+  );
 }
 
 function parseApiData(apiData) {
   if (apiData && apiData.predictions) {
-    return apiData.predictions.map(datum => {
+    return apiData.predictions.map((datum) => {
       const date = toDate(datum.t);
       return {
         dateString: datum.t,
@@ -27,7 +33,7 @@ function parseApiData(apiData) {
         timestamp: date.getTime(),
         originalType: datum.type,
         type: toTypeString(datum.type),
-        height: roundTwoDigits(parseFloat(datum.v))
+        height: roundTwoDigits(parseFloat(datum.v)),
       };
     });
   }
@@ -38,23 +44,33 @@ function parseApiData(apiData) {
 function toDate(dateString) {
   //Input dateString: "2021-01-01 23:34"
   //ISO Format: 2021-01-02T06:33:49Z
-  const modifiedDateString = dateString.trim().split(' ').join('T') + ':00Z';
+  const modifiedDateString = dateString.trim().split(" ").join("T") + ":00Z";
   return new Date(modifiedDateString);
 }
 
 function toTypeString(type) {
   if (type) {
     switch (type.toUpperCase()) {
-      case 'L': return 'Low';
-      case 'H': return 'High';
-      default: return type;
+      case "L":
+        return "Low";
+      case "H":
+        return "High";
+      default:
+        return type;
     }
   }
-  return '';
+  return "";
 }
 
 function toDateRequestString(date) {
-  return "" + date.getFullYear() + "" + pad2(date.getMonth() + 1) + "" + pad2(date.getDate());
+  return (
+    "" +
+    date.getFullYear() +
+    "" +
+    pad2(date.getMonth() + 1) +
+    "" +
+    pad2(date.getDate())
+  );
 }
 
 function roundTwoDigits(number) {
@@ -62,13 +78,13 @@ function roundTwoDigits(number) {
 }
 
 function pad2(number) {
-  return (number < 10 ? '0' : '') + number;
+  return (number < 10 ? "0" : "") + number;
 }
 
 export function getData(stationId, currentDate) {
   const url = buildPath(stationId, currentDate, 5);
 
   return fetch(url)
-  .then((response) => response.json())
-  .then(jsonData => parseApiData(jsonData));
+    .then((response) => response.json())
+    .then((jsonData) => parseApiData(jsonData));
 }

@@ -1,43 +1,43 @@
-import React from 'react'
-import { getData } from '../services/noaa_buoys'
-import CurrentBuoyInfo from './CurrentBuoyInfo'
-import BuoyChart from './BuoyChart'
-import PropTypes from 'prop-types'
-import {extractLatestBuoyInfo, filterLatestDays} from './buoy-utils'
+import React from "react";
+import { getData } from "../services/noaa_buoys";
+import CurrentBuoyInfo from "./CurrentBuoyInfo";
+import BuoyChart from "./BuoyChart";
+import PropTypes from "prop-types";
+import { extractLatestBuoyInfo, filterLatestDays } from "./buoy-utils";
 
 export default class BuoyPage extends React.Component {
   state = {
     data: {},
     hasData: false,
-  }
-  fetching = false
+  };
+  fetching = false;
 
   _hasData() {
-    return this.state.hasData
+    return this.state.hasData;
   }
 
   componentDidMount() {
-    const { buoyId } = this.props
+    const { buoyId } = this.props;
 
     getData(buoyId).then((data) => {
       console.log(data);
       this.setState({
         data: data,
         hasData: true,
-      })
-      this.fetching = false
+      });
+      this.fetching = false;
 
-      console.log('Done fetching data')
-    })
+      console.log("Done fetching data");
+    });
   }
 
   _renderLoading() {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   _createSeries(parsedValues) {
     const series = parsedValues
-      .map(value => [value.timestamp, value.significantWaveHeightFt])
+      .map((value) => [value.timestamp, value.significantWaveHeightFt])
       .reverse();
     return series;
   }
@@ -47,7 +47,7 @@ export default class BuoyPage extends React.Component {
   }
 
   render() {
-    if (!this._hasData()) return this._renderLoading()
+    if (!this._hasData()) return this._renderLoading();
 
     const { data } = this.state;
     const { title } = this.props;
@@ -72,15 +72,13 @@ export default class BuoyPage extends React.Component {
           trend={buoyInfo.trend}
           date={buoyInfo.date}
         />
-        <BuoyChart
-          data={seriesData}
-        />
+        <BuoyChart data={seriesData} />
       </div>
-    )
+    );
   }
 }
 
 BuoyPage.propTypes = {
   title: PropTypes.string.isRequired,
   buoyId: PropTypes.string.isRequired,
-}
+};

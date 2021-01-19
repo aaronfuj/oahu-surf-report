@@ -1,5 +1,5 @@
 export const TideTrend = {
-    RISING: "rising",
-    FALLING: "falling",
-    NONE: "none",
-}
+  RISING: "rising",
+  FALLING: "falling",
+  NONE: "none",
+};
