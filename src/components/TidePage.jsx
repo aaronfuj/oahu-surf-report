@@ -179,7 +179,7 @@ export default class TidePage extends React.Component {
         />
         <div className="text-xs text-gray-400">{title} tides</div>
 
-        <SwipeableViews className="sm:hidden" enableMouseEvents="true">
+        <SwipeableViews className="sm:hidden" enableMouseEvents={true}>
           <div className="overflow-hidden">
             <div>
               <span className="text-xs font-medium">
