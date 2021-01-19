@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import HighchartsReact from 'highcharts-react-official'
-import Highcharts from 'highcharts'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts";
+import PropTypes from "prop-types";
 
 Highcharts.setOptions({
   global: {
-      // timezoneOffset: +1,
-      useUTC: false
-  }
+    // timezoneOffset: +1,
+    useUTC: false,
+  },
 });
 
 export default class TideChart extends Component {
@@ -18,11 +18,11 @@ export default class TideChart extends Component {
       chartOptions: {
         title: {
           // text: location
-          text: null
+          text: null,
         },
 
         chart: {
-          type: 'areaspline',
+          type: "areaspline",
           margin: [0, 0, 0, 0],
           // spaceingLeft: 0,
           // spacingRight: 0,
@@ -33,7 +33,7 @@ export default class TideChart extends Component {
         yAxis: {
           title: {
             // text: 'Height (ft)'
-            text: null
+            text: null,
           },
           min: -0.5,
           max: 2.5,
@@ -41,7 +41,7 @@ export default class TideChart extends Component {
           startOnTick: false,
           endOnTick: false,
           labels: {
-            align: 'left',
+            align: "left",
             x: 2,
             y: 3,
           },
@@ -52,21 +52,39 @@ export default class TideChart extends Component {
           crosshairs: true,
           formatter: function () {
             var date = new Date(this.x);
-            var datestring = Highcharts.dateFormat("%A, %b %e %Y, %l:%M %p ", date);
+            var datestring = Highcharts.dateFormat(
+              "%A, %b %e %Y, %l:%M %p ",
+              date
+            );
 
-            var s = '<span style="font-size: 10px;">' + datestring + '</span>';
+            var s = '<span style="font-size: 10px;">' + datestring + "</span>";
             if (this.points) {
-              s += '<br/><span style="color: #0080FF">' + this.points[0].series.name + ':</span><b> ' + this.points[0].y.toFixed(2) + '</b>';
+              s +=
+                '<br/><span style="color: #0080FF">' +
+                this.points[0].series.name +
+                ":</span><b> " +
+                this.points[0].y.toFixed(2) +
+                "</b>";
             } else {
-              s += '<br/><span style="color: #00FF00">' + this.series.name + ':</span><b> ' + this.y.toFixed(2) + '</b>';
+              s +=
+                '<br/><span style="color: #00FF00">' +
+                this.series.name +
+                ":</span><b> " +
+                this.y.toFixed(2) +
+                "</b>";
             }
             return s;
-          }
+          },
         },
 
         xAxis: {
-          type: 'datetime',
-          plotBands: this._createPlotBands(props.minDate, props.sunrise, props.sunset, props.maxDate),
+          type: "datetime",
+          plotBands: this._createPlotBands(
+            props.minDate,
+            props.sunrise,
+            props.sunset,
+            props.maxDate
+          ),
           plotLines: [this._createPlotLine(props.currentDate)],
           min: props.minDate.getTime(),
           max: props.maxDate.getTime(),
@@ -89,7 +107,7 @@ export default class TideChart extends Component {
         // },
 
         legend: {
-          enabled: false
+          enabled: false,
         },
 
         // plotOptions: {
@@ -100,42 +118,46 @@ export default class TideChart extends Component {
         //     }
         // },
 
-        series: [{
-          name: 'Wave Heights',
-          data: props.data,
-          fillOpacity: 0.3,
-          threshold: -0.5,
-          marker: {
-            enabled: false,
-            // radius: 3,
+        series: [
+          {
+            name: "Wave Heights",
+            data: props.data,
+            fillOpacity: 0.3,
+            threshold: -0.5,
+            marker: {
+              enabled: false,
+              // radius: 3,
+            },
           },
-        }],
+        ],
 
         responsive: {
-          rules: [{
-            condition: {
-              maxWidth: 590
-            },
-            chartOptions: {
-              yAxis: {
-                title: {
-                  text: null
-                }
+          rules: [
+            {
+              condition: {
+                maxWidth: 590,
               },
-            }
-          }]
+              chartOptions: {
+                yAxis: {
+                  title: {
+                    text: null,
+                  },
+                },
+              },
+            },
+          ],
         },
 
         credits: {
-          enabled: false
+          enabled: false,
         },
-      }
-    }
+      },
+    };
   }
 
   _createPlotBand(startDate, endDate) {
     return {
-      color: '#F3F4F6',
+      color: "#F3F4F6",
       from: startDate.getTime(),
       to: endDate.getTime(),
     };
@@ -154,12 +176,10 @@ export default class TideChart extends Component {
     return bands;
   }
 
-  
-
   _createPlotLine(date) {
     return {
       // color: '#96ff96',
-      color: 'red',
+      color: "red",
       width: 2,
       value: date.getTime(),
       zIndex: 5,
@@ -171,12 +191,9 @@ export default class TideChart extends Component {
 
     return (
       <div>
-        <HighchartsReact
-          highcharts={Highcharts}
-          options={chartOptions}
-        />
+        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       </div>
-    )
+    );
   }
 }
 
@@ -187,4 +204,4 @@ TideChart.propTypes = {
   sunrise: PropTypes.instanceOf(Date),
   sunset: PropTypes.instanceOf(Date),
   data: PropTypes.array.isRequired,
-}
+};

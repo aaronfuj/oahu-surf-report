@@ -1,17 +1,17 @@
-import React from 'react'
-import { getData } from '../services/noaa_surf_state'
-import DirectionWaveHeightForecast from './DirectionWaveHeightForecast'
+import React from "react";
+import { getData } from "../services/noaa_surf_state";
+import DirectionWaveHeightForecast from "./DirectionWaveHeightForecast";
 
 export default class WaveHeightForecastPage extends React.Component {
   state = {
     currentDate: null,
     data: {},
     hasData: false,
-  }
-  fetching = false
+  };
+  fetching = false;
 
   _hasData() {
-    return this.state.hasData
+    return this.state.hasData;
   }
 
   componentDidMount() {
@@ -20,19 +20,19 @@ export default class WaveHeightForecastPage extends React.Component {
       this.setState({
         data: data,
         hasData: true,
-      })
-      this.fetching = false
+      });
+      this.fetching = false;
 
-      console.log('Done fetching data')
-    })
+      console.log("Done fetching data");
+    });
   }
 
   _renderLoading() {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   render() {
-    if (!this._hasData()) return this._renderLoading()
+    if (!this._hasData()) return this._renderLoading();
 
     const { data } = this.state;
     const { waveHeights } = data;
@@ -43,10 +43,7 @@ export default class WaveHeightForecastPage extends React.Component {
           heights={waveHeights}
           direction='north'
         /> */}
-        <DirectionWaveHeightForecast
-          heights={waveHeights}
-          direction='west'
-        />
+        <DirectionWaveHeightForecast heights={waveHeights} direction="west" />
         {/* <DirectionWaveHeightForecast
           heights={waveHeights}
           direction='south'
@@ -56,6 +53,6 @@ export default class WaveHeightForecastPage extends React.Component {
           direction='east'
         /> */}
       </div>
-    )
+    );
   }
 }

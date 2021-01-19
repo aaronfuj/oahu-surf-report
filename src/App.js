@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
-import './App.css';
-import OahuPage from './components/OahuPage'
+import "./App.css";
+import OahuPage from "./components/OahuPage";
 
 function App() {
   return (
@@ -19,8 +19,7 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <OahuPage
-      />
+      <OahuPage />
     </div>
   );
 }
