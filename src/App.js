@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 import "./App.css";
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import OahuPage from "./components/OahuPage";
+import SandysPage from "./components/SandysPage";
 
 function App() {
   return (
@@ -19,7 +21,16 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <OahuPage />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/sandys">
+            <SandysPage />
+          </Route>
+          <Route path="/">
+            <OahuPage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
