@@ -1,10 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default class Footer extends React.Component {
   render() {
     return (
       <div className="space-y-4 space-x-4">
         <div className="flex flex-col md:flex-row pt-10">
+          <div className="flex-none pt-2 pr-2">
+            <div className="font-bold text-sm text-gray-600">Spots</div>
+            <ul className="text-xs text-gray-500">
+              <li>
+                <Link to="/sandys">Sandys</Link>
+              </li>
+            </ul>
+          </div>
           <div className="flex-none pt-2 pr-2">
             <div className="font-bold text-sm text-gray-600">Resources</div>
             <ul className="text-xs text-gray-500">
