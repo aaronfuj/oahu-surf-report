@@ -6,6 +6,7 @@ import getTimes from "../services/sunrise_sunset";
 import MonotoneInterpolatorCreator from "../services/monotone_cubic_spline_interpolation";
 import { TideTrend } from "../constants/TideTrend";
 import CurrentTideTrend from "./CurrentTideTrend";
+import SunriseSunsetRow from "./SunriseSunsetRow";
 import TideTable from "./TideTable";
 import TideChart from "./TideChart";
 import PropTypes from "prop-types";
@@ -195,6 +196,10 @@ export default class TidePage extends React.Component {
               data={seriesData}
             />
             <TideTable tides={singleDayData} />
+            <SunriseSunsetRow
+              sunrise={day1Times.sunrise}
+              sunset={day1Times.sunset}
+            />
           </div>
           <div className="overflow-hidden">
             <div>
@@ -211,6 +216,10 @@ export default class TidePage extends React.Component {
               data={seriesData}
             />
             <TideTable tides={nextSingleDayData} />
+            <SunriseSunsetRow
+              sunrise={day2Times.sunrise}
+              sunset={day2Times.sunset}
+            />
           </div>
         </SwipeableViews>
 
@@ -230,6 +239,10 @@ export default class TidePage extends React.Component {
               data={seriesData}
             />
             <TideTable tides={singleDayData} />
+            <SunriseSunsetRow
+              sunrise={day1Times.sunrise}
+              sunset={day1Times.sunset}
+            />
           </div>
           <div className="flex-1 overflow-hidden">
             <div>
@@ -246,6 +259,10 @@ export default class TidePage extends React.Component {
               data={seriesData}
             />
             <TideTable tides={nextSingleDayData} />
+            <SunriseSunsetRow
+              sunrise={day2Times.sunrise}
+              sunset={day2Times.sunset}
+            />
           </div>
         </div>
       </div>
