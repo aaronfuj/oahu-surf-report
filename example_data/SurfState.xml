@@ -1,0 +1,595 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+ <rss version='2.0' xmlns:atom="http://www.w3.org/2005/Atom">
+ <channel>
+  <title>Surf Zone Forecast for the State of Hawaii</title>
+  <link>https://www.weather.gov/hfo/statesurf</link>
+  <description>Surf Zone Forecast for the State of Hawaii</description>
+  <language>en-us</language>
+  <managingEditor>W-HFO.Webmaster@noaa.gov (Honolulu Webmaster)</managingEditor>
+  <webMaster>W-HFO.Webmaster@noaa.gov (Honolulu Webmaster)</webMaster>
+  <lastBuildDate>21 Dec 2020 01:23:00 GMT</lastBuildDate>
+  <image>
+   <url>http://weather.gov/images/xml_logo.gif</url>
+   <title>Surf Zone Forecast for the State of Hawaii</title>
+   <link>https://www.weather.gov/hfo/statesurf</link>
+  </image>
+  <item>
+   <title>Hazards for Kauai</title>
+   <link>https://www.weather.gov/hfo/statesurf#headlineKauai</link>
+   <description><![CDATA[<p>No high surf advisory or warnings.</p>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>hazards,002</category>
+  </item>
+  <item>
+   <title>Hazards for Oahu</title>
+   <link>https://www.weather.gov/hfo/statesurf#headlineOahu</link>
+   <description><![CDATA[<p>No high surf advisory or warnings.</p>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>hazards,005</category>
+  </item>
+  <item>
+   <title>Hazards for Maui</title>
+   <link>https://www.weather.gov/hfo/statesurf#headlineMaui</link>
+   <description><![CDATA[<p>No high surf advisory or warnings.</p>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>hazards,017</category>
+  </item>
+  <item>
+   <title>Hazards for South Big Island and Big Island North and East</title>
+   <link>https://www.weather.gov/hfo/statesurf#headlineSouthBigIslandandBigIslandNorthandEast</link>
+   <description><![CDATA[<p>No high surf advisory or warnings.</p>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>hazards,024</category>
+  </item>
+  <item>
+   <title>Hazards for Big Island Leeward</title>
+   <link>https://www.weather.gov/hfo/statesurf#headlineBigIslandLeeward</link>
+   <description><![CDATA[<p>No high surf advisory or warnings.</p>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>hazards,023</category>
+  </item>
+  <item>
+   <title>Forecast for Kauai</title>
+   <link>https://www.weather.gov/hfo/statesurf#ForecastKauai</link>
+   <description><![CDATA[<h2>Forecast for Kauai</h2><pre>
+</pre><table width="500px;" border="1" style="margin-bottom: 20px;"><tr><tr><th rowspan="3">Shores</th><th colspan="2">Tonight</th><th colspan="2">Monday</th></tr>
+<tr><th colspan="2">Surf</th></th><th colspan="2">Surf</th></tr>
+<tr><th>PM</th><th>AM</th><th>AM</th><th>PM </th></tr>
+<tr><td style="text-align: left;">North Facing</td><td style="text-align: center;">8-12</td><td style="text-align: center;">8-12</td><td style="text-align: center;">7-10</td><td style="text-align: center;">7-10 </td></tr><tr><td style="text-align: left;">West Facing</td><td style="text-align: center;">6-8</td><td style="text-align: center;">6-8</td><td style="text-align: center;">5-7</td><td style="text-align: center;">5-7 </td></tr><tr><td style="text-align: left;">South Facing</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr><tr><td style="text-align: left;">East Facing</td><td style="text-align: center;">3-5</td><td style="text-align: center;">3-5</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr></table>
+<div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">TONIGHT</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Mostly cloudy. Scattered showers. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Low Temperature</th><td style="border-bottom: 1px dotted grey;">In the lower 70s. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">East winds 10 to 15 mph.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1611683">   Hanalei Bay</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 0.8 feet 09:09 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.6 feet 12:08 AM HST.</td></tr>
+<tr><th rowspan="3" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1611400">   Nawiliwili</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.3 feet 04:03 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">High 0.7 feet 10:10 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.7 feet 01:30 AM HST.</td></tr>
+</table></td></tr>
+</table></div><div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">MONDAY</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Partly sunny. Scattered showers. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">High Temperature</th><td style="border-bottom: 1px dotted grey;">In the lower 80s. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">East winds around 10 mph.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1611683">   Hanalei Bay</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.6 feet 08:02 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.2 feet 03:18 PM HST.</td></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1611400">   Nawiliwili</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.5 feet 09:03 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.2 feet 04:40 PM HST.</td></tr>
+</table></td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunrise</th><td style="border-bottom: 1px dotted grey;">7:12 AM HST. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunset</th><td style="border-bottom: 1px dotted grey;">6:00 PM HST.</td></tr>
+</table></div>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>forecast</category>
+  </item>
+  <item>
+   <title>Forecast for Oahu</title>
+   <link>https://www.weather.gov/hfo/statesurf#ForecastOahu</link>
+   <description><![CDATA[<h2>Forecast for Oahu</h2><pre>
+</pre><table width="500px;" border="1" style="margin-bottom: 20px;"><tr><tr><th rowspan="3">Shores</th><th colspan="2">Tonight</th><th colspan="2">Monday</th></tr>
+<tr><th colspan="2">Surf</th></th><th colspan="2">Surf</th></tr>
+<tr><th>PM</th><th>AM</th><th>AM</th><th>PM </th></tr>
+<tr><td style="text-align: left;">North Facing</td><td style="text-align: center;">7-10</td><td style="text-align: center;">7-10</td><td style="text-align: center;">6-8</td><td style="text-align: center;">6-8 </td></tr><tr><td style="text-align: left;">West Facing</td><td style="text-align: center;">5-7</td><td style="text-align: center;">5-7</td><td style="text-align: center;">4-6</td><td style="text-align: center;">4-6 </td></tr><tr><td style="text-align: left;">South Facing</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr><tr><td style="text-align: left;">East Facing</td><td style="text-align: center;">3-5</td><td style="text-align: center;">3-5</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr></table>
+<div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">TONIGHT</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Mostly cloudy. Scattered showers. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Low Temperature</th><td style="border-bottom: 1px dotted grey;">Around 70. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">East winds 10 to 15 mph.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="3" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612340">   Honolulu</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.1 feet 04:04 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">High 0.9 feet 10:36 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.7 feet 02:38 AM HST.</td></tr>
+<tr><th rowspan="3" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612482">   Waianae</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.1 feet 04:22 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">High 0.8 feet 10:56 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.7 feet 02:56 AM HST.</td></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612668">   Haleiwa</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 0.7 feet 09:34 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.5 feet 12:33 AM HST.</td></tr>
+<tr><th rowspan="3" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612480">   Mokuoloe</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.7 feet 03:36 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">High 0.8 feet 08:07 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.7 feet 11:49 PM HST.</td></tr>
+</table></td></tr>
+</table></div><div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">MONDAY</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">UV Index</th><td style="border-bottom: 1px dotted grey;">High. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Partly sunny. Scattered showers. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">High Temperature</th><td style="border-bottom: 1px dotted grey;">Around 80. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">East winds around 15 mph.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612340">   Honolulu</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.5 feet 09:26 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.1 feet 04:44 PM HST.</td></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612482">   Waianae</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.4 feet 09:46 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.1 feet 05:02 PM HST.</td></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612668">   Haleiwa</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.2 feet 08:24 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.1 feet 02:39 PM HST.</td></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612480">   Mokuoloe</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.8 feet 08:09 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.5 feet 04:10 PM HST.</td></tr>
+</table></td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunrise</th><td style="border-bottom: 1px dotted grey;">7:01 AM HST. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunset</th><td style="border-bottom: 1px dotted grey;">5:51 PM HST.</td></tr>
+</table></div>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>forecast</category>
+  </item>
+  <item>
+   <title>Forecast for Maui</title>
+   <link>https://www.weather.gov/hfo/statesurf#ForecastMaui</link>
+   <description><![CDATA[<h2>Forecast for Maui</h2><pre>
+</pre><table width="500px;" border="1" style="margin-bottom: 20px;"><tr><tr><th rowspan="3">Shores</th><th colspan="2">Tonight</th><th colspan="2">Monday</th></tr>
+<tr><th colspan="2">Surf</th></th><th colspan="2">Surf</th></tr>
+<tr><th>PM</th><th>AM</th><th>AM</th><th>PM </th></tr>
+<tr><td style="text-align: left;">North Facing</td><td style="text-align: center;">4-6</td><td style="text-align: center;">4-6</td><td style="text-align: center;">4-6</td><td style="text-align: center;">4-6 </td></tr><tr><td style="text-align: left;">West Facing</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr><tr><td style="text-align: left;">South Facing</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr><tr><td style="text-align: left;">East Facing</td><td style="text-align: center;">3-5</td><td style="text-align: center;">3-5</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr></table>
+<div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">TONIGHT</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Mostly cloudy. Scattered showers. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Low Temperature</th><td style="border-bottom: 1px dotted grey;">Around 70. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">East winds around 15 mph.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="3" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1615680">   Kahului</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.7 feet 03:04 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">High 0.9 feet 07:04 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.7 feet 11:45 PM HST.</td></tr>
+</table></td></tr>
+</table></div><div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">MONDAY</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Mostly sunny. Scattered showers. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">High Temperature</th><td style="border-bottom: 1px dotted grey;">In the lower 80s. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">East winds around 15 mph.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1615680">   Kahului</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.9 feet 07:57 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.6 feet 03:52 PM HST.</td></tr>
+</table></td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunrise</th><td style="border-bottom: 1px dotted grey;">6:58 AM HST. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunset</th><td style="border-bottom: 1px dotted grey;">5:50 PM HST.</td></tr>
+</table></div>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>forecast</category>
+  </item>
+  <item>
+   <title>Forecast for South Big Island and Big Island North and East</title>
+   <link>https://www.weather.gov/hfo/statesurf#ForecastSouthBigIslandandBigIslandNorthandEast</link>
+   <description><![CDATA[<h2>Forecast for South Big Island and Big Island North and East<img height="75" style="vertical-align: middle;" src="https://www.weather.gov/images/hfo/graphics/zoneShade/HIZ024-025.png" /></h2><pre>
+</pre><table width="500px;" border="1" style="margin-bottom: 20px;"><tr><tr><th rowspan="3">Shores</th><th colspan="2">Tonight</th><th colspan="2">Monday</th></tr>
+<tr><th colspan="2">Surf</th></th><th colspan="2">Surf</th></tr>
+<tr><th>PM</th><th>AM</th><th>AM</th><th>PM </th></tr>
+<tr><td style="text-align: left;">North Facing</td><td style="text-align: center;">3-5</td><td style="text-align: center;">3-5</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr><tr><td style="text-align: left;">East Facing</td><td style="text-align: center;">3-5</td><td style="text-align: center;">3-5</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4 </td></tr><tr><td style="text-align: left;">South Facing</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">3-5</td><td style="text-align: center;">3-5 </td></tr></table>
+<div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">TONIGHT</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Mostly cloudy. Showers likely. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Low Temperature</th><td style="border-bottom: 1px dotted grey;">In the upper 60s. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">Northeast winds around 5 mph.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="3" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617760">   Hilo Bay</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.6 feet 03:02 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.1 feet 08:32 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.8 feet 01:17 AM HST.</td></tr>
+</table></td></tr>
+</table></div><div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">MONDAY</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Partly sunny. Showers likely. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">High Temperature</th><td style="border-bottom: 1px dotted grey;">Around 80. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">Northeast winds 5 to 10 mph.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617760">   Hilo Bay</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 2.0 feet 08:34 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.5 feet 03:53 PM HST.</td></tr>
+</table></td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunrise</th><td style="border-bottom: 1px dotted grey;">6:50 AM HST. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunset</th><td style="border-bottom: 1px dotted grey;">5:47 PM HST.</td></tr>
+</table></div>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>forecast</category>
+  </item>
+  <item>
+   <title>Forecast for Big Island Leeward</title>
+   <link>https://www.weather.gov/hfo/statesurf#ForecastBigIslandLeeward</link>
+   <description><![CDATA[<h2>Forecast for Big Island Leeward<img height="75" style="vertical-align: middle;" src="https://www.weather.gov/images/hfo/graphics/zoneShade/HIZ023-026.png" /></h2><pre>
+</pre><table width="500px;" border="1" style="margin-bottom: 20px;"><tr><tr><th rowspan="3">Shores</th><th colspan="2">Tonight</th><th colspan="2">Monday</th></tr>
+<tr><th colspan="2">Surf</th></th><th colspan="2">Surf</th></tr>
+<tr><th>PM</th><th>AM</th><th>AM</th><th>PM </th></tr>
+<tr><td style="text-align: left;">West Facing</td><td style="text-align: center;">3-5</td><td style="text-align: center;">3-5</td><td style="text-align: center;">5-7</td><td style="text-align: center;">5-7 </td></tr><tr><td style="text-align: left;">South Facing</td><td style="text-align: center;">2-4</td><td style="text-align: center;">2-4</td><td style="text-align: center;">3-5</td><td style="text-align: center;">3-5 </td></tr></table>
+<div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">TONIGHT</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Partly sunny until 8 PM, then partly 
+                            cloudy. Isolated showers. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Low Temperature</th><td style="border-bottom: 1px dotted grey;">In the mid 60s. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">West winds around 5 mph early, becoming 
+                            light and variable.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="3" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617846">   Kona</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.4 feet 03:39 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">High 0.9 feet 09:10 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.5 feet 01:54 AM HST.</td></tr>
+<tr><th rowspan="3" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617433">   Kawaihae</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.1 feet 03:50 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.0 feet 10:19 PM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.7 feet 02:25 AM HST.</td></tr>
+</table></td></tr>
+</table></div><div style="margin-top: 20px; width: 500px; border-bottom: 3px solid blue;"><span style="font-weight: bold;">MONDAY</span><br /><table width="500px;"><tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Weather</th><td style="border-bottom: 1px dotted grey;">Mostly sunny. Isolated showers. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">High Temperature</th><td style="border-bottom: 1px dotted grey;">In the lower 80s. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Winds</th><td style="border-bottom: 1px dotted grey;">Light and variable winds, becoming 
+                            southwest around 5 mph in the 
+                            afternoon.</td></tr>
+<tr><td colspan="2"><table><tr><th colspan="2" style="border-bottom: 1px dotted grey; text-align: left;">Tides</th></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617846">   Kona</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.6 feet 09:12 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.3 feet 04:30 PM HST.</td></tr>
+<tr><th rowspan="2" style="border-bottom: 1px dotted grey; text-align: left; width: 150px;"><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617433">   Kawaihae</a></th><td style="border-bottom: 1px dotted grey; text-align: left;">High 1.7 feet 09:14 AM HST.</td></tr>
+<tr><td style="border-bottom: 1px dotted grey; text-align: left;">Low 0.1 feet 04:33 PM HST.</td></tr>
+</table></td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunrise</th><td style="border-bottom: 1px dotted grey;">6:54 AM HST. </td></tr>
+<tr><th style="width: 150px; border-bottom: 1px dotted grey; text-align: left;">Sunset</th><td style="border-bottom: 1px dotted grey;">5:51 PM HST.</td></tr>
+</table></div>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>forecast</category>
+  </item>
+  <item>
+   <title>Additional Resources for Kauai</title>
+   <link>https://www.weather.gov/hfo/statesurf#ExtraKauai</link>
+   <description><![CDATA[<h2>Additional Resources for Kauai</h2><ul><li><a href="http://hawaiibeachsafety.com/kauai">Kauai Beaches</a></li><li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1611683">Tide Table for    Hanalei Bay</a></li>
+<li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1611400">Tide Table for    Nawiliwili</a></li>
+<li><a href="https://hioceansafety.com">Hawaii Ocean Safety Information</a></li></ul>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>extra</category>
+  </item>
+  <item>
+   <title>Additional Resources for Oahu</title>
+   <link>https://www.weather.gov/hfo/statesurf#ExtraOahu</link>
+   <description><![CDATA[<h2>Additional Resources for Oahu</h2><ul><li><a href="http://hawaiibeachsafety.com/oahu">Oahu Beaches</a></li><li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612340">Tide Table for    Honolulu</a></li>
+<li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612482">Tide Table for    Waianae</a></li>
+<li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612668">Tide Table for    Haleiwa</a></li>
+<li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1612480">Tide Table for    Mokuoloe</a></li>
+<li><a href="https://hioceansafety.com">Hawaii Ocean Safety Information</a></li></ul>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>extra</category>
+  </item>
+  <item>
+   <title>Additional Resources for Maui</title>
+   <link>https://www.weather.gov/hfo/statesurf#ExtraMaui</link>
+   <description><![CDATA[<h2>Additional Resources for Maui</h2><ul><li><a href="http://hawaiibeachsafety.com/maui">Maui Beaches</a></li><li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1615680">Tide Table for    Kahului</a></li>
+<li><a href="https://hioceansafety.com">Hawaii Ocean Safety Information</a></li></ul>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>extra</category>
+  </item>
+  <item>
+   <title>Additional Resources for South Big Island and Big Island North and East</title>
+   <link>https://www.weather.gov/hfo/statesurf#ExtraSouthBigIslandandBigIslandNorthandEast</link>
+   <description><![CDATA[<h2>Additional Resources for South Big Island and Big Island North and East<img height="75" style="vertical-align: middle;" src="https://www.weather.gov/images/hfo/graphics/zoneShade/HIZ024-025.png" /></h2><ul><li><a href="http://hawaiibeachsafety.com/big-island">Big Island Beaches</a></li><li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617760">Tide Table for    Hilo Bay</a></li>
+<li><a href="https://hioceansafety.com">Hawaii Ocean Safety Information</a></li></ul>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>extra</category>
+  </item>
+  <item>
+   <title>Additional Resources for Big Island Leeward</title>
+   <link>https://www.weather.gov/hfo/statesurf#ExtraBigIslandLeeward</link>
+   <description><![CDATA[<h2>Additional Resources for Big Island Leeward<img height="75" style="vertical-align: middle;" src="https://www.weather.gov/images/hfo/graphics/zoneShade/HIZ023-026.png" /></h2><ul><li><a href="http://hawaiibeachsafety.com/big-island">Big Island Beaches</a></li><li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617846">Tide Table for    Kona</a></li>
+<li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1617433">Tide Table for    Kawaihae</a></li>
+<li><a href="https://hioceansafety.com">Hawaii Ocean Safety Information</a></li></ul>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>extra</category>
+  </item>
+  <item>
+   <title>Discussion</title>
+   <link>https://www.weather.gov/hfo/statesurf#Discussion</link>
+   <description><![CDATA[<p>
+</p>
+<h2>Discussion</h2>
+<p>A new west to northwest swell is beginning to arrive in the coastal waters this afternoon. Surf heights are expected to peak later this evening&#44; but remain below advisory levels. A larger&#44; slightly longer- period&#44; west-northwest swell is possible around the middle of the week. If this latter swell comes in as forecast&#44; a High Surf Advisory is likely. </p>
+<p>With trade winds on the decrease&#44; east shore surf is lowering as well&#44; but will increase again late this week as winds become strong again. Out-of-season southerly swells are expected to give south shore surf a small bump through Monday. A larger&#44; long- period south swell is expected to arrive Tuesday and peak Wednesday and Wednesday night with possible advisory level surf for south facing shores. This swell will then slowly lower into next weekend. </p>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>outlook</category>
+  </item>
+  <item>
+   <title>Footer</title>
+   <link>https://www.weather.gov/hfo/statesurf#Footer</link>
+   <description><![CDATA[<div style="margin-top: 20px; width: 700px; border-top: 3px solid blue;"> <h3>Product Legend:</h3> 
+
+<dl><dt>Surf:</dt><dd>        Height of the surf from trough to crest (face value)
+             in feet.</dd>
+<dt>Tides:</dt><dd>       Heights displayed are relative to the Mean Lower Low
+             Water (MLLW) datum in feet.</dd></dl><p>Surf heights can vary significantly from beach to beach along a
+coastline. Surf larger than the upper end of the range provided in
+the forecast will occur periodically, sometimes up to a few hours
+apart. Expect to encounter rip currents in or near the surf zone,
+with rip current strength increasing with surf size. Swimmers are
+urged to exercise caution at all times and enter the water near a
+lifeguard.</p><p>For the latest beach hazard and safety information at individual
+beaches in Hawaii refer to:</p><p><a href="http://oceansafety.soest.hawaii.edu">http://oceansafety.soest.hawaii.edu</a></p>
+
+
+
+<pre>$$
+</pre></div>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>footer</category>
+  </item>
+  <item>
+   <title>SRFHFO</title>
+   <link>https://www.weather.gov/hfo/statesurf#SRFHFO</link>
+   <description><![CDATA[<pre>FZHW52 PHFO 210123
+SRFHFO
+
+Surf Zone Forecast for Hawaii
+National Weather Service Honolulu HI
+323 PM HST Sun Dec 20 2020
+
+.DISCUSSION...A new west to northwest swell is beginning to arrive in
+the coastal waters this afternoon. Surf heights are expected to peak 
+later this evening, but remain below advisory levels. A larger, slightly
+longer- period, west-northwest swell is possible around the middle of
+the week. If this latter swell comes in as forecast, a High Surf 
+Advisory is likely.
+
+With trade winds on the decrease, east shore surf is lowering as 
+well, but will increase again late this week as winds become strong 
+again. Out-of-season southerly swells are expected to give south shore
+surf a small bump through Monday. A larger, long- period south swell 
+is expected to arrive Tuesday and peak Wednesday and Wednesday night 
+with possible advisory level surf for south facing shores. This swell 
+will then slowly lower into next weekend.
+
+HIZ002-003-211430-
+Kauai-
+323 PM HST Sun Dec 20 2020
+
+__________________________________________________________________
+                      Tonight                    Monday
+
+Shores                  Surf                       Surf     
+                     PM     AM                  AM     PM 
+__________________________________________________________________
+
+North Facing        8-12   8-12                7-10   7-10 
+West Facing          6-8    6-8                 5-7    5-7 
+South Facing         2-4    2-4                 2-4    2-4 
+East Facing          3-5    3-5                 2-4    2-4 
+                                                                  
+
+.TONIGHT...
+Weather.....................Mostly cloudy. Scattered showers. 
+Low Temperature.............In the lower 70s. 
+Winds.......................East winds 10 to 15 mph.
+Tides...
+   Hanalei Bay..............High 0.8 feet 09:09 PM HST.
+                            Low 0.6 feet 12:08 AM HST.
+   Nawiliwili...............Low 0.3 feet 04:03 PM HST.
+                            High 0.7 feet 10:10 PM HST.
+                            Low 0.7 feet 01:30 AM HST.
+
+.MONDAY...
+Weather.....................Partly sunny. Scattered showers. 
+High Temperature............In the lower 80s. 
+Winds.......................East winds around 10 mph.
+Tides...
+   Hanalei Bay..............High 1.6 feet 08:02 AM HST.
+                            Low 0.2 feet 03:18 PM HST.
+   Nawiliwili...............High 1.5 feet 09:03 AM HST.
+                            Low 0.2 feet 04:40 PM HST. 
+Sunrise.....................7:12 AM HST. 
+Sunset......................6:00 PM HST.
+
+$$
+
+HIZ005>009-211430-
+Oahu-
+323 PM HST Sun Dec 20 2020
+
+__________________________________________________________________
+                      Tonight                    Monday
+
+Shores                  Surf                       Surf     
+                     PM     AM                  AM     PM 
+__________________________________________________________________
+
+North Facing        7-10   7-10                 6-8    6-8 
+West Facing          5-7    5-7                 4-6    4-6 
+South Facing         2-4    2-4                 2-4    2-4 
+East Facing          3-5    3-5                 2-4    2-4 
+                                                                  
+
+.TONIGHT...
+Weather.....................Mostly cloudy. Scattered showers. 
+Low Temperature.............Around 70. 
+Winds.......................East winds 10 to 15 mph.
+Tides...
+   Honolulu.................Low 0.1 feet 04:04 PM HST.
+                            High 0.9 feet 10:36 PM HST.
+                            Low 0.7 feet 02:38 AM HST.
+   Waianae..................Low 0.1 feet 04:22 PM HST.
+                            High 0.8 feet 10:56 PM HST.
+                            Low 0.7 feet 02:56 AM HST.
+   Haleiwa..................High 0.7 feet 09:34 PM HST.
+                            Low 0.5 feet 12:33 AM HST.
+   Mokuoloe.................Low 0.7 feet 03:36 PM HST.
+                            High 0.8 feet 08:07 PM HST.
+                            Low 0.7 feet 11:49 PM HST.
+
+.MONDAY...
+UV Index....................High. 
+Weather.....................Partly sunny. Scattered showers. 
+High Temperature............Around 80. 
+Winds.......................East winds around 15 mph.
+Tides...
+   Honolulu.................High 1.5 feet 09:26 AM HST.
+                            Low 0.1 feet 04:44 PM HST.
+   Waianae..................High 1.4 feet 09:46 AM HST.
+                            Low 0.1 feet 05:02 PM HST.
+   Haleiwa..................High 1.2 feet 08:24 AM HST.
+                            Low 0.1 feet 02:39 PM HST.
+   Mokuoloe.................High 1.8 feet 08:09 AM HST.
+                            Low 0.5 feet 04:10 PM HST. 
+Sunrise.....................7:01 AM HST. 
+Sunset......................5:51 PM HST.
+
+$$
+
+HIZ017>021-211430-
+Maui-
+323 PM HST Sun Dec 20 2020
+
+__________________________________________________________________
+                      Tonight                    Monday
+
+Shores                  Surf                       Surf     
+                     PM     AM                  AM     PM 
+__________________________________________________________________
+
+North Facing         4-6    4-6                 4-6    4-6 
+West Facing          2-4    2-4                 2-4    2-4 
+South Facing         2-4    2-4                 2-4    2-4 
+East Facing          3-5    3-5                 2-4    2-4 
+                                                                  
+
+.TONIGHT...
+Weather.....................Mostly cloudy. Scattered showers. 
+Low Temperature.............Around 70. 
+Winds.......................East winds around 15 mph.
+Tides...
+   Kahului..................Low 0.7 feet 03:04 PM HST.
+                            High 0.9 feet 07:04 PM HST.
+                            Low 0.7 feet 11:45 PM HST.
+
+.MONDAY...
+Weather.....................Mostly sunny. Scattered showers. 
+High Temperature............In the lower 80s. 
+Winds.......................East winds around 15 mph.
+Tides...
+   Kahului..................High 1.9 feet 07:57 AM HST.
+                            Low 0.6 feet 03:52 PM HST. 
+Sunrise.....................6:58 AM HST. 
+Sunset......................5:50 PM HST.
+
+$$
+
+HIZ024-025-211430-
+South Big Island and Big Island North and East-
+323 PM HST Sun Dec 20 2020
+
+__________________________________________________________________
+                      Tonight                    Monday
+
+Shores                  Surf                       Surf     
+                     PM     AM                  AM     PM 
+__________________________________________________________________
+
+North Facing         3-5    3-5                 2-4    2-4 
+East Facing          3-5    3-5                 2-4    2-4 
+South Facing         2-4    2-4                 3-5    3-5 
+                                                                  
+
+.TONIGHT...
+Weather.....................Mostly cloudy. Showers likely. 
+Low Temperature.............In the upper 60s. 
+Winds.......................Northeast winds around 5 mph.
+Tides...
+   Hilo Bay.................Low 0.6 feet 03:02 PM HST.
+                            High 1.1 feet 08:32 PM HST.
+                            Low 0.8 feet 01:17 AM HST.
+
+.MONDAY...
+Weather.....................Partly sunny. Showers likely. 
+High Temperature............Around 80. 
+Winds.......................Northeast winds 5 to 10 mph.
+Tides...
+   Hilo Bay.................High 2.0 feet 08:34 AM HST.
+                            Low 0.5 feet 03:53 PM HST. 
+Sunrise.....................6:50 AM HST. 
+Sunset......................5:47 PM HST.
+
+$$
+
+HIZ023-026-211430-
+Big Island Leeward-
+323 PM HST Sun Dec 20 2020
+
+__________________________________________________________________
+                      Tonight                    Monday
+
+Shores                  Surf                       Surf     
+                     PM     AM                  AM     PM 
+__________________________________________________________________
+
+West Facing          3-5    3-5                 5-7    5-7 
+South Facing         2-4    2-4                 3-5    3-5 
+                                                                  
+
+.TONIGHT...
+Weather.....................Partly sunny until 8 PM, then partly 
+                            cloudy. Isolated showers. 
+Low Temperature.............In the mid 60s. 
+Winds.......................West winds around 5 mph early, becoming 
+                            light and variable.
+Tides...
+   Kona.....................Low 0.4 feet 03:39 PM HST.
+                            High 0.9 feet 09:10 PM HST.
+                            Low 0.5 feet 01:54 AM HST.
+   Kawaihae.................Low 0.1 feet 03:50 PM HST.
+                            High 1.0 feet 10:19 PM HST.
+                            Low 0.7 feet 02:25 AM HST.
+
+.MONDAY...
+Weather.....................Mostly sunny. Isolated showers. 
+High Temperature............In the lower 80s. 
+Winds.......................Light and variable winds, becoming 
+                            southwest around 5 mph in the 
+                            afternoon.
+Tides...
+   Kona.....................High 1.6 feet 09:12 AM HST.
+                            Low 0.3 feet 04:30 PM HST.
+   Kawaihae.................High 1.7 feet 09:14 AM HST.
+                            Low 0.1 feet 04:33 PM HST. 
+Sunrise.....................6:54 AM HST. 
+Sunset......................5:51 PM HST.
+
+$$
+
+
+__________________________________________________________________
+
+Product Legend: 
+
+Surf:        Height of the surf from trough to crest (face value)
+             in feet.
+
+Tides:       Heights displayed are relative to the Mean Lower Low
+             Water (MLLW) datum in feet.
+
+Surf heights can vary significantly from beach to beach along a
+coastline. Surf larger than the upper end of the range provided in
+the forecast will occur periodically, sometimes up to a few hours
+apart. Expect to encounter rip currents in or near the surf zone,
+with rip current strength increasing with surf size. Swimmers are
+urged to exercise caution at all times and enter the water near a
+lifeguard.
+
+For the latest beach hazard and safety information at individual
+beaches in Hawaii refer to:
+
+http://oceansafety.soest.hawaii.edu
+
+__________________________________________________________________
+
+$$
+</pre>]]></description>
+   <pubDate>21 Dec 2020 01:23:00 GMT</pubDate>
+   <guid isPermalink="false">https://www.weather.gov/hfo/statesurf</guid>
+   <category>raw product</category>
+  </item>
+  <atom:link href="https://www.weather.gov/source/hfo/xml/SurfState.xml" rel="self" type="application/rss+xml" />
+ </channel>
+</rss>
