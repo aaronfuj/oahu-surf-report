@@ -6,7 +6,7 @@ import { extractLatestBuoyInfo, filterLatestDays } from "./buoy-utils";
 
 import CurrentBuoyInfo from "./CurrentBuoyInfo";
 import BuoyChart from "./BuoyChart";
-import TidePage from "./TidePage";
+import TideStation from "./TideStation";
 import DirectionWaveHeightForecast from "./DirectionWaveHeightForecast";
 
 export default class Location extends React.Component {
@@ -84,7 +84,7 @@ export default class Location extends React.Component {
           date={buoyInfo.date}
         />
         <BuoyChart data={buoySeriesData} />
-        <TidePage
+        <TideStation
           stationId={stationId}
           title={stationName}
           coordinates={stationCoordinates}

@@ -10,9 +10,8 @@ import SunriseSunsetRow from "./SunriseSunsetRow";
 import TideTable from "./TideTable";
 import TideChart from "./TideChart";
 import PropTypes from "prop-types";
-import {createLocalTimeAmPmString} from "./date-utils";
 
-export default class TidePage extends React.Component {
+export default class TideStation extends React.Component {
   state = {
     currentDate: null,
     data: {},
@@ -106,10 +105,6 @@ export default class TidePage extends React.Component {
         timeZoneName: "short",
       })
     );
-  }
-
-  _pad2(number) {
-    return (number < 10 ? "0" : "") + number;
   }
 
   _createDayString(date) {
@@ -253,7 +248,7 @@ export default class TidePage extends React.Component {
   }
 }
 
-TidePage.propTypes = {
+TideStation.propTypes = {
   title: PropTypes.string.isRequired,
   stationId: PropTypes.string.isRequired,
   coordinates: PropTypes.object.isRequired,
