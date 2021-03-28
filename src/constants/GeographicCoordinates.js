@@ -1,4 +1,5 @@
 export const HONOLULU = { latitude: 21.3, longitude: -157.85 };
+export const GREEN_LANTERNS = { latitude: 21.428355, longitude: -158.179945};
 export const WAIANAE = { latitude: 21.446911, longitude: -158.188736 };
 export const HALEIWA = { latitude: 21.592991, longitude: -158.103424 };
 export const WAIMEA_BAY = { latitude: 21.640276, longitude: -158.062727 };

@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import OahuPage from "./components/OahuPage";
 import SandysPage from "./components/SandysPage";
+import MailiBeachPage from "./components/MailiBeachPage";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         <Switch>
           <Route path="/sandys">
             <SandysPage />
+          </Route>
+          <Route path="/maili">
+            <MailiBeachPage />
           </Route>
           <Route path="/">
             <OahuPage />

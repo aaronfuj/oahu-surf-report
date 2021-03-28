@@ -12,6 +12,9 @@ export default class Footer extends React.Component {
               <li>
                 <Link to="/sandys">Sandys</Link>
               </li>
+              <li>
+                <Link to="/maili">Maili Beach</Link>
+              </li>
             </ul>
           </div>
           <div className="flex-none pt-2 pr-2">
