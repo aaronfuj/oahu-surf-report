@@ -8,6 +8,9 @@
 /.pnp
 .pnp.js
 
+# local temp
+/example_data/ignore
+
 # testing
 /coverage
 
