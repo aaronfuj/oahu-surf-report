@@ -51,10 +51,10 @@ Some potential sources of data:
 ## Buoys
 
 The following buoys have wave height data:
-51211 - Pearl Harbor
-51212 - Barbers Point
-51210 - Kaneohe Bay
-51201 - Waimea Bay
+- 51211 - Pearl Harbor
+- 51212 - Barbers Point
+- 51210 - Kaneohe Bay
+- 51201 - Waimea Bay
 
 # Tides
 
@@ -80,7 +80,7 @@ Some potential sources of information:
 - NOAA Old Calculator: https://www.esrl.noaa.gov/gmd/grad/solcalc/sunrise.html
 - Javascript Library: https://github.com/mourner/suncalc
 
-# NOAA APIs
+# NOAA APIs (Unused)
 
 - https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 - https://www.weather.gov/documentation/services-web-api
