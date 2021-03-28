@@ -78,3 +78,9 @@ Some potential sources of information:
 
 - https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 - https://www.weather.gov/documentation/services-web-api
+
+# Acknolwedgments
+As part of this process and looking for data and how to parse it, I came across some useful resources that I want to acknowledge:
+- NOAA for providing the rich data sets for **free**.
+- Buoy Kit - https://github.com/derekdowling/buoy-kit - This is a typescript API for the tides which seems really useful. Unfortunately I found out about this after I had mostly finished my own services to do this.
+- Meta Surf Report - https://github.com/swrobel/meta-surf-forecast / https://metasurfforecast.com/ - These guys do a good job on conslidating different surf information from different web sites and providing some nice charts on top of them.
