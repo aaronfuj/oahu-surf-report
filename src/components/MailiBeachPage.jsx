@@ -31,6 +31,8 @@ export default class MailiBeachPage extends React.Component {
   }
 
   componentDidMount() {
+    document.title = 'Maili Beach Surf Report (NOAA)';
+
     getData().then((data) => {
       console.log(data);
       this.setState({

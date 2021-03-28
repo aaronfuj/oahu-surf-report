@@ -35,6 +35,8 @@ export default class OahuPage extends React.Component {
   }
 
   componentDidMount() {
+    document.title = 'Oahu Surf Report (NOAA)';
+
     getData().then((data) => {
       console.log(data);
       this.setState({
