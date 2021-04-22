@@ -1,6 +1,6 @@
 # Oahu Surf Report (NOAA)
 
-An unofficial aggregation and visualization of surf related information from NOAA and other sources for personal use.
+An unofficial aggregation and visualization of surf related information from NOAA and other sources for personal use. See https://surf.aaronfujimoto.com/ for it running in the wild!
 
 ## Deployment
 
