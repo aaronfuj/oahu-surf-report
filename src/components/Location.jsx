@@ -39,17 +39,6 @@ export default class Location extends React.Component {
     return <div>Loading...</div>;
   }
 
-  _createBuoySeries(parsedValues) {
-    const series = parsedValues
-      .map((value) => [value.timestamp, value.significantWaveHeightFt])
-      .reverse();
-    return series;
-  }
-
-  _latestFiveDays(parsedValues) {
-    return filterLatestDays(parsedValues, 5);
-  }
-
   _capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -67,23 +56,15 @@ export default class Location extends React.Component {
       forecastHeights,
     } = this.props;
 
-    const buoyInfo = extractLatestBuoyInfo(title, buoyData);
-    const buoySeriesData = this._createBuoySeries(
-      this._latestFiveDays(buoyData)
-    );
-
     return (
       <div>
         <div className="text-4xl font-thin text-center md:text-left">
           {title}
         </div>
-        <CurrentBuoyInfo
-          location={title}
-          height={buoyInfo.height}
-          trend={buoyInfo.trend}
-          date={buoyInfo.date}
+        <BuoyComponent
+          title={title}
+          buoyData={buoyData}
         />
-        <BuoyChart data={buoySeriesData} />
         <TideStation
           stationId={stationId}
           title={stationName}
@@ -111,3 +92,49 @@ Location.propTypes = {
   direction: PropTypes.string.isRequired,
   forecastHeights: PropTypes.array.isRequired,
 };
+
+class BuoyComponent extends React.Component {
+  _createBuoySeries(parsedValues) {
+    const series = parsedValues
+      .map((value) => [value.timestamp, value.significantWaveHeightFt])
+      .reverse();
+    return series;
+  }
+
+  _latestFiveDays(parsedValues) {
+    return filterLatestDays(parsedValues, 5);
+  }
+
+  render() {
+    const { title, buoyData } = this.props;
+
+    if (buoyData.length === 0) {
+      return (
+        <div>No buoy data available</div>
+      )
+    }
+
+    const buoyInfo = extractLatestBuoyInfo(title, buoyData);
+    const buoySeriesData = this._createBuoySeries(
+      this._latestFiveDays(buoyData)
+    );
+
+    return (
+      <div>
+        <CurrentBuoyInfo
+          location={title}
+          height={buoyInfo.height}
+          trend={buoyInfo.trend}
+          date={buoyInfo.date}
+        />
+        <BuoyChart data={buoySeriesData} />
+      </div>
+    )
+  }
+}
+
+BuoyComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  buoyData: PropTypes.array.isRequired,
+}
+
