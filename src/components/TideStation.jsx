@@ -37,7 +37,7 @@ export default class TideStation extends React.Component {
 
     const currentDate = new Date();
 
-    getData(stationId, currentDate).then((data) => {
+    getData(stationId, currentDate, 8).then((data) => {
       console.log(data);
       this.setState({
         currentDate: currentDate,
@@ -126,28 +126,66 @@ export default class TideStation extends React.Component {
       );
     }
 
+    let maxDays = 7;
+    maxDays = Math.min(maxDays, data.length);
+
     const dayDate = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
       currentDate.getDate()
     );
-    const nextDayDate = this._addDays(dayDate, 1);
-    const singleDayData = this._filterToDay(data, dayDate);
-    const nextSingleDayData = this._filterToDay(
-      data,
-      this._addDays(dayDate, 1)
-    );
 
-    const minDate = new Date(currentDate.toDateString());
-    const maxDate = this._addDays(minDate, 1);
+    const startMinDate = new Date(currentDate.toDateString());
+    const startMaxDate = this._addDays(startMinDate, 1);
     const seriesData = this._createSeries(data);
 
     const estimatedHeight = this._estimateHeight(data, currentDate);
     const trend = this._determineTrend(data, currentDate);
     const nextTide = this._getNextTide(data, currentDate);
 
-    const day1Times = getTimes(coordinates, currentDate);
-    const day2Times = getTimes(coordinates, this._addDays(currentDate, 1));
+    const chartDetails = []
+    for (let index = 0; index < maxDays; index++) {
+      const iterDate = this._addDays(currentDate, index);
+      const currentDayDate = this._addDays(dayDate, index);
+      const dateString = this._createDayString(currentDayDate);
+      const minDate = this._addDays(startMinDate, index);
+      const maxDate = this._addDays(startMaxDate, index);
+      const { sunrise, sunset } = getTimes(coordinates, iterDate);
+      const singleDayData = this._filterToDay(data, currentDayDate);
+
+      chartDetails.push({
+        date: currentDayDate,
+        dateString: dateString,
+        minDate: minDate,
+        maxDate: maxDate,
+        sunrise: sunrise,
+        sunset: sunset,
+        singleDayData: singleDayData,
+      });
+    }
+
+    const swipeables = chartDetails.map((details, index) => (
+      <div className="overflow-hidden" key={index}>
+        <div>
+          <span className="text-xs font-medium">
+            {details.dateString}
+          </span>
+        </div>
+        <TideChart
+          minDate={details.minDate}
+          maxDate={details.maxDate}
+          currentDate={currentDate}
+          sunrise={details.sunrise}
+          sunset={details.sunset}
+          data={seriesData}
+        />
+        <TideTable tides={details.singleDayData} />
+        <SunriseSunsetRow
+          sunrise={details.sunrise}
+          sunset={details.sunset}
+        />
+      </div>
+    ));
 
     return (
       <div>
@@ -159,87 +197,48 @@ export default class TideStation extends React.Component {
         <div className="text-xs text-gray-400">{title} tides</div>
 
         <SwipeableViews className="sm:hidden" enableMouseEvents={true}>
-          <div className="overflow-hidden">
-            <div>
-              <span className="text-xs font-medium">
-                {this._createDayString(dayDate)}
-              </span>
-            </div>
-            <TideChart
-              minDate={minDate}
-              maxDate={maxDate}
-              currentDate={currentDate}
-              sunrise={day1Times.sunrise}
-              sunset={day1Times.sunset}
-              data={seriesData}
-            />
-            <TideTable tides={singleDayData} />
-            <SunriseSunsetRow
-              sunrise={day1Times.sunrise}
-              sunset={day1Times.sunset}
-            />
-          </div>
-          <div className="overflow-hidden">
-            <div>
-              <span className="text-xs font-medium">
-                {this._createDayString(nextDayDate)}
-              </span>
-            </div>
-            <TideChart
-              minDate={this._addDays(minDate, 1)}
-              maxDate={this._addDays(maxDate, 1)}
-              currentDate={currentDate}
-              sunrise={day2Times.sunrise}
-              sunset={day2Times.sunset}
-              data={seriesData}
-            />
-            <TideTable tides={nextSingleDayData} />
-            <SunriseSunsetRow
-              sunrise={day2Times.sunrise}
-              sunset={day2Times.sunset}
-            />
-          </div>
+          {swipeables}
         </SwipeableViews>
 
         <div className="hidden sm:flex space-x-1">
           <div className="flex-1 overflow-hidden">
             <div>
               <span className="text-xs font-medium">
-                {this._createDayString(dayDate)}
+                {chartDetails[0].dateString}
               </span>
             </div>
             <TideChart
-              minDate={minDate}
-              maxDate={maxDate}
+              minDate={chartDetails[0].minDate}
+              maxDate={chartDetails[0].maxDate}
               currentDate={currentDate}
-              sunrise={day1Times.sunrise}
-              sunset={day1Times.sunset}
+              sunrise={chartDetails[0].sunrise}
+              sunset={chartDetails[0].sunset}
               data={seriesData}
             />
-            <TideTable tides={singleDayData} />
+            <TideTable tides={chartDetails[0].singleDayData} />
             <SunriseSunsetRow
-              sunrise={day1Times.sunrise}
-              sunset={day1Times.sunset}
+              sunrise={chartDetails[0].sunrise}
+              sunset={chartDetails[0].sunset}
             />
           </div>
           <div className="flex-1 overflow-hidden">
             <div>
               <span className="text-xs font-medium">
-                {this._createDayString(nextDayDate)}
+                {chartDetails[1].dateString}
               </span>
             </div>
             <TideChart
-              minDate={this._addDays(minDate, 1)}
-              maxDate={this._addDays(maxDate, 1)}
+              minDate={chartDetails[1].minDate}
+              maxDate={chartDetails[1].maxDate}
               currentDate={currentDate}
-              sunrise={day2Times.sunrise}
-              sunset={day2Times.sunset}
+              sunrise={chartDetails[1].sunrise}
+              sunset={chartDetails[1].sunset}
               data={seriesData}
             />
-            <TideTable tides={nextSingleDayData} />
+            <TideTable tides={chartDetails[1].singleDayData} />
             <SunriseSunsetRow
-              sunrise={day2Times.sunrise}
-              sunset={day2Times.sunset}
+              sunrise={chartDetails[1].sunrise}
+              sunset={chartDetails[1].sunset}
             />
           </div>
         </div>

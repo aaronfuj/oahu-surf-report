@@ -81,8 +81,8 @@ function pad2(number) {
   return (number < 10 ? "0" : "") + number;
 }
 
-export function getData(stationId, currentDate) {
-  const url = buildPath(stationId, currentDate, 5);
+export function getData(stationId, currentDate, days) {
+  const url = buildPath(stationId, currentDate, days);
 
   return fetch(url)
     .then((response) => response.json())
