@@ -4,5 +4,6 @@ export const HALEIWA = { id: "1612668", name: "Haleiwa", island: "oahu" };
 export const WAIMANALO = { id: "1612376", name: "Waimanalo", island: "oahu" };
 export const WAIANAE = { id: "1612482", name: "Waianae", island: "oahu" };
 
+export const HANALEI = { id: "1611683", name: "Hanalei", island: "kauai" };
 export const NAWILIWILI = { id: "1611400", name: "Nawiliwili", island: "kauai" };
 export const WAIMEA_BAY = { id: "1611401", name: "Waimea Bay", island: "kauai" };

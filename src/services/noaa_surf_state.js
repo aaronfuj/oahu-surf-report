@@ -3,12 +3,12 @@
 const PRODUCTION_URL = "/noaa_xml/SurfState.xml";
 const URL = PRODUCTION_URL;
 
-function parseDocument(xmlDocument) {
+function parseDocument(island, xmlDocument) {
   const items = [...xmlDocument.getElementsByTagName("item")];
 
   const lastBuildDate = getLastBuildDate(xmlDocument);
   const discussion = getDiscussion(items);
-  const { waveHeights, generalDayInfo } = getIslandForecast(items, "oahu");
+  const { waveHeights, generalDayInfo } = getIslandForecast(items, island);
   return {
     lastBuildDate: lastBuildDate,
     lastBuildDateObject: xmlTimeToDate(lastBuildDate),
@@ -303,7 +303,7 @@ function xmlTimeToDate(feedtime) {
   return buildDate;
 }
 
-export function getData(url) {
+function getDataInternal(url, island) {
   if (url === null || url === undefined) {
     url = URL;
   }
@@ -311,5 +311,9 @@ export function getData(url) {
   return fetch(url)
     .then((response) => response.text())
     .then((text) => textToDocument(text, "text/xml"))
-    .then((data) => parseDocument(data));
+    .then((data) => parseDocument(island, data));
+}
+
+export function getData(island) {
+  return getDataInternal(null, island);
 }

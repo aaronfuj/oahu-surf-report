@@ -1,23 +1,24 @@
 import React from "react";
 import {
-  WAIMEA_BAY,
-  BARBERS_POINT,
-  MOKAPU_POINT,
-  PEARL_HARBOR,
+  HANALEI,
+  NAWILIWILI,
 } from "../constants/NoaaBuoys";
-import { HONOLULU, WAIANAE, WAIMANALO, HALEIWA } from "../constants/NoaaTides";
 import {
-  HONOLULU as HONOLULU_COORDINATES,
-  WAIANAE as WAIANAE_COORDINATES,
-  WAIMANALO as WAIMANALO_COORDINATES,
-  HALEIWA as HALEIWA_COORDINATES,
+  HANALEI as HANALEI_TIDES,
+  NAWILIWILI as NAWILIWILI_TIDES,
+} from "../constants/NoaaTides";
+import {
+  HANALEI as HANALEI_COORDINATES,
+  NAWILIWILI as NAWILIWILI_COORDINATES,
 } from "../constants/GeographicCoordinates";
 import Location from "./Location";
 import Forecast from "./Forecast";
 import Footer from "./Footer";
 import { getData } from "../services/noaa_surf_state";
 
-export default class OahuPage extends React.Component {
+import { Link } from "react-router-dom";
+
+export default class KauaiPage extends React.Component {
   westRef = React.createRef();
   northRef = React.createRef();
   southRef = React.createRef();
@@ -37,7 +38,7 @@ export default class OahuPage extends React.Component {
   componentDidMount() {
     document.title = 'Oahu Surf Report (NOAA)';
 
-    getData('oahu').then((data) => {
+    getData('kauai').then((data) => {
       console.log(data);
       this.setState({
         data: data,
@@ -72,30 +73,23 @@ export default class OahuPage extends React.Component {
       <div>
         <div className="flex text-center mb-2 pb-2 font-semibold border-b-2 border-gray-600">
           <div className="flex-1">
+            <Link to="/">Home</Link>
+          </div>
+          <div className="flex-1">
             <button onClick={() => this._executeScroll(this.northRef)}>
-              North
-            </button>
-          </div>
-          <div className="flex-1">
-            <button onClick={() => this._executeScroll(this.westRef)}>
-              West
-            </button>
-          </div>
-          <div className="flex-1">
-            <button onClick={() => this._executeScroll(this.southRef)}>
-              South
+              Hanalei
             </button>
           </div>
           <div className="flex-1">
             <button onClick={() => this._executeScroll(this.eastRef)}>
-              East
+              Nawiliwili
             </button>
           </div>
         </div>
 
         <div className="space-y-16">
           <Forecast
-            title="Oahu Surf Forecast"
+            title="Kauai Surf Forecast"
             date={lastBuildDateObject}
             discussion={discussion}
             generalDayInfo={generalDayInfo}
@@ -103,51 +97,25 @@ export default class OahuPage extends React.Component {
 
           <div ref={this.northRef}>
             <Location
-              title={WAIMEA_BAY.name}
-              buoyId={WAIMEA_BAY.id}
-              buoyName={WAIMEA_BAY.name}
-              stationId={HALEIWA.id}
-              stationName={HALEIWA.name}
-              stationCoordinates={HALEIWA_COORDINATES}
+              title={HANALEI.name}
+              buoyId={HANALEI.id}
+              buoyName={HANALEI.name}
+              stationId={HANALEI_TIDES.id}
+              stationName={HANALEI_TIDES.name}
+              stationCoordinates={HANALEI_COORDINATES}
               forecastHeights={waveHeights}
               direction="north"
             />
           </div>
 
-          <div ref={this.westRef}>
-            <Location
-              title={BARBERS_POINT.name}
-              buoyId={BARBERS_POINT.id}
-              buoyName={BARBERS_POINT.name}
-              stationId={WAIANAE.id}
-              stationName={WAIANAE.name}
-              stationCoordinates={WAIANAE_COORDINATES}
-              forecastHeights={waveHeights}
-              direction="west"
-            />
-          </div>
-
-          <div ref={this.southRef}>
-            <Location
-              title={PEARL_HARBOR.name}
-              buoyId={PEARL_HARBOR.id}
-              buoyName={PEARL_HARBOR.name}
-              stationId={HONOLULU.id}
-              stationName={HONOLULU.name}
-              stationCoordinates={HONOLULU_COORDINATES}
-              forecastHeights={waveHeights}
-              direction="south"
-            />
-          </div>
-
           <div ref={this.eastRef}>
             <Location
-              title={MOKAPU_POINT.name}
-              buoyId={MOKAPU_POINT.id}
-              buoyName={MOKAPU_POINT.name}
-              stationId={WAIMANALO.id}
-              stationName={WAIMANALO.name}
-              stationCoordinates={WAIMANALO_COORDINATES}
+              title={NAWILIWILI.name}
+              buoyId={NAWILIWILI.id}
+              buoyName={NAWILIWILI.name}
+              stationId={NAWILIWILI_TIDES.id}
+              stationName={NAWILIWILI_TIDES.name}
+              stationCoordinates={NAWILIWILI_COORDINATES}
               forecastHeights={waveHeights}
               direction="east"
             />

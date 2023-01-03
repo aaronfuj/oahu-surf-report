@@ -2,15 +2,15 @@ const XML_URL = "https://www.weather.gov/source/hfo/xml/SurfState.xml";
 const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 const URL = PROXY_URL + XML_URL;
 
-function getData() {
+function getData(island) {
   return fetch(URL)
   .then(response => response.text())
   .then(text => textToDocument(text, "text/xml"))
-  .then((data) => parseDocument(data));
+  .then((data) => parseDocument(island, data));
 }
 
-function run() {
-  getData()
+function run(island) {
+  getData(island)
   .then((data) => {
     console.log(data);
     return data;
@@ -18,14 +18,14 @@ function run() {
   .then((data) => renderData(data));
 }
 
-run();
+run('oahu');
 
-function parseDocument(xmlDocument) {
+function parseDocument(island, xmlDocument) {
   const items = [...xmlDocument.getElementsByTagName("item")];
 
   const lastBuildDate = getLastBuildDate(xmlDocument);
   const discussion = getDiscussion(items);
-  const { waveHeights, generalDayInfo } = getIslandForecast(items, 'oahu');
+  const { waveHeights, generalDayInfo } = getIslandForecast(items, island);
   return {
     lastBuildDate: lastBuildDate,
     lastBuildDateObject: xmlTimeToDate(lastBuildDate),

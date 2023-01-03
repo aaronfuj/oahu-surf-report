@@ -119,6 +119,12 @@ class BuoyComponent extends React.Component {
       this._latestFiveDays(buoyData)
     );
 
+    if (isNaN(buoyInfo.height)) {
+      return (
+        <div>No buoy heights available</div>
+      )
+    }
+
     return (
       <div>
         <CurrentBuoyInfo

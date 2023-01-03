@@ -33,7 +33,7 @@ export default class SandysPage extends React.Component {
   componentDidMount() {
     document.title = 'Sandy Beach Surf Report (NOAA)';
 
-    getData().then((data) => {
+    getData('oahu').then((data) => {
       console.log(data);
       this.setState({
         data: data,

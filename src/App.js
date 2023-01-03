@@ -2,6 +2,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import OahuPage from "./components/OahuPage";
+import KauaiPage from "./components/KauaiPage";
 import SandysPage from "./components/SandysPage";
 import MailiBeachPage from "./components/MailiBeachPage";
 
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/maili">
             <MailiBeachPage />
+          </Route>
+          <Route path="/kauai">
+            <KauaiPage />
           </Route>
           <Route path="/">
             <OahuPage />
