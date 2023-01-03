@@ -73,7 +73,7 @@ export default class KauaiPage extends React.Component {
       <div>
         <div className="flex text-center mb-2 pb-2 font-semibold border-b-2 border-gray-600">
           <div className="flex-1">
-            <Link to="/">Home</Link>
+            <Link to="/">Oahu</Link>
           </div>
           <div className="flex-1">
             <button onClick={() => this._executeScroll(this.northRef)}>

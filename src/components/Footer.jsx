@@ -15,6 +15,14 @@ export default class Footer extends React.Component {
               <li>
                 <Link to="/maili">Maili Beach</Link>
               </li>
+            </ul>
+          </div>
+          <div className="flex-none pt-2 pr-2">
+            <div className="font-bold text-sm text-gray-600">Islands</div>
+            <ul className="text-xs text-gray-500">
+              <li>
+                <Link to="/">Oahu</Link>
+              </li>
               <li>
                 <Link to="/kauai">Kauai</Link>
               </li>
